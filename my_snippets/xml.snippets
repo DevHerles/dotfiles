@@ -1,0 +1,273 @@
+# xml declaration
+snippet xml
+<?xml version="1.0" encoding="UTF-8"?>
+endsnippet
+snippet <?
+<?xml version="1.0" encoding="UTF-8"?>
+endsnippet
+snippet odoo
+<odoo>
+	<data>
+		${1}
+	</data>
+</odoo>
+endsnippet
+snippet mroot
+<menuitem
+	id="${1:model_name}_menu_root"
+	name="${2:Main Menu}"
+	sequence="${3:1}"/>
+endsnippet
+snippet menuitem "Odoo root menuitem, menuitem and action"
+<record id="${1:model_name}_action" model="ir.actions.act_window">
+	<field name="name">${2:model.name}.action</field>
+	<field name="res_model">$2</field>
+	<field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+	id="$1_menu_root"
+	name="${3:Main Menu}"
+	sequence="${4:1}"/>
+
+<menuitem
+	id="$1_menu_action"
+	name="${5:Sub Menu}"
+	parent="$1_menu_root"
+	action="$1_action"
+	sequence="${6:1}"/>
+endsnippet
+snippet menuitem "Odoo menuitem and action"
+<record id="${1:model_name}_action" model="ir.actions.act_window">
+	<field name="name">$3</field>
+	<field name="res_model">$2</field>
+	<field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+	id="${1}_menu_action"
+	name="${3:Sub Menu}"
+	parent="${4:parent_menu}_menu_root"
+	action="$1_action"
+	sequence="${5:1}"/>
+endsnippet
+snippet menuitem "Odoo menuitem"
+<menuitem
+	id="${1:module_name}_menu_action"
+	name="${2:Sub Menu}"
+	parent="${3:module_name}_menu_root"
+	action="$1_action"
+	sequence="${4:1}"/>
+endsnippet
+snippet ti
+<${1:}>${2}</$1>
+endsnippet
+snippet rview
+<record id="${1:model_name}_view_$3" model="ir.ui.view">
+	<field name="name">$2.$3</field>
+	<field name="model">${2:model.name}</field>
+	<field name="type">${3:form}</field>
+	<field name="priority" eval="8"/>
+	<field name="arch" type="xml">
+		<$3 string="${4:Label}">
+			<field name="${5:name}"/>
+		</$3>
+	</field>
+</record>
+endsnippet
+snippet pivot "Odoo pivot"
+<record id="${1:module_name}_pivot" model="ir.ui.view">
+	<field name="name">${2:module.name}.pivot</field>
+	<field name="model">$2</field>
+	<field name="type">pivot</field>
+	<field name="arch" type="xml">
+		<pivot string="${3:Description}">
+			<field name="${4:field_name}" type="row"/>
+			<field name="${5:field_name}" type="col"/>
+			<field name="${6:field_name}" type="measure"/>
+		</pivot>
+	</field>
+</record>
+endsnippet
+snippet table "HTML table"
+<table class="table table-condensed" style="border:none;">
+	<tbody>
+		<tr>
+			<td> <label for="${1:field_name}"/> </td>
+		</tr>
+		<tr>
+			<td> <field name="$1"/> </td>
+		</tr>
+	</tbody>
+</table>
+endsnippet
+snippet record "Complete Odoo template"
+<record id="${1:model_name}_view" model="ir.ui.view">
+	<field name="name">$2.form</field>
+	<field name="model">${2:model.name}</field>
+	<field name="type">form</field>
+	<field name="priority" eval="8"/>
+	<field name="arch" type="xml">
+		<form>
+			<header>
+				<button name="function_name" states="state" string="Label" type="object"
+					attrs="{'invisible': [('state','!=','state')]}"/>
+				<field name="state" widget="statusbar"/>
+			</header>
+			<sheet>
+				<table class="table table-condensed" style="border:none;">
+					<tbody>
+						<tr>
+							<div class="oe_left" style="width: 500px;">
+								<div class="oe_title">
+									<label string="${3:Field name}" class="oe_edit_only"/>
+									<h1>
+										<field name="name" class="oe_inline" required="1"/>
+									</h1>
+								</div>
+							</div>
+						</tr>
+					</tbody>
+					<notebook colspan="4">
+						<page string="${4:Title}">
+							<group>
+								<group>
+									<field name="${5:name}"/>
+								</group>
+							</group>
+						</page>
+					</notebook>
+				</table>
+			</sheet>
+		</form>
+	</field>
+</record>
+<record id="$1_tree" model="ir.ui.view">
+	<field name="name">$2.tree</field>
+	<field name="model">$2</field>
+	<field name="type">tree</field>
+	<field name="arch" type="xml">
+		<tree>
+			<field name="$5"/>
+		</tree>
+	</field>
+</record>
+<record id="$1_action" model="ir.actions.act_window">
+	<field name="name">$2</field>
+	<field name="res_model">$2</field>
+	<field name="view_mode">tree,form</field>
+</record>
+<menuitem id="$1_menu" name="${6:Menu}"
+	parent="$1_menu"
+	action="$1_action"
+	sequence="${7:10}"/>
+endsnippet
+snippet record "Odoo action record"
+<record id="${1:model_name}_action" model="ir.actions.act_window">
+	<field name="name">${2:model.name}.action</field>
+	<field name="res_model">$2</field>
+	<field name="view_mode">tree,form</field>
+</record>
+endsnippet
+snippet daction "Odoo domain action"
+<act_window id="$1_action"
+	name="${2:model.name}"
+	res_model="$2"
+	view_mode="tree,form"
+	domain="[('${3:field_name}_id', '=', default_$3_id)]"/>
+endsnippet
+snippet irecord
+<record id="${1:model_name}_view_form_inherit_$3_$4" model="ir.ui.view">
+	<field name="name">$2.form</field>
+	<field name="model">${2:model.name}</field>
+	<field name="inherit_id" ref="${3:parent_module}.${4:view_id_to_inherit}_view"/>
+	<field name="arch" type="xml">
+		<xpath expr="//button[@name='button_name']" position="after">
+			<button name="new_button" string="New button" type="object"/>
+		</xpath>
+	</field>
+</record>
+endsnippet
+snippet field
+<field name="${1:name}"/>
+endsnippet
+snippet button
+<button name="${1:button_name}" string="${2:New button}" type="${3:object}"/>
+endsnippet
+snippet domain
+domain="[('${1:state}','${2:=}', ${3:True})]"
+endsnippet
+snippet required
+attrs="{'${1:required}': [('${2:state}','${3:=}', ${4:'value'})]}"
+endsnippet
+snippet readonly
+attrs="{'${1:readonly}': [('${2:state}','${3:=}', ${4:'value'})]}"
+endsnippet
+snippet invisible
+attrs="{'${1:invisible}': [('${2:state}','${3:=}', ${4:'value'})]}"
+endsnippet
+snippet onchange
+on_change="onchange_${1:method}(${2:argument}, context=context)"
+endsnippet
+snippet attribute
+<attribute name="${1:name}">${2:value}</attribute>
+endsnippet
+snippet label
+<label for="${1:field_name}" string="${2:String}"/>
+endsnippet
+snippet separator
+<separator string="${1:String}" colspan="${2:4}"/>
+endsnippet
+snippet group
+<group colspan="${1:4}">
+	${2}
+</group>
+endsnippet
+snippet notebook
+<notebook colspan="4">
+	<page string="${1:String}">
+		${2}
+	</page>
+</notebook>
+endsnippet
+snippet page
+<page string="${1:String}">
+	${2}
+</page>
+endsnippet
+snippet xpath
+<xpath expr="${1://field[@name='field_name']}" position="${2:replace|inside|before|after|attribute}">
+	${3}
+</xpath>
+endsnippet
+snippet opt
+options="{'no_create': ${1:True}, 'no_open': ${2:True}}"
+endsnippet
+snippet noc
+options="{'no_create': True}"
+endsnippet
+snippet nop
+options="{'no_open': True}"
+endsnippet
+snippet tbot
+<tree editable="bottom">
+	${1:...}
+</tree>
+endsnippet
+snippet ttop
+<tree editable="top">
+	${1:...}
+</tree>
+endsnippet
+snippet top
+editable="top"
+endsnippet
+snippet bot
+editable="bottom"
+endsnippet
+snippet con
+context="{'default_${1:field_name}': ${2:value}}"
+endsnippet
+snippet sep
+<separator>${1:separator}</separator>
+endsnippet

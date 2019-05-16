@@ -1,0 +1,271 @@
+snippet #!
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+endsnippet
+snippet #!2
+#!/usr/bin/env python2
+# -*- coding: utf-8 -*-
+endsnippet
+snippet #!3
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+endsnippet
+snippet from
+from ${1:package} import ${0:module}
+endsnippet
+snippet ***
+##############################################################################
+#  ${0}
+##############################################################################
+endsnippet
+# New Odoo Class
+snippet cls
+class ${1:ModuleName}(${2:models.Model}):
+	"""${3:docstring for $1}"""
+
+	_name = '${4:module.name}'
+	_description = '$1 ${5:description}'
+
+	code = fields.Char(u'Código')
+	name = fields.Char('Nombre')
+endsnippet
+# Define class for OpenObject
+snippet for
+	for ${1:item} in ${2:items}:
+		${0}
+endsnippet
+# Lambda
+snippet ld
+${1:var} = lambda ${2:vars} : ${0:action}
+endsnippet
+snippet try Try/Except
+try:
+	${1:${VISUAL}}
+except ${2:Exception} as ${3:e}:
+	${0:raise $3}
+endsnippet
+# python debugger (pdb)
+snippet ipdb
+__import__('ipdb').set_trace()
+endsnippet
+# logging
+# glog = get log
+snippet glog
+import logging
+LOGGER = logging.getLogger(${0:__name__})
+endsnippet
+snippet le
+	LOGGER.error(${0:msg})
+endsnippet
+# conflict with lambda=ld, therefor we change into Logger.debuG
+snippet lg
+	LOGGER.debug(${0:msg})
+endsnippet
+snippet lw
+	LOGGER.warning(${0:msg})
+endsnippet
+snippet lc
+	LOGGER.critical(${0:msg})
+endsnippet
+snippet li
+	LOGGER.info(${0:msg})
+endsnippet
+# Define type of fields
+snippet cha "Odoo Char field"
+${1:fieldname} = fields.Char('${2:string=Label}')${3}
+endsnippet
+snippet char "Odoo Char related field"
+${1:fieldname} = fields.Char(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet int "Odoo Int field"
+${1:fieldname} = fields.Integer('${2:string=Label}')${3}
+endsnippet
+snippet intr "Odoo Int related field"
+${1:fieldname} = fields.Integer(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet flo "Odoo Float field"
+${1:fieldname} = fields.Float('${2:string=Label}')${3}
+endsnippet
+snippet flor "Odoo Float related field"
+${1:fieldname} = fields.Float(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet boo "Odoo Boolean field"
+${1:fieldname} = fields.Boolean('${2:string=Label}')${3}
+endsnippet
+snippet boor "Odoo Boolean related field"
+${1:fieldname} = fields.Boolean(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet dat "Odoo Date field"
+${1:fieldname} = fields.Date('${2:string=Label}', default=fields.Date.context_today)${3}
+endsnippet
+snippet datr "Odoo Date related field"
+${1:fieldname} = fields.Date(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet datt "Odoo Datetime field"
+${1:fieldname} = fields.Datetime('${2:string=Label}', default=fields.Datetime.now())${3}
+endsnippet
+snippet datr "Odoo Datetime related field"
+${1:fieldname} = fields.Datetime(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet selr "Odoo Selection field"
+${1:fieldname} = fields.Selection(selection=${2:[('', '')]}, '${3:string=Label}')${4}
+endsnippet
+snippet selr "Odoo Selection related field"
+${1:fieldname} = fields.Selection(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet m2o "Odoo Many2one field"
+${1:fieldname}_id = fields.Many2one('${2:comodel_name=ObjectName}', ${3}'${4:string=Label}')${5}
+endsnippet
+snippet m2or "Odoo Many2one related field"
+${1:fieldname} = fields.Many2one(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet m2m "Odoo Many2many field"
+${1:fieldname}_ids = fields.Many2many(comodel_name='${2:ObjectName}', string='${3:Label}', ${5}help='${4:Help note}')${6}
+endsnippet
+snippet m2mr "Odoo Many2Many related field"
+${1:fieldname} = fields.Many2Many(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet o2m "Odoo One2many field"
+${1:fieldname}_ids = fields.One2many(comodel_name='${2:ObjectName}', inverse_name='$1_id', string='${3:Label}'${4})${5}
+endsnippet
+snippet o2mr "Odoo One2many field"
+${1:fieldname} = fields.One2Many(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet tex "Odoo Text field"
+${1:fieldname} = fields.Text('${2:string=Label}')${3}
+endsnippet
+snippet texr "Odoo Text related field"
+${1:fieldname} = fields.Text(related='${2:related_field.field_name}')${3}
+endsnippet
+snippet bin "Odoo Binary field"
+${1:fieldname} = fields.Binary('${2:string=Label}')${3}
+endsnippet
+# Attribute for fields
+snippet dom "Odoo domain"
+domain=[('${1:state}', '${2:=}', '${3:done}')]
+endsnippet
+snippet ? "Odoo help"
+help='${1:Help about Field}',
+endsnippet
+snippet readonly "Odoo readonly attribute"
+readonly=True, ${1}
+endsnippet
+snippet req "Odoo required attribute"
+required=True, ${1}
+endsnippet
+snippet tra "Odoo translate attribute"
+translate=True, ${1}
+endsnippet
+snippet sto
+store=True, ${1}
+endsnippet
+snippet com
+compute='${1:_compute_method_name}', ${2}
+endsnippet
+snippet rel
+related='${1:field.chain}', ${2}
+endsnippet
+snippet def
+default='${1:value}', ${2}
+endsnippet
+snippet manifest "Odoo manifest dictionary"
+# -*- coding: utf-8 -*-
+
+{
+	'name': u'${1:Module name}',
+	'version': '${2:1.0.0}',
+	'author': '${3:Herles Incalla}',
+	'website': '${4:http://www.arandasf.pe}',
+	'category': '${5:Medical}',
+	'description': u'${6:Module description}',
+	'depends': ['${7:base}'],
+	'data': ['${8:views/module_name_view.xml}'],
+	'active': ${9:False},
+	'installable': ${10:True}
+}
+endsnippet
+snippet write "Odoo write method"
+@api.multi
+def write(self, vals):
+	return super(${2:ClassName}, self).write(vals)
+endsnippet
+snippet create "Odoo create method"
+@api.model
+def create(self, vals):
+	${1:foo} = super(${2:ClassName}, self).create(vals)
+endsnippet
+snippet unlink "Odoo unlink method"
+@api.multi
+def unlink(self):
+	for record in self:
+		if record.state != ${1:PENDING}:
+			raise ValidationError('El registro no puede ser eliminado.')
+		super(${2:ClassName}, record).unlink()
+endsnippet
+snippet onchange "Odoo onchange method"
+@api.onchange('${1:fieldname}')
+def _onchange_$1(self):
+	if not self.$1:
+		return
+endsnippet
+snippet rea "Odoo readonly attribute"
+readonly=True,
+endsnippet
+snippet "rep (\d+) (\w+)" "Repeat" r
+`!p snip.rv = int(match.group(1))*match.group(2)`
+endsnippet
+
+
+snippet e "\emph{text}" w
+\emph{${1:${VISUAL:text}}}
+endsnippet
+
+global !p
+import re
+def field(type, field_name, description_1, description_2='', comodel_name='', inverse_name=''):
+    regex = re.compile('[áéíóúÁÉÍÓÚñÑ]')
+
+    if description_1 == 'R':
+        description = "related='{0}'".format(description_2)
+    else:
+        description = ' '.join([description_1, description_2]).rstrip()
+        if(regex.search(description) == None):
+            description = "'{0}'".format(description)
+        else:
+            description = "u'{0}'".format(description)
+
+    if type == 'c':
+        return '{0} = fields.Char({1})'.format(field_name, description)
+    if type == 'b':
+        return '{0} = fields.Boolean({1})'.format(field_name, description)
+    if type == 'i':
+        return '{0} = fields.Integer({1})'.format(field_name, description)
+    if type == 'mto':
+        return '{0}_id = fields.Many2one({1})'.format(field_name, description)
+    if type == 'otm':
+        return '{0}_ids = fields.Many2one(comodel_name=\'{1}\', inverse_name=\'{2}\', string={3})'.format(field_name, comodel_name, inverse_name, description)
+    else:
+        return '...'
+
+endglobal
+
+snippet "f (\w+) (\w+) (\w+) (\w+) (\w+) (\w+)" "field" r
+`!p
+snip.rv = field(match.group(1), match.group(2), match.group(3), match.group(4), match.group(5), match.group(6))
+`
+endsnippet
+snippet "f (\w+) (\w+) (\w+) (\w+\.\w+)" "field" r
+`!p
+snip.rv = field(match.group(1), match.group(2), match.group(3).capitalize(), match.group(4))
+`
+endsnippet
+snippet "f (\w+) (\w+) (\w+)" "field" r
+`!p
+snip.rv = field(match.group(1), match.group(2), match.group(3).capitalize())
+`
+endsnippet
+snippet "f (\w+) (\w+)" "field" r
+`!p
+snip.rv = field('c', match.group(1), match.group(2).capitalize())
+`
+endsnippet
