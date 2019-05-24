@@ -96,13 +96,13 @@ snippet boor "Odoo Boolean related field"
 ${1:fieldname} = fields.Boolean(related='${2:related_field.field_name}')${3}
 endsnippet
 snippet dat "Odoo Date field"
-${1:fieldname} = fields.Date('${2:string=Label}')${3}
+${1:fieldname} = fields.Date('${2:string=Label}', default=fields.Date.context_today)${3}
 endsnippet
 snippet datr "Odoo Date related field"
 ${1:fieldname} = fields.Date(related='${2:related_field.field_name}')${3}
 endsnippet
 snippet datt "Odoo Datetime field"
-${1:fieldname} = fields.Datetime('${2:string=Label}')${3}
+${1:fieldname} = fields.Datetime('${2:string=Label}', default=fields.Datetime.now())${3}
 endsnippet
 snippet datr "Odoo Datetime related field"
 ${1:fieldname} = fields.Datetime(related='${2:related_field.field_name}')${3}
@@ -193,6 +193,14 @@ snippet create "Odoo create method"
 @api.model
 def create(self, vals):
 	${1:foo} = super(${2:ClassName}, self).create(vals)
+endsnippet
+snippet unlink "Odoo unlink method"
+@api.multi
+def unlink(self):
+	for record in self:
+		if record.state != ${1:PENDING}:
+			raise ValidationError('El registro no puede ser eliminado.')
+		super(${2:ClassName}, record).unlink()
 endsnippet
 snippet onchange "Odoo onchange method"
 @api.onchange('${1:fieldname}')
