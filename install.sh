@@ -92,10 +92,10 @@ function installOhMyZSH() {
        git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     fi
 
-    if [ -d ~/.oh-my-zsh/custom/plugins/zsh-completions ]; then
+    if [ -d ~/.dotfiles/oh-my-zsh/custom/plugins/zsh-completions ]; then
        cd ~/.oh-my-zsh && git pull;
     else
-       git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+       git clone https://github.com/zsh-users/zsh-completions ~/.dotfiles/oh-my-zsh/plugins/zsh-completions
     fi
 
     if [ -d ~/.dotfiles/gruvbox ]; then
