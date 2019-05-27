@@ -342,8 +342,7 @@ map F <Plug>Sneak_S
 "*****************************************************************************
 nnoremap <silent> <C-p> :Files <CR>
 "nnoremap <silent> <Leader>f :Find <CR>
-nnoremap <silent> <Tab> :Buffers <CR>
-
+nnoremap <silent> <Leader><Tab> :Buffers <CR>
 "*****************************************************************************
 " jedi-vim
 "*****************************************************************************
@@ -451,7 +450,6 @@ if has('unnamedplus')
 endif
 
 map <Leader>v :e $MYVIMRC<CR>
-map <Leader><Tab> :e<SPACE>
 
 " MyNext() and MyPrev(): Movement between tabs OR buffers
 function! MyNext()
