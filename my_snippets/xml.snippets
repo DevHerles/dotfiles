@@ -37,6 +37,12 @@ snippet menuitem "Odoo root menuitem, menuitem and action"
 	action="$1_action"
 	sequence="${6:1}"/>
 endsnippet
+snippet record "Odoo res.groups"
+<record id="${1:model_name}_group_${2:group}" model="res.groups">
+	<field name="name">${3:Model Name}</field>
+	<field name="category_id" ref="${4:modulo_name}.${5:category_id}"/>
+</record>
+endsnippet
 snippet menuitem "Odoo menuitem and action"
 <record id="${1:model_name}_action" model="ir.actions.act_window">
 	<field name="name">$3</field>
