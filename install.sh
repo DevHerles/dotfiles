@@ -176,6 +176,8 @@ function setupTmux() {
     echo "Installing tmux plugin manager"
     echo "==================================="
 
+    sudo apt-get install xsel # or xclip
+
     if [ -d ~/.tmux/plugins/tpm ]; then
        cd ~/.tmux/plugins/tpm && git pull
     else
