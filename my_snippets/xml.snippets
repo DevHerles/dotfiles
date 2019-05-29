@@ -37,10 +37,17 @@ snippet menuitem "Odoo root menuitem, menuitem and action"
 	action="$1_action"
 	sequence="${6:1}"/>
 endsnippet
+snippet record "Odoo security category"
+<record id="${1:module_name}_category" model="ir.module.category">
+	<field name="name">${2:Application name}</field>
+	<field name="description">${3:Access level for Application name}</field>
+	<field name="sequence">${4:999}</field>
+</record>
+endsnippet
 snippet record "Odoo res.groups"
-<record id="${1:model_name}_group_${2:group}" model="res.groups">
-	<field name="name">${3:Model Name}</field>
-	<field name="category_id" ref="${4:modulo_name}.${5:category_id}"/>
+<record id="${1:module_name}_group_${2:group}" model="res.groups">
+	<field name="name">${3:Group name}</field>
+	<field name="category_id" ref="${4:module_name}.$1_category"/>
 </record>
 endsnippet
 snippet menuitem "Odoo menuitem and action"
