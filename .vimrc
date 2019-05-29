@@ -111,6 +111,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'moll/vim-bbye'
 Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
+Plug 'chrisbra/csv.vim'
 
 "Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" Colorscheme

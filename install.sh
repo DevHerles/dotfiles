@@ -81,6 +81,9 @@ function installOhMyZSH() {
     sudo apt-get install git-core
 
     if [ -d ~/.oh-my-zsh ]; then
+       if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
+          rm ~/.oh-my-zsh/themes/asf.zsh-theme
+       fi
        cd ~/.oh-my-zsh && git pull;
     else
        wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
@@ -125,6 +128,7 @@ function cloneDotfiles() {
 
     git clone https://github.com/DevHerles/dotfiles.git ~/.dotfiles
 
+    cp ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/
     # echo "Installing z.sh"
     # git clone https://github.com/rupa/z.git ~/
 
