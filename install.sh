@@ -153,7 +153,7 @@ function cloneDotfiles() {
 
     git clone https://github.com/DevHerles/dotfiles.git ~/.dotfiles
 
-    cp ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/
+    cp ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
     # echo "Installing z.sh"
     # git clone https://github.com/rupa/z.git ~/
 
