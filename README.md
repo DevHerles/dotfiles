@@ -11,6 +11,11 @@ To install simply run:
 
 Be sure to also install the font in the `fonts/` folder and use this font as the default for your terminal. Do not use a separate font for non-ascii characters.
 
+Execute:
+```bash
+export LS_COLORS="$(vivid generate snazzy)"
+```
+
 ## What Gets Installed
 
 - brew

@@ -68,14 +68,29 @@ function installNpmPackages() {
     npm i -g vtop
 }
 
-function installToos() {
+function installTools() {
 
     echo "==================================="
     echo "Installing admin tools"
     echo "dfc"
+    echo "vivid"
     echo "==================================="
 
-    sudo apt-get install dfc
+    if [ -f /usr/bin/dfc ]; then
+       echo "dfc is already installed"
+    else
+       sudo apt-get install dfc
+    fi
+
+    if [ -f /usr/bin/vivid ]; then
+       echo "vivid is already installed"
+    else
+       wget "https://github.com/sharkdp/vivid/releases/download/v0.4.0/vivid_0.4.0_amd64.deb"
+       sudo dpkg -i vivid_0.4.0_amd64.deb
+    fi
+
+    export LS_COLORS="$(vivid generate snazzy)"
+
 }
 
 function installOhMyZSH() {
@@ -207,6 +222,14 @@ function setupTmux() {
     ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
 }
 
+function setupDirColors() {
+    echo "==================================="
+    echo "Setup dircolors"
+    echo "==================================="
+
+    eval $( dircolors -b ~/.dotfiles/dir_colors )
+}
+
 function install() {
 
     echo "==================================="
@@ -217,11 +240,12 @@ function install() {
     # installHomebrewPackages
     # installNodeJS
     # installNpmPackages
-    installToos
+    installTools
     installOhMyZSH
     cloneDotfiles
     setupVim
     setupTmux
+    #setupDirColors
 }
 
 install
