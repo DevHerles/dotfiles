@@ -68,6 +68,16 @@ function installNpmPackages() {
     npm i -g vtop
 }
 
+function installToos() {
+
+    echo "==================================="
+    echo "Installing admin tools"
+    echo "dfc"
+    echo "==================================="
+
+    sudo apt-get install dfc
+}
+
 function installOhMyZSH() {
 
     echo "==================================="
@@ -207,6 +217,7 @@ function install() {
     # installHomebrewPackages
     # installNodeJS
     # installNpmPackages
+    installToos
     installOhMyZSH
     cloneDotfiles
     setupVim
