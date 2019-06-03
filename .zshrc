@@ -94,9 +94,9 @@ foreach file (`echo $sources`)
 end
 
 # User configuration
-export ALIEN_THEME="gruvbox"
 # export MANPATH="/usr/local/man:$MANPATH"
 
+export LS_COLORS="$(vivid generate snazzy)"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 

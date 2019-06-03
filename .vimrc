@@ -663,6 +663,19 @@ function! MyStatusLine()
     return statusline
 endfunction
 
+nnoremap <Leader>y :call<SID>EightyLine()<cr>
+fun! s:EightyLine()
+ if !exists('w:eightyline')
+  let w:eightyline = 1
+  :set colorcolumn=80  " highlight three columns after 'textwidth'
+  :highlight ColorColumn ctermbg=16 guibg=#000000
+ else
+  unl w:eightyline
+  :set colorcolumn=80  " highlight three columns after 'textwidth'
+  :highlight ColorColumn NONE
+ endif
+endfunction
+
 " Cursor to yellow on insert mode
 " Blue on command/other mode
 " Note the use of hex codes (ie 3971ED)
