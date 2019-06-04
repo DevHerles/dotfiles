@@ -1,5 +1,4 @@
 syntax enable
-set nofoldenable 		" Disable folding
 set encoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8
@@ -113,6 +112,7 @@ Plug 'moll/vim-bbye'
 Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/csv.vim'
+Plug 'tmhedberg/SimpylFold'
 
 "Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" Colorscheme
