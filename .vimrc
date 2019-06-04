@@ -55,6 +55,7 @@ set showmode			" Show current mode at the bottom.
 set ruler			" Always show cursor position.
 "set completeopt+=noinsert	" If you use the noinsert flag in completeopt in combination with menu, the first item will be selected (but not inserted into the buffer).
 set statusline=%!MyStatusLine()
+set undofile
 
 if has('vim_starting')
   set nocompatible               " Be iMproved
@@ -103,7 +104,7 @@ Plug 'terryma/vim-multiple-cursors' " <C-n> highlights a word and then <C-n> aga
 Plug 'terryma/vim-expand-region' " Press + to expand the visual selection and _ to shrink it.
 Plug 'osyo-manga/vim-over' " :substitute preview
 Plug 'pangloss/vim-javascript' | Plug 'mxw/vim-jsx'
-Plug 'sjl/gundo.vim'
+Plug 'simnalamburt/vim-mundo'
 Plug 'tweekmonster/braceless.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'alvan/vim-closetag'
@@ -185,9 +186,9 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 "*****************************************************************************
-" Undofiles
+" Mundo files
 "*****************************************************************************
-if !has('nvim')
+if has('nvim')
     set undodir=~/.vim/undo
 endif
 augroup vimrc
