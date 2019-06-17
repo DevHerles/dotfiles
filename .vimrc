@@ -114,6 +114,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/csv.vim'
 Plug 'tmhedberg/SimpylFold'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'junegunn/limelight.vim'
 
 "Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" Colorscheme
@@ -396,6 +397,8 @@ map <Leader>s :OverCommandLine<CR>
 "*****************************************************************************
 " Window
 "*****************************************************************************
+noremap <silent> <leader>u <ESC>?=<CR>/(<CR>au<ESC>
+
 nnoremap <silent> <Leader>q :Bdelete<CR>
 nnoremap <silent> <Leader>+ :vertical resize +20<CR>
 nnoremap <silent> <Leader>- :vertical resize -20<CR>
