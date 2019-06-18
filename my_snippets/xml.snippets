@@ -6,6 +6,7 @@ snippet <?
 <?xml version="1.0" encoding="UTF-8"?>
 endsnippet
 snippet odoo
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 	<data>
 		${1}
@@ -28,7 +29,9 @@ snippet menuitem "Odoo root menuitem, menuitem and action"
 <menuitem
 	id="$1_menu_root"
 	name="${3:Main Menu}"
-	sequence="${4:1}"/>
+	web_icon="$1,static/description/icon_$1.png"
+	sequence="${4:1}"
+	groups="$1_group_${4:group}"/>
 
 <menuitem
 	id="$1_menu_action"
@@ -133,7 +136,7 @@ snippet record "Complete Odoo template"
 						<tr>
 							<div class="oe_left" style="width: 500px;">
 								<div class="oe_title">
-									<label string="${3:Field name}" class="oe_edit_only"/>
+									<label class="oe_edit_only"/>
 									<h1>
 										<field name="name" class="oe_inline" required="1"/>
 									</h1>
@@ -142,38 +145,86 @@ snippet record "Complete Odoo template"
 						</tr>
 					</tbody>
 					<notebook colspan="4">
-						<page string="${4:Title}">
+						<page>
 							<group>
 								<group>
-									<field name="${5:name}"/>
+									<field name="name"/>
 								</group>
 							</group>
 						</page>
 					</notebook>
 				</table>
 			</sheet>
+			<div class="oe_chatter">
+				<field name="message_follower_ids" widget="mail_followers"/>
+				<field name="message_ids" widget="mail_thread"/>
+			</div>
 		</form>
 	</field>
 </record>
+
 <record id="$1_tree" model="ir.ui.view">
 	<field name="name">$2.tree</field>
 	<field name="model">$2</field>
 	<field name="type">tree</field>
 	<field name="arch" type="xml">
 		<tree>
-			<field name="$5"/>
+			<field name="name"/>
 		</tree>
 	</field>
 </record>
+
+<record id="$1_search" model="ir.ui.view">
+	<field name="name">$2.search</field>
+	<field name="model">$2</field>
+	<field name="arch" type="xml">
+		<search string="Buscar por...">
+			<field name="name"/>
+			<group expand="0" string="Agrupar por...">
+				<filter name="name" string="name" domain="[('name','1')]"/>
+			</group>
+		</search>
+	</field>
+</record>
+
 <record id="$1_action" model="ir.actions.act_window">
 	<field name="name">$2</field>
 	<field name="res_model">$2</field>
 	<field name="view_mode">tree,form</field>
 </record>
-<menuitem id="$1_menu" name="${6:Menu}"
-	parent="$1_menu"
+
+<menuitem
+	id="$1_menu_root"
+	name="${3:Root Menu}"
+	web_icon="$1,static/description/icon_$1.png"
+	sequence="1"
+	groups="$1_group_admin"/>
+
+<menuitem
+	id="$1_menu"
+	name="${4:Main Menu}"
+	parent="$1_menu_root"
 	action="$1_action"
-	sequence="${7:10}"/>
+	sequence="1"
+	groups="$1_group_admin"/>
+
+<!-- init $1_security.xml -->
+<record id="$1_category" model="ir.module.category">
+	<field name="name">$3</field>
+	<field name="description">Nivel de acceso para $3</field>
+	<field name="sequence">406</field>
+</record>
+
+<record id="$1_group_admin" model="res.groups">
+	<field name="name">Administrador</field>
+	<field name="category_id" ref="$1.$1_category"/>
+</record>
+
+<record id="$1_group_user" model="res.groups">
+	<field name="name">Usuario</field>
+	<field name="category_id" ref="$1.$1_category"/>
+</record>
+<!-- end $1_security.xml -->
 endsnippet
 snippet record "Odoo action record"
 <record id="${1:model_name}_action" model="ir.actions.act_window">
