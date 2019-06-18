@@ -118,9 +118,9 @@ snippet table "HTML table"
 </table>
 endsnippet
 snippet record "Complete Odoo template"
-<record id="${1:model_name}_view" model="ir.ui.view">
-	<field name="name">$2.form</field>
-	<field name="model">${2:model.name}</field>
+<record id="${1:module_name}_${2:model_name}_view" model="ir.ui.view">
+	<field name="name">$1.$2.form</field>
+	<field name="model">$1.$2</field>
 	<field name="type">form</field>
 	<field name="priority" eval="8"/>
 	<field name="arch" type="xml">
@@ -136,7 +136,7 @@ snippet record "Complete Odoo template"
 						<tr>
 							<div class="oe_left" style="width: 500px;">
 								<div class="oe_title">
-									<label class="oe_edit_only"/>
+									<label for="name" class="oe_edit_only"/>
 									<h1>
 										<field name="name" class="oe_inline" required="1"/>
 									</h1>
@@ -163,9 +163,9 @@ snippet record "Complete Odoo template"
 	</field>
 </record>
 
-<record id="$1_tree" model="ir.ui.view">
-	<field name="name">$2.tree</field>
-	<field name="model">$2</field>
+<record id="$1_$2_tree" model="ir.ui.view">
+	<field name="name">$1.$2.tree</field>
+	<field name="model">$1.$2</field>
 	<field name="type">tree</field>
 	<field name="arch" type="xml">
 		<tree>
@@ -174,9 +174,9 @@ snippet record "Complete Odoo template"
 	</field>
 </record>
 
-<record id="$1_search" model="ir.ui.view">
-	<field name="name">$2.search</field>
-	<field name="model">$2</field>
+<record id="$1_$2_search" model="ir.ui.view">
+	<field name="name">$1.$2.search</field>
+	<field name="model">$1.$2</field>
 	<field name="arch" type="xml">
 		<search string="Buscar por...">
 			<field name="name"/>
@@ -187,9 +187,9 @@ snippet record "Complete Odoo template"
 	</field>
 </record>
 
-<record id="$1_action" model="ir.actions.act_window">
-	<field name="name">$2</field>
-	<field name="res_model">$2</field>
+<record id="$1_$2_action" model="ir.actions.act_window">
+	<field name="name">$1.$2</field>
+	<field name="res_model">$1.$2</field>
 	<field name="view_mode">tree,form</field>
 </record>
 
@@ -201,10 +201,10 @@ snippet record "Complete Odoo template"
 	groups="$1_group_admin"/>
 
 <menuitem
-	id="$1_menu"
+	id="$1_$2_menu"
 	name="${4:Main Menu}"
 	parent="$1_menu_root"
-	action="$1_action"
+	action="$1_$2_action"
 	sequence="1"
 	groups="$1_group_admin"/>
 
@@ -252,8 +252,18 @@ snippet irecord
 	</field>
 </record>
 endsnippet
+snippet fields
+<field name="${1:name}" nolabel="${2:1}">
+	<tree editable="${3:bottom}">
+		<field name="${4:name}"/>${5}
+	</tree>
+</field>
+endsnippet
 snippet field
 <field name="${1:name}"/>
+endsnippet
+snippet fieldr
+<field name="${1:name}" readonly="1"/>
 endsnippet
 snippet button
 <button name="${1:button_name}" string="${2:New button}" type="${3:object}"/>
@@ -282,9 +292,18 @@ endsnippet
 snippet separator
 <separator string="${1:String}" colspan="${2:4}"/>
 endsnippet
-snippet group
+snippet group "Odoo group"
 <group colspan="${1:4}">
 	${2}
+</group>
+endsnippet
+snippet group "Odoo group group"
+<group>
+	<group>
+		<field name="${1:name}"/>${2}
+	</group>
+	<group>
+	</group>
 </group>
 endsnippet
 snippet notebook
