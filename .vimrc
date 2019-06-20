@@ -113,7 +113,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/csv.vim'
 Plug 'tmhedberg/SimpylFold'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+"Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'junegunn/limelight.vim'
 
 "Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
