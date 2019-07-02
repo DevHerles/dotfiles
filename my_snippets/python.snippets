@@ -95,13 +95,16 @@ endsnippet
 snippet boor "Odoo Boolean related field"
 ${1:fieldname} = fields.Boolean(related='${2:related_field.field_name}')${3}
 endsnippet
-snippet dat "Odoo Date field"
+snippet dat "Odoo Date field context_today"
 ${1:fieldname} = fields.Date('${2:string=Label}', default=fields.Date.context_today)${3}
 endsnippet
 snippet datr "Odoo Date related field"
 ${1:fieldname} = fields.Date(related='${2:related_field.field_name}')${3}
 endsnippet
-snippet datt "Odoo Datetime field"
+snippet datt "Odoo Datetime field Date.today()"
+${1:fieldname} = fields.Datetime('${2:string=Label}', default=fields.Date.today())${3}
+endsnippet
+snippet datt "Odoo Datetime Datetime.now()"
 ${1:fieldname} = fields.Datetime('${2:string=Label}', default=fields.Datetime.now())${3}
 endsnippet
 snippet datr "Odoo Datetime related field"

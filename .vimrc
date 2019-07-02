@@ -111,7 +111,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'moll/vim-bbye'
 Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
-Plug 'chrisbra/csv.vim'
+"Plug 'chrisbra/csv.vim'
 Plug 'tmhedberg/SimpylFold'
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'junegunn/limelight.vim'
@@ -421,6 +421,9 @@ let &colorcolumn=join(range(81,999),",")
 let &colorcolumn="80,".join(range(81,999),",")
 " Search in line
 noremap <Leader>( ?(<CR>a
+
+" duplicate current line
+noremap <Leader>d yyp
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
