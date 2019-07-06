@@ -78,19 +78,6 @@ endsnippet
 snippet ti
 <${1:}>${2}</$1>
 endsnippet
-snippet rview
-<record id="${1:model_name}_view_$3" model="ir.ui.view">
-	<field name="name">$2.$3</field>
-	<field name="model">${2:model.name}</field>
-	<field name="type">${3:form}</field>
-	<field name="priority" eval="8"/>
-	<field name="arch" type="xml">
-		<$3 string="${4:Label}">
-			<field name="${5:name}"/>
-		</$3>
-	</field>
-</record>
-endsnippet
 snippet pivot "Odoo pivot"
 <record id="${1:module_name}_pivot" model="ir.ui.view">
 	<field name="name">${2:module.name}.pivot</field>
@@ -116,6 +103,19 @@ snippet table "HTML table"
 		</tr>
 	</tbody>
 </table>
+endsnippet
+snippet record "Odoo general record view"
+<record id="${1:module_name}_${2:model}_${3:name}_view_$4" model="ir.ui.view">
+	<field name="name">$1.$2.$3.$4</field>
+	<field name="model">$1.$2.$3</field>
+	<field name="type">${4:form}</field>
+	<field name="priority" eval="8"/>
+	<field name="arch" type="xml">
+		<$4>
+			<field name="${5:name}"/>$6
+		</$4>
+	</field>
+</record>
 endsnippet
 snippet record "Complete Odoo template"
 <record id="${1:module_name}_${2:model_name}_view" model="ir.ui.view">
