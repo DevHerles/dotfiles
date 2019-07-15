@@ -29,7 +29,7 @@ set scrolloff=3
 set laststatus=2 		" Status bar
 set switchbuf=usetab
 set list 			" Display unprintable chars
-set listchars=tab:▸\ ,extends:❯,precedes:❮,nbsp:␣
+set listchars=tab:→\ ,extends:❯,precedes:❮,nbsp:␣,eol:¬,trail:⋅
 set showbreak=↪
 set nowrap
 set autoread
@@ -55,6 +55,10 @@ set ruler			" Always show cursor position.
 "set completeopt+=noinsert	" If you use the noinsert flag in completeopt in combination with menu, the first item will be selected (but not inserted into the buffer).
 set statusline=%!MyStatusLine()
 set undofile
+
+" make the highlighting of tabs and other non-text less annoying
+highlight SpecialKey ctermfg=19 guifg=#333333
+highlight NonText ctermfg=19 guifg=#333333
 
 if has('vim_starting')
   set nocompatible               " Be iMproved
