@@ -9,7 +9,7 @@ set hidden
 set mouse=a 			" Enable mouse (for window resizing)
 set backspace=indent,eol,start	" Fix backspace indent
 set hlsearch 			" Searching
-set incsearch 			" Searching
+set incsearch 			" Search as you type
 set ignorecase
 set smartcase
 set showcmd 			" Show (partial) command in status line.
@@ -121,6 +121,7 @@ Plug 'vimwiki/vimwiki'
 Plug 'junegunn/limelight.vim'
 Plug 'kalekundert/vim-coiled-snake' | Plug 'Konfekt/FastFold'
 Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-signify'
 "Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" Colorscheme
 Plug 'ap/vim-css-color' " A very fast, multi-syntax context-sensitive color name highlighter
@@ -346,6 +347,14 @@ let g:startify_list_order = [
 " don't change vim's dir when I select a file
 let g:startify_change_to_dir = 0
 nnoremap <silent> <Leader><Tab> :Startify<CR>
+
+"*****************************************************************************
+" signify
+"*****************************************************************************
+let g:signify_vcs_list = [ 'git' ]
+let g:signify_realtime = 1
+let g:signify_sign_show_count = 0
+let g:signify_sign_change = '-'
 
 "*****************************************************************************
 " ale: signs for errors and warnings
