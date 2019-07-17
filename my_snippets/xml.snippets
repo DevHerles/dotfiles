@@ -81,37 +81,37 @@ snippet odoo "Complete Odoo template"
 		</record>
 
 		<menuitem
-			id="$1_menu_root"
+			id="$1_$2_menu_root"
 			name="${4:Root Menu}"
-			web_icon="$1,static/description/icon_$1.png"
+			web_icon="$1,static/description/icon_$1_$2.png"
 			sequence="1"
-			groups="$1_group_admin"/>
+			groups="$1_$2_group_admin"/>
 
 		<menuitem
 			id="$1_$2_$3_menu"
 			name="${5:Main Menu}"
-			parent="$1_menu_root"
+			parent="$1_$2_menu_root"
 			action="$1_$2_$3_action"
 			sequence="1"
-			groups="$1_group_admin"/>
+			groups="$1_$2_group_admin"/>
 
-		<!-- init $1_security.xml -->
-		<record id="$1_category" model="ir.module.category">
-			<field name="name">${6:Category name}</field>
+		<!-- init $1_$2_security.xml -->
+		<record id="$1_$2_category" model="ir.module.category">
+			<field name="name">$4</field>
 			<field name="description">Gestión de accesos para $4</field>
 			<field name="sequence">406</field>
 		</record>
 
-		<record id="$1_group_admin" model="res.groups">
+		<record id="$1_$2_group_admin" model="res.groups">
 			<field name="name">Administrador</field>
-			<field name="category_id" ref="$1.$1_category"/>
+			<field name="category_id" ref="$1_$2.$1_$2_category"/>
 		</record>
 
-		<record id="$1_group_user" model="res.groups">
+		<record id="$1_$2_group_user" model="res.groups">
 			<field name="name">Usuario</field>
-			<field name="category_id" ref="$1.$1_category"/>
+			<field name="category_id" ref="$1_$2.$1_$2_category"/>
 		</record>
-		<!-- end $1_security.xml -->
+		<!-- end $1_$2_security.xml -->
 	</data>
 </odoo>
 endsnippet
@@ -145,15 +145,15 @@ snippet menuitem "Odoo root menuitem, menuitem and action"
 endsnippet
 snippet record "Odoo security category"
 <record id="${1:module_name}_category" model="ir.module.category">
-	<field name="name">${2:Application name}</field>
-	<field name="description">${3:Access level for Application name}</field>
+	<field name="name">${2:Module name category}</field>
+	<field name="description">${3:Access level for} $2</field>
 	<field name="sequence">${4:999}</field>
 </record>
 endsnippet
 snippet record "Odoo res.groups"
 <record id="${1:module_name}_group_${2:group}" model="res.groups">
 	<field name="name">${3:Group name}</field>
-	<field name="category_id" ref="${4:module_name}.$1_category"/>
+	<field name="category_id" ref="$1.$1_category"/>
 </record>
 endsnippet
 snippet menuitem "Odoo menuitem and action"
@@ -278,7 +278,7 @@ snippet action "Odoo action record"
 	<field name="view_mode">tree,form</field>
 </record>
 endsnippet
-snippet inherit "Odoo general inherit view"
+snippet record "Odoo general inherit view"
 <record id="${1:model_name}_view_$4_inherit_$5_$6" model="ir.ui.view">
 	<field name="name">$1.$2.$3.${4:form}</field>
 	<field name="model">${2:model}.${3:name}</field>
@@ -290,7 +290,7 @@ snippet inherit "Odoo general inherit view"
 	</field>
 </record>
 endsnippet
-snippet daction "Odoo domain action"
+snippet action "Odoo domain action"
 <act_window id="$1_action"
 	name="${2:model.name}"
 	res_model="$2"
