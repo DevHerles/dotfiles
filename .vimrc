@@ -120,6 +120,7 @@ Plug 'vimwiki/vimwiki'
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'junegunn/limelight.vim'
 Plug 'kalekundert/vim-coiled-snake' | Plug 'Konfekt/FastFold'
+Plug 'mhinz/vim-startify'
 "Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" Colorscheme
 Plug 'ap/vim-css-color' " A very fast, multi-syntax context-sensitive color name highlighter
@@ -327,6 +328,26 @@ nnoremap <leader>21 :diffput<CR>
 autocmd FileType python BracelessEnable +indent
 
 "*****************************************************************************
+" startify
+"*****************************************************************************
+let g:startify_custom_header = ['']
+let g:startify_list_order = [
+      \ ['        Most recently used files'],
+      \ 'files',
+      \ ['        Most recently used in current directory'],
+      \ 'dir',
+      \ ['        Sessions'],
+      \ 'sessions',
+      \ [        'Bookmarks'],
+      \ 'bookmarks',
+      \ ['        Commands'],
+      \ 'commands',
+      \ ]
+" don't change vim's dir when I select a file
+let g:startify_change_to_dir = 0
+nnoremap <silent> <Leader><Tab> :Startify<CR>
+
+"*****************************************************************************
 " ale: signs for errors and warnings
 "*****************************************************************************
 let g:ale_sign_error = '✗'
@@ -350,7 +371,7 @@ map F <Plug>Sneak_S
 "*****************************************************************************
 nnoremap <silent> <C-p> :Files <CR>
 "nnoremap <silent> <Leader>f :Find <CR>
-nnoremap <silent> <Leader><Tab> :Buffers <CR>
+"nnoremap <silent> <Leader><Tab> :Buffers <CR>
 "*****************************************************************************
 " jedi-vim
 "*****************************************************************************
