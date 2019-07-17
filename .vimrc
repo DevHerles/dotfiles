@@ -112,10 +112,10 @@ Plug 'moll/vim-bbye'
 Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
 "Plug 'chrisbra/csv.vim'
-Plug 'tmhedberg/SimpylFold'
+"Plug 'tmhedberg/SimpylFold'
 "Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'junegunn/limelight.vim'
-
+Plug 'kalekundert/vim-coiled-snake' | Plug 'Konfekt/FastFold'
 "Plug 'Shougo/neosnippet.vim' | Plug 'Shougo/neosnippet-snippets'
 "" Colorscheme
 Plug 'ap/vim-css-color' " A very fast, multi-syntax context-sensitive color name highlighter
