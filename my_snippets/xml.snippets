@@ -1,9 +1,117 @@
 # xml declaration
-snippet odoo
+snippet odoo "Complete Odoo template"
 <?xml version="1.0" encoding="utf-8"?>
+
 <odoo>
 	<data>
-		${1}
+
+		<record id="${1:module_name}_${2:model}_${3:name}_view_form" model="ir.ui.view">
+			<field name="name">$1.$2.$3.$4</field>
+			<field name="model">$1.$2.$3</field>
+			<field name="type">form</field>
+			<field name="priority" eval="8"/>
+			<field name="arch" type="xml">
+				<form>
+					<header>
+						<button name="function_name" states="state" string="Label" type="object"
+							attrs="{'invisible': [('state','!=','state')]}"/>
+						<field name="state" widget="statusbar"/>
+					</header>
+					<sheet>
+						<table class="table table-condensed" style="border:none;">
+							<tbody>
+								<tr>
+									<div class="oe_left" style="width: 500px;">
+										<div class="oe_title">
+											<label for="name" class="oe_edit_only"/>
+											<h1>
+												<field name="name" class="oe_inline" required="1"/>
+											</h1>
+										</div>
+									</div>
+								</tr>
+							</tbody>
+							<notebook colspan="4">
+								<page>
+									<group>
+										<group>
+											<field name="name"/>
+										</group>
+									</group>
+								</page>
+							</notebook>
+						</table>
+					</sheet>
+					<div class="oe_chatter">
+						<field name="message_follower_ids" widget="mail_followers"/>
+						<field name="message_ids" widget="mail_thread"/>
+					</div>
+				</form>
+			</field>
+		</record>
+
+		<record id="$1_$2_$3_tree" model="ir.ui.view">
+			<field name="name">$1.$2.$3.tree</field>
+			<field name="model">$1.$2.$3</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree>
+					<field name="name"/>
+				</tree>
+			</field>
+		</record>
+
+		<record id="$1_$2_$3_search" model="ir.ui.view">
+			<field name="name">$1.$2.$3.search</field>
+			<field name="model">$1.$2.$3</field>
+			<field name="arch" type="xml">
+				<search string="Buscar por...">
+					<field name="name"/>
+					<group expand="0" string="Agrupar por...">
+						<filter name="name" string="name" domain="[('name','1')]"/>
+					</group>
+				</search>
+			</field>
+		</record>
+
+		<record id="$1_$2_$3_action" model="ir.actions.act_window">
+			<field name="name">$1.$2.$3.action</field>
+			<field name="res_model">$1.$2.$3</field>
+			<field name="view_mode">tree,form</field>
+		</record>
+
+		<menuitem
+			id="$1_menu_root"
+			name="${4:Root Menu}"
+			web_icon="$1,static/description/icon_$1.png"
+			sequence="1"
+			groups="$1_group_admin"/>
+
+		<menuitem
+			id="$1_$2_$3_menu"
+			name="${5:Main Menu}"
+			parent="$1_menu_root"
+			action="$1_$2_$3_action"
+			sequence="1"
+			groups="$1_group_admin"/>
+
+		<!-- init $1_security.xml -->
+		<record id="$1_category" model="ir.module.category">
+			<field name="name">${6:Category name}</field>
+			<field name="description">Gestión de accesos para $4</field>
+			<field name="sequence">406</field>
+		</record>
+
+		<record id="$1_group_admin" model="res.groups">
+			<field name="name">Administrador</field>
+			<field name="category_id" ref="$1.$1_category"/>
+		</record>
+
+		<record id="$1_group_user" model="res.groups">
+			<field name="name">Usuario</field>
+			<field name="category_id" ref="$1.$1_category"/>
+		</record>
+		<!-- end $1_security.xml -->
 	</data>
 </odoo>
 endsnippet
@@ -111,115 +219,6 @@ snippet record "Odoo general record view"
 		</$4>
 	</field>
 </record>
-endsnippet
-snippet record "Complete Odoo template"
-<record id="${1:module_name}_${2:model}_${3:name}_view_form" model="ir.ui.view">
-	<field name="name">$1.$2.$3.$4</field>
-	<field name="model">$1.$2.$3</field>
-	<field name="type">form</field>
-	<field name="priority" eval="8"/>
-	<field name="arch" type="xml">
-		<form>
-			<header>
-				<button name="function_name" states="state" string="Label" type="object"
-					attrs="{'invisible': [('state','!=','state')]}"/>
-				<field name="state" widget="statusbar"/>
-			</header>
-			<sheet>
-				<table class="table table-condensed" style="border:none;">
-					<tbody>
-						<tr>
-							<div class="oe_left" style="width: 500px;">
-								<div class="oe_title">
-									<label for="name" class="oe_edit_only"/>
-									<h1>
-										<field name="name" class="oe_inline" required="1"/>
-									</h1>
-								</div>
-							</div>
-						</tr>
-					</tbody>
-					<notebook colspan="4">
-						<page>
-							<group>
-								<group>
-									<field name="name"/>
-								</group>
-							</group>
-						</page>
-					</notebook>
-				</table>
-			</sheet>
-			<div class="oe_chatter">
-				<field name="message_follower_ids" widget="mail_followers"/>
-				<field name="message_ids" widget="mail_thread"/>
-			</div>
-		</form>
-	</field>
-</record>
-
-<record id="$1_$2_$3_tree" model="ir.ui.view">
-	<field name="name">$1.$2.$3.tree</field>
-	<field name="model">$1.$2.$3</field>
-	<field name="type">tree</field>
-	<field name="arch" type="xml">
-		<tree>
-			<field name="name"/>
-		</tree>
-	</field>
-</record>
-
-<record id="$1_$2_$3_search" model="ir.ui.view">
-	<field name="name">$1.$2.$3.search</field>
-	<field name="model">$1.$2.$3</field>
-	<field name="arch" type="xml">
-		<search string="Buscar por...">
-			<field name="name"/>
-			<group expand="0" string="Agrupar por...">
-				<filter name="name" string="name" domain="[('name','1')]"/>
-			</group>
-		</search>
-	</field>
-</record>
-
-<record id="$1_$2_$3_action" model="ir.actions.act_window">
-	<field name="name">$1.$2.$3.action</field>
-	<field name="res_model">$1.$2.$3</field>
-	<field name="view_mode">tree,form</field>
-</record>
-
-<menuitem
-	id="$1_menu_root"
-	name="${4:Root Menu}"
-	web_icon="$1,static/description/icon_$1.png"
-	sequence="1"
-	groups="$1_group_admin"/>
-
-<menuitem
-	id="$1_$2_$3_menu"
-	name="${5:Main Menu}"
-	parent="$1_menu_root"
-	action="$1_$2_$3_action"
-	sequence="1"
-	groups="$1_group_admin"/>
-
-<!-- init $1_security.xml -->
-<record id="$1_category" model="ir.module.category">
-	<field name="name">${6:Category name}</field>
-	<field name="description">Gestión de accesos para $4</field>
-	<field name="sequence">406</field>
-</record>
-
-<record id="$1_group_admin" model="res.groups">
-	<field name="name">Administrador</field>
-	<field name="category_id" ref="$1.$1_category"/>
-</record>
-
-<record id="$1_group_user" model="res.groups">
-	<field name="name">Usuario</field>
-	<field name="category_id" ref="$1.$1_category"/>
-</record>
-<!-- end $1_security.xml -->
 endsnippet
 snippet header "Odoo form header"
 <header>

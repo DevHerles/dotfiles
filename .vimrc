@@ -646,6 +646,17 @@ let g:expand_region_text_objects = {
 "*****************************************************************************
 highlight BadWhitespace ctermbg=red guibg=red
 
+" SNIPPETS
+au BufRead,BufNewFile *.snippet set expandtab
+au BufRead,BufNewFile *.snippet set tabstop=4
+au BufRead,BufNewFile *.snippet set softtabstop=4
+au BufRead,BufNewFile *.snippet set shiftwidth=4
+au BufRead,BufNewFile *.snippet set autoindent
+au BufRead,BufNewFile *.snippet match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.snippet match BadWhitespace /\s\+$/
+au         BufNewFile *.snippet set fileformat=unix
+au BufRead,BufNewFile *.snippet let b:comment_leader = '<!--'
+
 " XML
 au BufRead,BufNewFile *.xml set expandtab
 au BufRead,BufNewFile *.xml set tabstop=4
