@@ -431,6 +431,8 @@ map <Leader>s :OverCommandLine<CR>
 "*****************************************************************************
 " Window
 "*****************************************************************************
+nnoremap <silent> <Leader>= gg=G
+"command W :execute ':silent w sudo tee % > /dev/null' | :edit!
 noremap <silent> <leader>u <ESC>?=<CR>/(<CR>au<ESC>
 
 nnoremap <silent> <Leader>q :Bdelete<CR>
@@ -675,6 +677,7 @@ au BufRead,BufNewFile *.xml match BadWhitespace /^\t\+/
 au BufRead,BufNewFile *.xml match BadWhitespace /\s\+$/
 au         BufNewFile *.xml set fileformat=unix
 au BufRead,BufNewFile *.xml let b:comment_leader = '<!--'
+au FileType xml setlocal equalprg=xmllint\ --format\ --recover\ -\ 2>/dev/null
 
 " HTML
 au BufRead,BufNewFile *.html set filetype=xml
