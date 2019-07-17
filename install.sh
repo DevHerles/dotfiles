@@ -74,7 +74,10 @@ function installTools() {
     echo "Installing admin tools"
     echo "dfc"
     echo "vivid"
+    echo "tree"
     echo "==================================="
+
+    sudo apt install tree
 
     if [ -f /usr/bin/dfc ]; then
        echo "dfc is already installed"
