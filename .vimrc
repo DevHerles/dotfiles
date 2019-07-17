@@ -473,6 +473,14 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" Jump back to your last edit (do this in normal mode).
+nnoremap <Leader>p g;
+nnoremap <Leader>n g,
+
+" Jump back to the position you were last
+"nnoremap <Leader>o ^o	" (Out) will jump back
+"nnoremap <Leader>i ^i	" (In) will go back forward
+
 "" Clear search highlight
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 
