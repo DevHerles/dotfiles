@@ -431,6 +431,13 @@ map <Leader>s :OverCommandLine<CR>
 "*****************************************************************************
 " Window
 "*****************************************************************************
+nnoremap n nzz
+nnoremap N Nzz
+
+" Copy/Paste from register
+vnoremap <leader>cc "*y
+map <leader>vv "*p
+
 nnoremap <silent> <Leader>= gg=G
 "command W :execute ':silent w sudo tee % > /dev/null' | :edit!
 noremap <silent> <leader>u <ESC>?=<CR>/(<CR>au<ESC>
@@ -660,7 +667,7 @@ au bufNewFile *.xml 0r ~/.dotfiles/templates/template.xml
 "*****************************************************************************
 " File types
 "*****************************************************************************
-highlight BadWhitespace ctermbg=red guibg=red
+highlight BadWhitespace ctermbg=red guibg=default
 
 " SNIPPETS
 au BufRead,BufNewFile *.snippet set expandtab
