@@ -433,6 +433,15 @@ map <Leader>s :OverCommandLine<CR>
 "*****************************************************************************
 nnoremap n nzz
 nnoremap N Nzz
+"
+" Fast saving
+"nmap <Leader>w :w!<cr>
+
+" Center the screen
+nnoremap <Leader><Leader> zz
+
+" Act like D and C
+nnoremap Y y$
 
 " Copy/Paste from register
 vnoremap <leader>cc "*y
@@ -454,6 +463,10 @@ noremap <C-s> :w<CR>
 noremap <C-u> :e ++ff=dos<CR>
 nnoremap <silent> L :call MyNext()<CR>
 nnoremap <silent> H :call MyPrev()<CR>
+
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 " Resizing split windows
 nnoremap ,w :call SwapSplitResizeShortcuts()<CR>
 imap jk <Esc>
