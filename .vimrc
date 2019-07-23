@@ -433,7 +433,33 @@ map <Leader>s :OverCommandLine<CR>
 "*****************************************************************************
 nnoremap n nzz
 nnoremap N Nzz
-"
+" Switch between the last two files
+nnoremap <tab><tab> <c-^>
+
+" command typo mapping
+cnoremap WQ wq
+cnoremap Wq wq
+cnoremap QA qa
+cnoremap qA qa
+cnoremap Q! q!
+
+" replace word under cursor, globally, with confirmation
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left>
+
+" re-indent file and jump back to where the cursor was
+map <F7> mzgg=G`z
+
+" prevent entering ex mode accidentally
+nnoremap Q <Nop>
+
+" fold file based on indent
+nnoremap <silent> <leader>zi :setlocal foldmethod=indent<CR>
+
+nnoremap <silent> <F9> :windo diffthis<CR>
+" rename current file
+nnoremap <Leader>rn :!mv <C-R>=expand("%")<CR>
+
 " Fast saving
 "nmap <Leader>w :w!<cr>
 
