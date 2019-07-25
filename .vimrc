@@ -126,6 +126,7 @@ Plug 'mhinz/vim-signify'
 "" Colorscheme
 Plug 'ap/vim-css-color' " A very fast, multi-syntax context-sensitive color name highlighter
 Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug 'tomasiser/vim-code-dark'
 Plug 'dracula/vim'
 
@@ -208,8 +209,8 @@ if !exists('g:not_finish_vimplug')
       " https://github.com/neovim/neovim/wiki/FAQ
       set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
   endif
-  colorscheme gruvbox
 endif
+colorscheme gruvbox
 
 "*****************************************************************************
 " Deoplete

@@ -150,6 +150,122 @@ snippet record "Odoo security category"
 	<field name="sequence">${4:999}</field>
 </record>
 endsnippet
+snippet record "Odoo action record"
+<record id="${1:module_name}_${2:model}_${3:name}_action" model="ir.actions.act_window">
+	<field name="name">$1.$2.$3.action</field>
+	<field name="res_model">$1.$2.$3</field>
+	<field name="view_type">form</field>
+	<field name="view_mode">form</field>
+	<field name="target">new</field>
+</record>
+endsnippet
+snippet report "Odoo report template"
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+		<!-- start /$1_$2/reports/$3_report_wizard.xml -->
+		<template id="$1_$2_$3_report">
+			<t t-call="report.external_layout">
+				<t t-foreach="docs" t-as="o">
+					<div class="page">
+						<div style="text-align: center;">
+							<h4><span t-esc="content.get('report_name')"/></h4>
+						</div>
+						<br/>
+						<div class="row">
+							<div  class="col-xs-4">
+								<p><b>DESDE: </b><span t-esc="o.date_start" t-options="{'widget': 'date'}"/></p>
+							</div>
+							<div class="col-xs-4">
+								<p><b>HASTA: </b><span t-esc="o.date_end" t-options="{'widget': 'date'}"/></p>
+							</div>
+						</div>
+						<br/>
+						<t t-if="o.report_type == '01'">
+							<t t-call="$1_$2_$3_$7_template"/>
+						</t>
+					</div>
+				</t>
+			</t>
+		</template>
+
+		<template id="$1_$2_$3_${7:template_name}_template">
+			<table class="table table-bordered table-condensed">
+				<thead class="thead-light">
+					<tr>
+						<th>TEMPLATE TITLE</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr t-foreach="content.get('lines')" t-as="line">
+						<td><span t-esc="line.get('id')"/></td>
+					</tr>
+				</tbody>
+			</table>
+		</template>
+		<!-- end /$1_$2/reports/$3_report_wizard.xml -->
+
+		<record id="$1_$2_$3_report_wizard_action" model="ir.actions.act_window">
+			<field name="name">${6:Report form title}</field>
+			<field name="res_model">$1.$2.$3.report.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem
+			id="${1:oeh}_${2:medical}_${3:inpatient}_menu"
+			name="${4:Reports}"
+			parent="${5:parent_menu}"
+			sequence="30"/>
+
+		<menuitem
+			id="$1_$2_$3_report_wizard_menu"
+			name="$6"
+			action="$1_$2_$3_report_wizard_action"
+			parent="$1_$2_$3_menu"
+			sequence="30"/>
+
+		<record id="$1_$2_$3_report_wizard_view" model="ir.ui.view">
+			<field name="name">$1.$2.$3.wizard.form</field>
+			<field name="model">$1.$2.$3.report.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<group>
+							<field name="date_start"/>
+							<field name="date_end"/>
+						</group>
+						<group>
+							<field name="report_type"/>
+						</group>
+					</group>
+					<footer>
+						<button name="%($1_$2_$3_report)d" type="action" string="Descargar" class="oe_highlight"/> o
+						<button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+
+		<record id="$1_$2_$3_paperformat" model="report.paperformat">
+			<field name="name">$1.$2.$3.paperformat</field>
+			<field name="default" eval="True"/>
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">25</field>
+			<field name="margin_bottom">20</field>
+			<field name="margin_left">7</field>
+			<field name="margin_right">7</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">20</field>
+			<field name="dpi">90</field>
+		</record>
+
+	</data>
+</odoo>
+endsnippet
 snippet record "Odoo res.groups"
 <record id="${1:module_name}_group_${2:group}" model="res.groups">
 	<field name="name">${3:Group name}</field>
