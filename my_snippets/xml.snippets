@@ -169,6 +169,14 @@ snippet report "Odoo report template"
 			<t t-call="report.external_layout">
 				<t t-foreach="docs" t-as="o">
 					<div class="page">
+						<div style="text-align: right;">
+							<div>
+								Usuario: <b><span t-esc="user.name"></span></b>
+							</div>
+							<div>
+								Fecha y hora: <b><span t-esc="content.get('print_datetime')"/></b>
+							</div>
+						</div>
 						<div style="text-align: center;">
 							<h4><span t-esc="content.get('report_name')"/></h4>
 						</div>

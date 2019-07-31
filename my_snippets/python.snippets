@@ -68,9 +68,14 @@ class ${1:ModelName}ReportWizard(models.TransientModel):
 			paperformat.update({'orientation': 'Portrait'})
 			return self._build_report_$5()
 
-	@api.model
-	def _convert_date(self, date):
-		return date and '/'.join(date.split('-')[::-1]) or date
+	@staticmethod
+	def _get_current_datetime(ddatetime=False):
+		datetime_format = '%Y-%m-%d %H:%M:%S'
+		start_datetime = datetime.strptime(ddatetime, datetime_format) if ddatetime else datetime.now()
+		return (start_datetime - timedelta(hours=5)).strftime(datetime_format)
+
+	def _real_datetime(self, ddatetime):
+		return self._get_current_datetime(ddatetime) if ddatetime else ''
 
 	def _build_report_$4(self, domain=[], ttype=[]):
 		domain = [
@@ -90,7 +95,8 @@ class ${1:ModelName}ReportWizard(models.TransientModel):
 		return {
 			'rows': records,
 			'total': sum(inv.get('total') for inv in records),
-			'report_name': 'REPORT TITLE',
+			'report_name': dict(self._fields['report_type'].selection).get(self.report_type).upper(),
+			'print_datetime': self._get_current_datetime(),
 		}
 
 endsnippet
