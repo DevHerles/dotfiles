@@ -233,6 +233,16 @@ function setupDirColors() {
     eval $( dircolors -b ~/.dotfiles/dir_colors )
 }
 
+function installDocker() {
+    sudo apt install docker.io
+    sudo systemctl start docker
+    sudo systemctl enable docker
+
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    newgrp docker
+}
+
 function install() {
 
     echo "==================================="
@@ -243,6 +253,7 @@ function install() {
     # installHomebrewPackages
     # installNodeJS
     # installNpmPackages
+    installDocker
     installTools
     installOhMyZSH
     cloneDotfiles
