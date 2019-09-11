@@ -18,7 +18,6 @@ export LS_COLORS="$(vivid generate snazzy)"
 
 ## What Gets Installed
 
-- brew
 - n (faster nvm alternative)
 - node
 - vim
