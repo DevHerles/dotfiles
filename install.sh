@@ -205,6 +205,11 @@ function setupVim() {
 
 function setupTmux() {
     echo "==================================="
+    echo "Installing tmux                    "
+    echo "==================================="
+    sudo apt  install tmux
+
+    echo "==================================="
     echo "Installing tmux plugin manager"
     echo "==================================="
 
@@ -243,6 +248,16 @@ function installDocker() {
     newgrp docker
 }
 
+function installVimPlug() {
+    sudo apt install curl
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+}
+
+function installNeoVim() {
+    sudo apt install neovim
+}
+
 function install() {
 
     echo "==================================="
@@ -253,7 +268,8 @@ function install() {
     # installHomebrewPackages
     # installNodeJS
     # installNpmPackages
-    installDocker
+    installNeoVim
+    installVimPlug
     installTools
     installOhMyZSH
     cloneDotfiles
