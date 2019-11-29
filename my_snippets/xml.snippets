@@ -159,41 +159,119 @@ snippet record "Odoo action record"
 	<field name="target">new</field>
 </record>
 endsnippet
+snippet record "Odoo calendar view"
+<record id="${1:oeh}_${2:medical}_${3:inpatient}_calendar_view" model="ir.ui.view">
+	<field name="name">$1.$2.$3.calendar</field>
+	<field name="model">$1.$2.$3</field>
+	<field name="arch" type="xml">
+		<calendar string="${4:Description}" date_start="${5:date_start}" date_stop="${6:date_stop}"
+			date_delay="duration" display="[${7:patient_id}]" color="${8:color_field}" quick_add="False" mode="day" event_open_popup="False">
+			<field name="doctor"/>
+			<field name="${7:patient_id}"/>
+		</calendar>
+	</field>
+</record>
+endsnippet
+snippet wizard "Odoo wizard template"
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+	<data>
+		<record id="$1_$2_$3_wizard_action" model="ir.actions.act_window">
+			<field name="name">${6:Wizard form title}</field>
+			<field name="res_model">$1.$2.$3.wizard</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+
+		<menuitem
+			id="${1:oeh}_${2:medical}_${3:inpatient}_menu"
+			name="${4:Wizards}"
+			parent="${5:parent_menu}"
+			sequence="30"/>
+
+		<menuitem
+			id="$1_$2_$3_wizard_menu"
+			name="$6"
+			action="$1_$2_$3_wizard_action"
+			parent="$1_$2_$3_menu"
+			sequence="30"/>
+
+		<record id="$1_$2_$3_wizard_view" model="ir.ui.view">
+			<field name="name">$1.$2.$3.wizard.form</field>
+			<field name="model">$1.$2.$3.wizard</field>
+			<field name="arch" type="xml">
+				<form>
+					<group>
+						<group>
+							<field name="date_start"/>
+						</group>
+						<group>
+							<field name="date_end"/>
+						</group>
+					</group>
+					<footer>
+						<button name="apply" confirm="¿Seguro de aplicar los cambios?" type="object" string="Aplicar" class="oe_highlight"/> o
+						<button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
+					</footer>
+				</form>
+			</field>
+		</record>
+	</data>
+</odoo>
+# -*- coding: utf-8 -*-
+from odoo import api, fields, models
+
+
+class $2$3Wizard(models.TransientModel):
+	_name = '$1.$2.$3.wizard'
+
+	date_start = fields.Date('Fecha de inicio', required=True)
+	date_end = fields.Date('Fecha fin', required=True)
+
+	@api.multi
+	def apply(self):
+		return True
+endsnippet
 snippet report "Odoo report template"
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
 	<data>
 		<!-- start /$1_$2/reports/$3_report_wizard.xml -->
-		<template id="$1_$2_$3_report">
-			<t t-call="report.external_layout">
-				<t t-foreach="docs" t-as="o">
-					<div class="page">
-						<div style="text-align: right;">
-							<div>
-								Usuario: <b><span t-esc="user.name"></span></b>
+		<template id="$2_report_template">
+			<t t-call="report.html_container">
+				<t t-foreach="docs" t-as="doc">
+					<t t-foreach="doc._get_content" t-as="content">
+						<t t-call="report.external_layout">
+							<div class="page">
+								<div style="text-align: right;">
+									<div>
+										Usuario: <b><span t-esc="user.name"></span></b>
+									</div>
+									<div>
+										Fecha y hora: <b><span t-esc="content.get('print_datetime')"/></b>
+									</div>
+								</div>
+								<div style="text-align: center;">
+									<h4><span t-esc="content.get('report_name')"/></h4>
+								</div>
+								<div class="row">
+									<div  class="col-xs-4">
+										<p><b>DESDE: </b><span t-esc="content.get('date_start')" t-options="{'widget': 'date'}"/></p>
+									</div>
+									<div class="col-xs-4">
+										<p><b>HASTA: </b><span t-esc="content.get('date_end')" t-options="{'widget': 'date'}"/></p>
+									</div>
+								</div>
+								<br/>
+								<t t-if="content.get('report_type') == '01'">
+									<t t-call="$1_$2.$1_$2_$3_$7_template"/>
+								</t>
 							</div>
-							<div>
-								Fecha y hora: <b><span t-esc="content.get('print_datetime')"/></b>
-							</div>
-						</div>
-						<div style="text-align: center;">
-							<h4><span t-esc="content.get('report_name')"/></h4>
-						</div>
-						<br/>
-						<div class="row">
-							<div  class="col-xs-4">
-								<p><b>DESDE: </b><span t-esc="o.date_start" t-options="{'widget': 'date'}"/></p>
-							</div>
-							<div class="col-xs-4">
-								<p><b>HASTA: </b><span t-esc="o.date_end" t-options="{'widget': 'date'}"/></p>
-							</div>
-						</div>
-						<br/>
-						<t t-if="o.report_type == '01'">
-							<t t-call="$1_$2_$3_$7_template"/>
 						</t>
-					</div>
+					</t>
 				</t>
 			</t>
 		</template>
@@ -213,6 +291,29 @@ snippet report "Odoo report template"
 			</table>
 		</template>
 		<!-- end /$1_$2/reports/$3_report_wizard.xml -->
+
+		<record id="$1_$2_$3_paperformat" model="report.paperformat">
+			<field name="name">$1.$2.$3.paperformat</field>
+			<field name="default" eval="True"/>
+			<field name="format">A4</field>
+			<field name="orientation">Portrait</field>
+			<field name="margin_top">25</field>
+			<field name="margin_bottom">20</field>
+			<field name="margin_left">7</field>
+			<field name="margin_right">7</field>
+			<field name="header_line" eval="False" />
+			<field name="header_spacing">20</field>
+			<field name="dpi">90</field>
+		</record>
+
+		<report id="$7_report_wizard"
+			model="$1.$2.$3.report.wizard"
+			string="Reporte (PDF)"
+			report_type="qweb-pdf"
+			paperformat_id="$1_$2_$3_paperformat"
+			name="$1_$2.$2_report_template"
+			file="$1_$2.$2_report_template"
+		/>
 
 		<record id="$1_$2_$3_report_wizard_action" model="ir.actions.act_window">
 			<field name="name">${6:Report form title}</field>
@@ -250,27 +351,12 @@ snippet report "Odoo report template"
 						</group>
 					</group>
 					<footer>
-						<button name="%($1_$2_$3_report)d" type="action" string="Descargar" class="oe_highlight"/> o
+						<button name="%($7_report_wizard)d" type="action" string="Descargar" class="oe_highlight"/> o
 						<button name="cancel" string="Cancel" special="cancel" class="oe_link"/>
 					</footer>
 				</form>
 			</field>
 		</record>
-
-		<record id="$1_$2_$3_paperformat" model="report.paperformat">
-			<field name="name">$1.$2.$3.paperformat</field>
-			<field name="default" eval="True"/>
-			<field name="format">A4</field>
-			<field name="orientation">Portrait</field>
-			<field name="margin_top">25</field>
-			<field name="margin_bottom">20</field>
-			<field name="margin_left">7</field>
-			<field name="margin_right">7</field>
-			<field name="header_line" eval="False" />
-			<field name="header_spacing">20</field>
-			<field name="dpi">90</field>
-		</record>
-
 	</data>
 </odoo>
 endsnippet
@@ -341,6 +427,21 @@ snippet record "Odoo general record view"
 		<$4>
 			<field name="${5:name}"/>$6
 		</$4>
+	</field>
+</record>
+endsnippet
+snippet record "Odoo search record view"
+<record id="${1:module_name}_${2:model}_${3:name}_view_search" model="ir.ui.view">
+	<field name="name">$1.$2.$3.search</field>
+	<field name="model">$1.$2.$3</field>
+	<field name="arch" type="xml">
+		<search string="Búsqueda">
+			<field name="${4:name}" filter_domain="[('$4','ilike',self)]"/>
+			<separator/>
+			<group expand="0" string="Agrupar por...">
+				<filter string="${5:Description}" name="$4" context="{'group_by': ['$4']}"/>
+			</group>
+		</search>
 	</field>
 </record>
 endsnippet

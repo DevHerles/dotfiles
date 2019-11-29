@@ -163,6 +163,14 @@ function cloneDotfiles() {
     # Create secret keys file - used to store local env vars
     # touch ~/dotfile/secret-keys.sh
 }
+function addZshCustomTheme() {
+
+    echo "==================================="
+    echo "Adding Zsh custom theme..."
+    echo "==================================="
+
+    cp ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
+}
 
 function setupVim() {
     echo "==================================="
@@ -253,10 +261,11 @@ function install() {
     # installHomebrewPackages
     # installNodeJS
     # installNpmPackages
-    installDocker
+    #installDocker
     installTools
     installOhMyZSH
-    cloneDotfiles
+    #cloneDotfiles
+    addZshCustomTheme
     setupVim
     setupTmux
     #setupDirColors

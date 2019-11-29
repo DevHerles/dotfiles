@@ -61,7 +61,7 @@ class ${1:ModelName}ReportWizard(models.TransientModel):
 		})
 		return res
 
-	@api.multi
+	@property
 	def _get_content(self):
 		paperformat = self.env.ref('$2_$3.$2_$3_$4_paperformat')
 		if self.report_type in ${5:FIRST_TYPE}:
@@ -96,6 +96,7 @@ class ${1:ModelName}ReportWizard(models.TransientModel):
 			'rows': records,
 			'total': sum(inv.get('total') for inv in records),
 			'report_name': dict(self._fields['report_type'].selection).get(self.report_type).upper(),
+			'report_type': self.report_type,
 			'print_datetime': self._get_current_datetime(),
 		}
 
@@ -167,6 +168,17 @@ ${1:fieldname} = fields.Integer(related='${2:related_field.field_name}')${3}
 endsnippet
 snippet flo "Odoo Float field"
 ${1:fieldname} = fields.Float('${2:string=Label}')${3}
+endsnippet
+snippet floc "Odoo Float copute field"
+${1:fieldname} = fields.Float('${2:Label}', compute='_compute_$1')
+@api.multi
+@api.depends(${3:'field, ...'})
+def _compute_$1(self):
+	for record in self:
+		if record.$1 in ('TD', 'TN'):
+			record.$1 = 1
+		else:
+			record.$1 = 0.5
 endsnippet
 snippet flor "Odoo Float related field"
 ${1:fieldname} = fields.Float(related='${2:related_field.field_name}')${3}
