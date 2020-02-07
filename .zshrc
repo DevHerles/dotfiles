@@ -118,3 +118,4 @@ export LS_COLORS="$(vivid generate snazzy)"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+echo -e "\e]12;yellow\a"
