@@ -230,7 +230,12 @@ function setupTmux() {
     if [ -f $file ] ; then
         rm $file
     fi
+    file=".gitconfig"
+    if [ -f $file ] ; then
+        rm $file
+    fi
     ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
+    ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 }
 
 function setupDirColors() {
