@@ -127,6 +127,12 @@ function cloneDotfiles() {
     fi
     echo "Linking .gitconfig..."
     ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
+
+    echo "Linking init.vim..."
+    ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
+
+    echo "Linking configs folder..."
+    ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
 }
 
 function setupVim() {
