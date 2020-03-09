@@ -14,14 +14,15 @@ function installAdminTools() {
     echo "vtop is already installed."
   else
     echo "Installing vtop..."
-    npm i -g vtop
+    sudo npm i -g vtop
   fi
 
   if which bat > /dev/null; then
     echo "bat is already installed."
   else
     echo "Installing bat..."
-    sudo apt install bat
+    wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb
+    sudo dpkg -i bat_0.11.0_amd64.deb && rm bat_0.11.0_amd64.deb
   fi
 
   if which tree > /dev/null; then
@@ -120,9 +121,9 @@ function cloneDotfiles() {
     ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
   fi
 
-  file=".gitconfig"
+  file="~/.gitconfig"
   if [ -f $file ] ; then
-    echo "Removing .gitconfig..."
+    echo "Removing ~/.gitconfig..."
     rm $file
   fi
   echo "Linking .gitconfig..."
