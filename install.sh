@@ -1,99 +1,62 @@
 #!/usr/bin/env bash
 
-function installHomebrew() {
-
-    echo "==================================="
-    echo "Installing homebrew"
-    echo "==================================="
-
-    cd ~/
-
-    which -s brew > /dev/null
-    if [[ $? -eq 1 ]]; then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    else
-        brew upgrade
-    fi
-}
-
-function installHomebrewPackages() {
-
-    echo "=================================="
-    echo "Installing homebrew packages:"
-    echo "git"
-    echo "neovim"
-    echo "tmux"
-    echo "zsh"
-    echo "fzf"
-    echo "bat"
-    echo "icdiff"
-    echo "shpotify"
-    echo "=================================="
-
-    cd ~/
-
-    brew install git
-    brew install neovim
-    brew install tmux
-    brew install zsh
-    brew install fzf
-    brew install bat
-    brew install icdiff
-    brew install shpotify
-
-    # Sneak on colorls here --> https://github.com/athityakumar/colorls
-    gem install colorls
-}
-
-function installNodeJS() {
-
-    echo "==================================="
-    echo "Installing n and NodeJS"
-    echo "==================================="
-
-    cd ~/
-
-    curl -L https://git.io/n-install | bash
-}
-
-function installNpmPackages() {
-
-    echo "==================================="
-    echo "Installing global npm packages"
-    echo "vtop"
-    echo "==================================="
-
-    cd ~/
-
-    npm i -g vtop
-}
-
-function installTools() {
+function installAdminTools() {
 
     echo "==================================="
     echo "Installing admin tools"
+    echo "nodejs"
+    echo "vtop"
+    echo "bat"
+    echo "tree"
     echo "dfc"
     echo "vivid"
-    echo "tree"
     echo "==================================="
 
-    sudo apt install tree
+    if which nodejs > /dev/null; then
+	echo "nodejs is already installed."
+    else
+	echo "Installing NodeJs..."
+    	curl -L https://git.io/n-install | bash
+    fi
+
+    if which vtop > /dev/null; then
+	echo "vtop is already installed."
+    else
+	echo "Installing vtop..."
+    	npm i -g vtop
+    fi
+
+    if which bat > /dev/null; then
+	echo "bat is already installed."
+    else
+	echo "Installing bat..."
+	sudo apt install bat
+    fi
+
+    if which tree > /dev/null; then
+	echo "tree is already installed."
+    else
+	echo "Installing tree..."
+	sudo apt install tree
+    fi
 
     if [ -f /usr/bin/dfc ]; then
        echo "dfc is already installed"
     else
+       echo "Installing dfc..."
        sudo apt-get install dfc
     fi
 
     if [ -f /usr/bin/vivid ]; then
        echo "vivid is already installed"
     else
+       echo "Downloading vivid0.4.0..."
        wget "https://github.com/sharkdp/vivid/releases/download/v0.4.0/vivid_0.4.0_amd64.deb"
+       echo "Installing vivid0.4.0..."
        sudo dpkg -i vivid_0.4.0_amd64.deb
     fi
 
     export LS_COLORS="$(vivid generate snazzy)"
-
 }
 
 function installOhMyZSH() {
@@ -105,8 +68,19 @@ function installOhMyZSH() {
     echo "==================================="
 
     cd ~/
-    sudo apt-get install zsh
-    sudo apt-get install git-core
+    if which zsh > /dev/null; then
+	echo "zsh is already installed."
+    else
+	echo "Installing zsh"
+    	sudo apt-get install zsh
+    fi
+
+    if which git > /dev/nul; then
+	echo "Git is already installed."
+    else
+	echo "Installing git..."
+    	sudo apt-get install git-core
+    fi
 
     if [ -d ~/.oh-my-zsh ]; then
        if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
@@ -132,16 +106,16 @@ function installOhMyZSH() {
     if [ -d ~/.dotfiles/gruvbox ]; then
        cd ~/.dotfiles/gruvbox && git pull;
     fi
-    # git clone https://github.com/commanderkelso/oh-my-zsh-gruvbox-powerline-theme.git
-    # mv ~/oh-my-zsh-gruvbox-powerline-theme ~/.dotfiles/gruvbox/
-    # rm ~/.oh-my-zsh/themes/gruvbox-powerline.zsh-theme
-    # ln -s ~/.dotfiles/gruvbox/gruvbox-powerline.zsh-theme ~/.oh-my-zsh/themes
+
+    if [ -f ~/.zshrc ]; then
+	rm ~/.zshrc
+    fi
 
     ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 
     chsh -s `which zsh`
-
 }
+
 function cloneDotfiles() {
 
     echo "==================================="
@@ -156,20 +130,20 @@ function cloneDotfiles() {
 
     git clone https://github.com/DevHerles/dotfiles.git ~/.dotfiles
 
-    cp ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
-    # echo "Installing z.sh"
-    # git clone https://github.com/rupa/z.git ~/
+    if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
+	echo "Removing asf.zsh-theme..."
+	rm ~/.oh-my-zsh/themes/asf.zsh-theme
+    fi
+    echo "Linking asf.zsh-theme..."
+    ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
 
-    # Create secret keys file - used to store local env vars
-    # touch ~/dotfile/secret-keys.sh
-}
-function addZshCustomTheme() {
-
-    echo "==================================="
-    echo "Adding Zsh custom theme..."
-    echo "==================================="
-
-    cp ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
+    file=".gitconfig"
+    if [ -f $file ] ; then
+	echo "Removing .gitconfig..."
+        rm $file
+    fi
+    echo "Linking .gitconfig..."
+    ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 }
 
 function setupVim() {
@@ -181,12 +155,17 @@ function setupVim() {
 
     # Link vimrc for both vim and neovim
     if [ -f ~/.vimrc ]; then
+	echo "Removing .vimrc..."
         rm ~/.vimrc
     fi
+    echo "Linking .vimrc"
+    ln -sf ~/.dotfiles/.vimrc ~/.vimrc
+
     if [ -f ~/.config/nvim/init.vim ]; then
+	echo "Removing init.vim..."
         rm ~/.config/nvim/init.vim
     fi
-    ln -sf ~/.dotfiles/.vimrc ~/.vimrc
+    echo  "Linking init.vim..."
     ln -sf ~/.dotfiles/.vimrc ~/.config/nvim/init.vim
 
     # Set up colors folder
@@ -194,6 +173,7 @@ function setupVim() {
     mkdir -p ~/.config/nvim/colors
 
     # Install vim-plug
+
     curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -228,14 +208,11 @@ function setupTmux() {
     echo "==================================="
     file=".tmux.conf"
     if [ -f $file ] ; then
+	echo "Removing .tmux.conf..."
         rm $file
     fi
-    file=".gitconfig"
-    if [ -f $file ] ; then
-        rm $file
-    fi
+    echo "Linking .tmux.conf..."
     ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
-    ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 }
 
 function setupDirColors() {
@@ -247,13 +224,18 @@ function setupDirColors() {
 }
 
 function installDocker() {
-    sudo apt install docker.io
-    sudo systemctl start docker
-    sudo systemctl enable docker
+    if which nodejs > /dev/null; then
+	echo "Docker is already installed."
+    else
+	echo "Installing docker..."
+	sudo apt install docker.io
+	sudo systemctl start docker
+	sudo systemctl enable docker
 
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
-    newgrp docker
+	sudo groupadd docker
+	sudo usermod -aG docker $USER
+	newgrp docker
+    fi
 }
 
 function install() {
@@ -262,14 +244,10 @@ function install() {
     echo "Beginning Installation..."
     echo "==================================="
 
-    # installHomebrew
-    # installHomebrewPackages
-    # installNodeJS
-    # installNpmPackages
-    #installDocker
-    installTools
+    installDocker
+    installAdminTools
     installOhMyZSH
-    #cloneDotfiles
+    cloneDotfiles
     addZshCustomTheme
     setupVim
     setupTmux
