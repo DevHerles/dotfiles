@@ -45,14 +45,14 @@ let g:DevIconsEnableFoldersOpenClose = 1
 
 " let g:onedark_terminal_italics = 1 "---------------------- Italic comment's code
 let g:onedark_termcolors=256
-:silent! colorscheme purify "--------------------------------- Set onedark theme
+:silent! colorscheme aranda "--------------------------------- Set onedark theme
 hi Normal guibg=NONE ctermbg=NONE "---------------- Transparent background color
 
 " }}}
 
 " AIRLINE {{{
 
-let g:airline_theme='purify' "--------------------------- Set status bar's theme
+let g:airline_theme='aranda' "--------------------------- Set status bar's theme
 let g:airline_powerline_fonts = 1 "----------- Just work with patched NERD fonts
 let g:airline_section_c = '%t' "--filename "-------------- Only show file's name
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "- Hide format type

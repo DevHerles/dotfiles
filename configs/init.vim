@@ -12,7 +12,7 @@ call plug#begin('~/.config/nvim/plugged') "---------------------- Start vim plug
 " COLORS, THEMES {{{
 
 Plug 'joshdick/onedark.vim'
-Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'DevHerles/aranda', { 'rtp': 'vim' }
 
 " }}}
 

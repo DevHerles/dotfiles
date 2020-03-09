@@ -139,6 +139,15 @@ function setupVim() {
     echo "Setting up vim and neovim..."
     cd ~/
 
+    if [ -f ~/.config/vim ]; then
+	echo "Neovim is already installed"
+    else
+	echo "Installing Neovim..."
+	sudo apt-get install neovim
+	sudo apt-get install python-neovim
+	sudo apt-get install python3-neovim
+    fi
+
     # Link vimrc for both vim and neovim
     if [ -f ~/.vimrc ]; then
 	echo "Removing .vimrc..."
@@ -152,7 +161,7 @@ function setupVim() {
         rm ~/.config/nvim/init.vim
     fi
     echo  "Linking init.vim..."
-    ln -sf ~/.dotfiles/.vimrc ~/.config/nvim/init.vim
+    ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
 
     # Set up colors folder
     mkdir -p ~/.vim/colors
