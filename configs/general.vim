@@ -115,8 +115,8 @@ set backspace=indent,eol,start "----------------- Allow backspace in insert mode
 
 " TAB, INDENT {{{
 
-set tabstop=2 "---------------------------------------------- 2 spaces for 1 tab
-set softtabstop=2
+set tabstop=4 "---------------------------------------------- 4 spaces for 1 tab
+set softtabstop=4
 set shiftwidth=2
 set expandtab "------------------------------------------ Add tab in insert mode
 set smarttab
