@@ -79,6 +79,7 @@ plugins=(
   copyfile
   tmux
   history
+  colored-man-pages
 )
 autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
