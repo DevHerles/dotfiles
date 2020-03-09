@@ -1,16 +1,7 @@
 #!/usr/bin/env bash
 
 function installAdminTools() {
-
-    echo "==================================="
     echo "Installing admin tools"
-    echo "nodejs"
-    echo "vtop"
-    echo "bat"
-    echo "tree"
-    echo "dfc"
-    echo "vivid"
-    echo "==================================="
 
     if which nodejs > /dev/null; then
 	echo "nodejs is already installed."
@@ -60,12 +51,7 @@ function installAdminTools() {
 }
 
 function installOhMyZSH() {
-
-    echo "==================================="
-    echo "Installing ZSH y git-core"
-    echo "zsh"
-    echo "git-core"
-    echo "==================================="
+    echo "Installing ZSH y git-core..."
 
     cd ~/
     if which zsh > /dev/null; then
@@ -75,7 +61,7 @@ function installOhMyZSH() {
     	sudo apt-get install zsh
     fi
 
-    if which git > /dev/nul; then
+    if which git > /dev/null; then
 	echo "Git is already installed."
     else
 	echo "Installing git..."
@@ -117,25 +103,22 @@ function installOhMyZSH() {
 }
 
 function cloneDotfiles() {
-
-    echo "==================================="
-    echo "Cloning dotfiles"
-    echo "==================================="
-
     cd ~/
 
     if [ -d ~/.dotfiles ]; then
-        rm -rf ~/.dotfiles
+	echo "Pulling dotfiles..."
+        cd ~/.dotfiles && git checkout && git pull
+    else
+	echo "Clonning dotfiles..."
+	git clone https://github.com/DevHerles/dotfiles.git -b transparent ~/.dotfiles
     fi
-
-    git clone https://github.com/DevHerles/dotfiles.git ~/.dotfiles
 
     if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
-	echo "Removing asf.zsh-theme..."
-	rm ~/.oh-my-zsh/themes/asf.zsh-theme
+	echo "Skipping..., asf.zsh-theme is already installed."
+    else
+	echo "Linking asf.zsh-theme..."
+	ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
     fi
-    echo "Linking asf.zsh-theme..."
-    ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
 
     file=".gitconfig"
     if [ -f $file ] ; then
@@ -147,10 +130,7 @@ function cloneDotfiles() {
 }
 
 function setupVim() {
-    echo "==================================="
-    echo "Setting up vim and neovim"
-    echo "==================================="
-
+    echo "Setting up vim and neovim..."
     cd ~/
 
     # Link vimrc for both vim and neovim
@@ -184,17 +164,12 @@ function setupVim() {
         ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.config/nvim/colors/$colorFile
     done
 
-    echo "==================================="
     echo "Vim and neovim setup complete"
     echo "Once this process is complete open vim and run :PlugInstall"
-    echo "==================================="
-
 }
 
 function setupTmux() {
-    echo "==================================="
-    echo "Installing tmux plugin manager"
-    echo "==================================="
+    echo "Installing tmux plugin manager..."
 
     if [ -d ~/.tmux/plugins/tpm ]; then
        cd ~/.tmux/plugins/tpm && git pull
@@ -203,9 +178,7 @@ function setupTmux() {
     fi
 
     cd ~/
-    echo "==================================="
     echo "Linking tmux config"
-    echo "==================================="
     file=".tmux.conf"
     if [ -f $file ] ; then
 	echo "Removing .tmux.conf..."
@@ -216,10 +189,7 @@ function setupTmux() {
 }
 
 function setupDirColors() {
-    echo "==================================="
-    echo "Setup dircolors"
-    echo "==================================="
-
+    echo "Setup dircolors..."
     eval $( dircolors -b ~/.dotfiles/dir_colors )
 }
 
@@ -239,19 +209,14 @@ function installDocker() {
 }
 
 function install() {
-
-    echo "==================================="
     echo "Beginning Installation..."
-    echo "==================================="
-
-    installDocker
     installAdminTools
     installOhMyZSH
     cloneDotfiles
-    addZshCustomTheme
     setupVim
     setupTmux
-    #setupDirColors
+    installDocker
+    setupDirColors
 }
 
 install
