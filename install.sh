@@ -3,6 +3,13 @@
 function installAdminTools() {
   echo "Installing admin tools"
 
+  if which ack > /dev/null; then
+    echo "Ack is already installed."
+  else
+    echo "Installing ack-grep..."
+    sudo apt-get install ack-grep
+  fi
+
   if which nodejs > /dev/null; then
     echo "nodejs is already installed."
   else
