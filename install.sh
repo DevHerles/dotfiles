@@ -3,6 +3,13 @@
 function installAdminTools() {
   echo "Installing admin tools"
 
+  if which ack > /dev/null; then
+    echo "Ack is already installed."
+  else
+    echo "Installing ack-grep..."
+    sudo apt-get install ack-grep
+  fi
+
   if which nodejs > /dev/null; then
     echo "nodejs is already installed."
   else
@@ -141,7 +148,7 @@ function setupVim() {
   echo "Setting up vim and neovim..."
   cd ~/
 
-  if [ -f ~/.config/vim ]; then
+  if which nvim > /dev/null; then
     echo "Neovim is already installed"
   else
     echo "Installing Neovim..."
@@ -155,8 +162,13 @@ function setupVim() {
     mkdir -p ~/.config/nvim/colors
 
     # Install vim-plug
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
+      echo "Vim-plug is already installed"
+    else
+      echo "Installing vim-plug..."
+      curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
 
     local colors=($(ls ~/.dotfiles/vim_colors))
     for colorFile in $colors
