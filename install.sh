@@ -107,7 +107,14 @@ function installOhMyZSH() {
 
   ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 
-  chsh -s `which zsh`
+  echo "Changing shell..."
+  ZSH = "/usr/bin/zsh"
+  if [ $SHELL == $ZSH ]; then
+    echo "Skipping, your current console is already zsh..."
+  else
+    echo "Changing console to zsh..."
+    chsh -s `which zsh`
+  fi
 }
 
 function linkingDotFiles() {
