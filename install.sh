@@ -134,6 +134,7 @@ function cloneDotfiles() {
 
   echo "Linking configs folder..."
   ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
+
 }
 
 function setupVim() {
@@ -148,21 +149,6 @@ function setupVim() {
     sudo apt-get install python-neovim
     sudo apt-get install python3-neovim
   fi
-
-    # Link vimrc for both vim and neovim
-    if [ -f ~/.vimrc ]; then
-      echo "Removing .vimrc..."
-      rm ~/.vimrc
-    fi
-    echo "Linking .vimrc"
-    ln -sf ~/.dotfiles/.vimrc ~/.vimrc
-
-    if [ -f ~/.config/nvim/init.vim ]; then
-      echo "Removing init.vim..."
-      rm ~/.config/nvim/init.vim
-    fi
-    echo  "Linking init.vim..."
-    ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
 
     # Set up colors folder
     mkdir -p ~/.vim/colors
@@ -227,8 +213,8 @@ function install() {
   echo "Beginning Installation..."
   installAdminTools
   installOhMyZSH
-  cloneDotfiles
   setupVim
+  cloneDotfiles
   setupTmux
   installDocker
   setupDirColors
