@@ -107,9 +107,7 @@ function installOhMyZSH() {
 
   ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 
-  echo "Changing shell..."
-  ZSH = "/usr/bin/zsh"
-  if [ $SHELL == $ZSH ]; then
+  if [ $SHELL == "/usr/bin/zsh" ]; then
     echo "Skipping, your current console is already zsh..."
   else
     echo "Changing console to zsh..."
@@ -180,12 +178,6 @@ function setupTmux() {
   fi
 
   cd ~/
-  echo "Linking tmux config"
-  file=".tmux.conf"
-  if [ -f $file ] ; then
-    echo "Removing .tmux.conf..."
-    rm $file
-  fi
   echo "Linking .tmux.conf..."
   ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
 }
