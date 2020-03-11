@@ -107,32 +107,20 @@ function installOhMyZSH() {
 
   ln -sf ~/.dotfiles/.zshrc ~/.zshrc
 
-  chsh -s `which zsh`
+  if [ $SHELL == "/usr/bin/zsh" ]; then
+    echo "Skipping, your current console is already zsh..."
+  else
+    echo "Changing console to zsh..."
+    chsh -s `which zsh`
+  fi
 }
 
-function cloneDotfiles() {
+function linkingDotFiles() {
   cd ~/
 
-  if [ -d ~/.dotfiles ]; then
-    echo "Pulling dotfiles..."
-    cd ~/.dotfiles && git checkout && git pull
-  else
-    echo "Clonning dotfiles..."
-    git clone https://github.com/DevHerles/dotfiles.git -b transparent ~/.dotfiles
-  fi
+  echo "Linking asf.zsh-theme..."
+  ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
 
-  if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
-    echo "Skipping..., asf.zsh-theme is already installed."
-  else
-    echo "Linking asf.zsh-theme..."
-    ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
-  fi
-
-  file="~/.gitconfig"
-  if [ -f $file ] ; then
-    echo "Removing ~/.gitconfig..."
-    rm $file
-  fi
   echo "Linking .gitconfig..."
   ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 
@@ -141,14 +129,13 @@ function cloneDotfiles() {
 
   echo "Linking configs folder..."
   ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
-
 }
 
 function setupVim() {
   echo "Setting up vim and neovim..."
   cd ~/
 
-  if [ -f ~/.config/vim ]; then
+  if which nvim > /dev/null; then
     echo "Neovim is already installed"
   else
     echo "Installing Neovim..."
@@ -162,8 +149,14 @@ function setupVim() {
     mkdir -p ~/.config/nvim/colors
 
     # Install vim-plug
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
+      echo "Vim-plug is already installed"
+    else
+      echo "Installing vim-plug..."
+      curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      echo "Once this process is complete open vim and run :PlugInstall"
+    fi
 
     local colors=($(ls ~/.dotfiles/vim_colors))
     for colorFile in $colors
@@ -173,7 +166,6 @@ function setupVim() {
     done
 
     echo "Vim and neovim setup complete"
-    echo "Once this process is complete open vim and run :PlugInstall"
   }
 
 function setupTmux() {
@@ -186,12 +178,6 @@ function setupTmux() {
   fi
 
   cd ~/
-  echo "Linking tmux config"
-  file=".tmux.conf"
-  if [ -f $file ] ; then
-    echo "Removing .tmux.conf..."
-    rm $file
-  fi
   echo "Linking .tmux.conf..."
   ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
 }
@@ -221,7 +207,7 @@ function install() {
   installAdminTools
   installOhMyZSH
   setupVim
-  cloneDotfiles
+  linkingDotFiles
   setupTmux
   installDocker
   setupDirColors
