@@ -9,6 +9,14 @@
 
 call plug#begin('~/.config/nvim/plugged') "---------------------- Start vim plug
 
+" DART, FLUTTER {{{
+
+Plug 'dart-lang/dart-vim-plugin'
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
+
+" }}}
+
 " COLORS, THEMES {{{
 
 Plug 'joshdick/onedark.vim'
