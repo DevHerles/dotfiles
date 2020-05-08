@@ -3,6 +3,15 @@
 function installAdminTools() {
   echo "Installing admin tools"
 
+  if which lazygit > /dev/null; then
+    echo "lazygit is already installed."
+  else
+    echo "Installing lazygit..."
+    sudo add-apt-repository ppa:lazygit-team/release
+    sudo apt-get update
+    sudo apt-get install lazygit
+  fi
+
   if which ack > /dev/null; then
     echo "Ack is already installed."
   else

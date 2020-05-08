@@ -62,6 +62,9 @@ nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR> " -Change to current working directory
 
 map <Leader>v :e $MYVIMRC<CR> " -----------------------------------Open init.vim
 
+set undofile " -------------Enable persistent undo so that undo history persists
+set undodir=~/.vim/undo " ------------across vim sessions - works with vim-mundo
+
 " MyNext() and MyPrev(): Movement between tabs OR buffers
 function! MyNext()
     if exists( '*tabpagenr' ) && tabpagenr('$') != 1
@@ -167,6 +170,19 @@ endif
 
 noremap <Leader>t :RangerCurrentDirectory<CR>
 noremap <Leader>f :FZF<CR>
+
+" }}}
+
+" COC {{{
+
+noremap <Leader>e :CocCommand explorer<CR>
+
+" }}}
+
+" LAZYGIT {{{
+
+noremap <silent> <Leader>g :FloatermNew --height=0.8 --width=0.9 --name=Lazygit --autoclose=2 lazygit <CR>
+noremap <silent> <Leader>z :FloatermNew --height=0.7 --width=0.9 --name=Zhell --autoclose=2 <CR>
 
 " }}}
 

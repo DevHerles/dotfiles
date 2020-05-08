@@ -9,11 +9,53 @@
 
 call plug#begin('~/.config/nvim/plugged') "---------------------- Start vim plug
 
+" VIM-FLOATERM {{{
+
+Plug 'voldikss/vim-floaterm'
+
+" }}}
+
+" VISTA {{{
+
+Plug 'liuchengxu/vista.vim'
+
+" }}}
+
+" VIM-JSON {{{
+
+Plug 'elzr/vim-json'
+
+" }}}
+
+" VIM-MUNDO {{{
+
+Plug 'simnalamburt/vim-mundo'
+
+" }}}
+
 " DART, FLUTTER {{{
 
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
+
+" }}}
+
+" DART, FLUTTER {{{
+
+Plug 'terryma/vim-expand-region'
+
+" }}}
+
+" DENITE {{{
+
+if has('nvim')
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/denite.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 
 " }}}
 
@@ -43,7 +85,7 @@ Plug 'junegunn/fzf.vim' "-------------------------------------------- fzf in vim
 
 Plug 'francoiscabrol/ranger.vim' "----------Ranger integration in vim and neovim
 if has('nvim')
-Plug 'rbgrouleff/bclose.vim' "---For neovim, dependency to the plugin bclose.vim
+  Plug 'rbgrouleff/bclose.vim' "---For neovim, dependency to the plugin bclose.vim
 endif
 
 " }}}
@@ -66,13 +108,13 @@ Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }"  Typescript's Syntax
 
 " Help colorize text color
 Plug 'ap/vim-css-color', {
-  \ 'for': [
-    \ 'html',
-    \ 'css',
-    \ 'scss',
-    \ 'sass',
-    \ 'less'
-    \ ] }
+      \ 'for': [
+      \ 'html',
+      \ 'css',
+      \ 'scss',
+      \ 'sass',
+      \ 'less'
+      \ ] }
 Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
 Plug 'MTDL9/vim-log-highlighting', {'for': 'log'} "----------------- For Vim Log
 
@@ -99,18 +141,18 @@ Plug 'mattn/emmet-vim' "------------------------------------------ Emmet for vim
 
 Plug 'FooSoft/vim-argwrap' "------ Wrap and unwrap function args, list, dicts...
 Plug 'prettier/vim-prettier', {
-  \ 'do': 'npm install',
-  \ 'branch': 'release/1.x',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'sass',
-    \ 'scss',
-    \ 'json',
-    \ 'markdown',
-    \ 'html' ] }
+      \ 'do': 'npm install',
+      \ 'branch': 'release/1.x',
+      \ 'for': [
+      \ 'javascript',
+      \ 'typescript',
+      \ 'css',
+      \ 'less',
+      \ 'sass',
+      \ 'scss',
+      \ 'json',
+      \ 'markdown',
+      \ 'html' ] }
 
 " }}}
 
