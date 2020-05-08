@@ -9,6 +9,16 @@
 
 call plug#begin('~/.config/nvim/plugged') "---------------------- Start vim plug
 
+" VIM-CODEFMT {{{
+
+Plug 'google/vim-codefmt'
+Plug 'google/vim-maktaba' "----------Add maktaba and codefmt to the runtimepath.
+Plug 'google/vim-codefmt' "-(The latter must be installed before it can be used.)
+Plug 'google/vim-glaive' "-----Is used to configure codefmt's maktaba flags. See
+" `:help :Glaive` for usage.
+
+" }}}
+
 " VIM-FLOATERM {{{
 
 Plug 'voldikss/vim-floaterm'

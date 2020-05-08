@@ -186,3 +186,16 @@ noremap <silent> <Leader>z :FloatermNew --height=0.7 --width=0.9 --name=Zhell --
 
 " }}}
 
+" CODEFMT {{{
+
+augroup autoformat_settings
+  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+  autocmd FileType dart AutoFormatBuffer dartfmt
+  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+  autocmd FileType java AutoFormatBuffer google-java-format
+  autocmd FileType python AutoFormatBuffer yapf
+  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+augroup END
+
+" }}}
+
