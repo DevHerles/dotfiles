@@ -3,6 +3,13 @@
 function installAdminTools() {
   echo "Installing admin tools"
 
+  if which ruby > /dev/null; then
+    echo "ruby is already installed."
+  else
+    echo "Installing ruby..."
+    sudo apt-get install ruby-full
+  fi
+
   if which lazygit > /dev/null; then
     echo "lazygit is already installed."
   else
@@ -155,6 +162,7 @@ function setupVim() {
     sudo apt-get install python-dev python-pip python3-dev python3-pip
     sudo apt-get install python-neovim
     sudo apt-get install python3-neovim
+    sudo gem install neovim
   fi
 
     # Set up colors folder
