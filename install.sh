@@ -26,7 +26,7 @@ function installAdminTools() {
     sudo apt-get install ack-grep
   fi
 
-  if which nodejs > /dev/null; then
+  if which node > /dev/null; then
     echo "nodejs is already installed."
   else
     echo "Installing NodeJs..."
@@ -209,7 +209,7 @@ function setupDirColors() {
 }
 
 function installDocker() {
-  if which nodejs > /dev/null; then
+  if which docker > /dev/null; then
     echo "Docker is already installed."
   else
     echo "Installing docker..."
