@@ -3,6 +3,13 @@
 function installAdminTools() {
   echo "Installing admin tools"
 
+  if which ctags > /dev/null; then
+    echo "ctags is already installed."
+  else
+    echo "Installing ctags..."
+    sudo apt-get install ctags
+  fi
+
   if which ruby > /dev/null; then
     echo "ruby is already installed."
   else
