@@ -16,8 +16,9 @@ export TERMINAL="sterminal"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Path to your flutter installation.
-export PATH=/opt/flutter/bin:$PATH
-export PATH=/opt/flutter/bin/cache/dart-sdk:$PATH
+export PATH=$HOME/flutter/bin:$PATH
+export PATH=$HOME/flutter/bin/cache/dart-sdk:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 export PATH=/usr/bin/gem:$PATH
 
 # Set name of the theme to load --- if set to "random", it will

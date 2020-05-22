@@ -3,6 +3,10 @@
   "coc.preferences.snippets.enable": true,
   "coc.preferences.snippetStatusText": "🌈",
   "coc.preferences.formatOnType": false,
+  "codeLens.enable": true,
+  "suggest.echodocSupport": true,
+  "diagnostic.virtualText": true,
+
 
   // diagnostic
   "diagnostic.infoSign": "i",

@@ -9,6 +9,8 @@
 
 call plug#begin('~/.config/nvim/plugged') "---------------------- Start vim plug
 
+Plug 'APZelos/blamer.nvim'
+
 " VIM-CODEFMT {{{
 
 Plug 'google/vim-codefmt'
@@ -22,12 +24,6 @@ Plug 'google/vim-glaive' "-----Is used to configure codefmt's maktaba flags. See
 " VIM-FLOATERM {{{
 
 Plug 'voldikss/vim-floaterm'
-
-" }}}
-
-" VISTA {{{
-
-Plug 'liuchengxu/vista.vim'
 
 " }}}
 
@@ -48,24 +44,13 @@ Plug 'simnalamburt/vim-mundo'
 Plug 'dart-lang/dart-vim-plugin'
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
+Plug 'thosakwe/vim-flutter'
 
 " }}}
 
-" DART, FLUTTER {{{
+" VIM EXPAND REGION {{{
 
-Plug 'terryma/vim-expand-region'
-
-" }}}
-
-" DENITE {{{
-
-"if has('nvim')
-  "Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-  "Plug 'Shougo/denite.nvim'
-  "Plug 'roxma/nvim-yarp'
-  "Plug 'roxma/vim-hug-neovim-rpc'
-"endif
+Plug 'terryma/vim-expand-region' " Press + to expand the visual selection and _ to shrink it.
 
 " }}}
 
@@ -78,37 +63,37 @@ Plug 'DevHerles/aranda', { 'rtp': 'vim' }
 
 " TOOLBAR {{{
 
-Plug 'bling/vim-airline' "---------------------------------- Status bar, Tabline
-Plug 'vim-airline/vim-airline-themes' "- Vim-Airline Themes (To use tabline ext)
-Plug 'tpope/vim-fugitive' "---------- Just use to show git status in Vim-Airline
+Plug 'bling/vim-airline' " --------------------------------- Status bar, Tabline
+Plug 'vim-airline/vim-airline-themes' "  Vim-Airline Themes (To use tabline ext)
+Plug 'tpope/vim-fugitive' " --------- Just use to show git status in Vim-Airline
 
 " }}}
 
 " FINDER {{{
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim' "-------------------------------------------- fzf in vim
+Plug 'junegunn/fzf.vim' " ------------------------------------------- fzf in vim
 
 " }}}
 
 " RANGER {{{
 
-Plug 'francoiscabrol/ranger.vim' "----------Ranger integration in vim and neovim
+Plug 'francoiscabrol/ranger.vim' " ---------Ranger integration in vim and neovim
 if has('nvim')
-  Plug 'rbgrouleff/bclose.vim' "---For neovim, dependency to the plugin bclose.vim
+  Plug 'rbgrouleff/bclose.vim' " For neovim, dependency to the plugin bclose.vim
 endif
 
 " }}}
 
 " NAVIGATE {{{
 
-Plug 'scrooloose/nerdtree' "------------------------------------------ Nerd Tree
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' "-- Nerdtree syntax & Icon colors
-Plug 'ryanoasis/vim-devicons' "------------------------------------------- Icons
-Plug 'easymotion/vim-easymotion' "----------- Jump around the screen like a boss
-Plug 'andymass/vim-matchup' "------------- Better % and highlight matching words
-Plug 'tommcdo/vim-exchange' "-------------------------------- Easy text exchange
-Plug 'rhysd/clever-f.vim' "-------------------------------- Make f more powerful
+Plug 'scrooloose/nerdtree' " ----------------------------------------- Nerd Tree
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " - Nerdtree syntax & Icon colors
+Plug 'ryanoasis/vim-devicons' " ------------------------------------------ Icons
+Plug 'easymotion/vim-easymotion' " ---------- Jump around the screen like a boss
+Plug 'andymass/vim-matchup' " ------------ Better % and highlight matching words
+Plug 'tommcdo/vim-exchange' " ------------------------------- Easy text exchange
+Plug 'rhysd/clever-f.vim' " ------------------------------- Make f more powerful
 
 " }}}
 
@@ -125,31 +110,30 @@ Plug 'ap/vim-css-color', {
       \ 'sass',
       \ 'less'
       \ ] }
-Plug 'Valloric/MatchTagAlways' "------- Always highlights the XML/HTML tags that enclose your cursor location
-Plug 'MTDL9/vim-log-highlighting', {'for': 'log'} "----------------- For Vim Log
+Plug 'Valloric/MatchTagAlways' " Always highlights the XML/HTML tags that enclose your cursor location
+Plug 'MTDL9/vim-log-highlighting', {'for': 'log'} " ---------------- For Vim Log
 
 " Frameworks
-Plug 'MaxMEllon/vim-jsx-pretty' "----------------------------------------- React
+Plug 'MaxMEllon/vim-jsx-pretty' " ---------------------------------------- React
 
 " }}}
 
 " FASTER CODE {{{
 
-Plug 'tmsvg/pear-tree' "------------------------------------- Auto pair brackets
-Plug 'alvan/vim-closetag' "--------------------------------- Auto close html tag
-Plug 'tpope/vim-surround' "--------------------------------------- Auto surround
-Plug 'tpope/vim-commentary' "------------------------------- Comment code faster
-Plug 'tpope/vim-repeat' "------------------------------ dot repeat with pluggins
-Plug 'Yggdroot/indentLine' "---------------------------- Indent code with v-line
-Plug 'wellle/targets.vim' "--------------------- Provides additional text object
-Plug 'mg979/vim-visual-multi' "--------------------------------- Multiple Cursor
-Plug 'mattn/emmet-vim' "------------------------------------------ Emmet for vim
+Plug 'tmsvg/pear-tree' " ------------------------------------ Auto pair brackets
+Plug 'alvan/vim-closetag' " -------------------------------- Auto close html tag
+Plug 'tpope/vim-surround' " -------------------------------------- Auto surround
+Plug 'tpope/vim-commentary' " ------------------------------ Comment code faster
+Plug 'tpope/vim-repeat' " ----------------------------- dot repeat with pluggins
+Plug 'Yggdroot/indentLine' " --------------------------- Indent code with v-line
+Plug 'wellle/targets.vim' " -------------------- Provides additional text object
+Plug 'mg979/vim-visual-multi' " -------------------------------- Multiple Cursor
+Plug 'mattn/emmet-vim' " ----------------------------------------- Emmet for vim
 
 " }}}
 
 " BEAUTIFY CODE {{{
 
-Plug 'FooSoft/vim-argwrap' "------ Wrap and unwrap function args, list, dicts...
 Plug 'prettier/vim-prettier', {
       \ 'do': 'npm install',
       \ 'branch': 'release/1.x',
@@ -168,33 +152,30 @@ Plug 'prettier/vim-prettier', {
 
 " UTILS {{{
 
-Plug 'NLKNguyen/copy-cut-paste.vim' "---------------- Copy, Paste with Clipboard
-Plug 'skywind3000/asyncrun.vim' "--------------- Run async shell commands in vim
-Plug 'kyoz/ezbuf.vim' "------------------------------- Fast and easy use buffers
-Plug 'kyoz/npm.vim' "-------------------------- Work with npm more easier in Vim
+Plug 'NLKNguyen/copy-cut-paste.vim' " --------------- Copy, Paste with Clipboard
+Plug 'kyoz/ezbuf.vim' " ------------------------------ Fast and easy use buffers
+Plug 'kyoz/npm.vim' " ------------------------- Work with npm more easier in Vim
 Plug 'segeljakt/vim-silicon'
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
-Plug 'godlygeek/tabular', {'for': 'markdown'} "-------------- Alignment for text
+Plug 'godlygeek/tabular', {'for': 'markdown'} " ------------- Alignment for text
 Plug 'dhruvasagar/vim-table-mode',{'for': 'markdown', 'do': ':TableFormat'}
-Plug 'lervag/vimtex', {'for': 'tex'} "------------------- For editing Latex file
+Plug 'lervag/vimtex', {'for': 'tex'} " ------------------ For editing Latex file
 
 " Performance
 Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}
 
 " Colors
-Plug 'KabbAmine/vCoolor.vim' "------------------------------------- Color picker
+Plug 'KabbAmine/vCoolor.vim' " ------------------------------------ Color picker
 Plug 'guns/xterm-color-table.vim'
 
 " Focus
-Plug 'junegunn/goyo.vim' "---------------------- Distraction-free writing in Vim
-Plug 'junegunn/limelight.vim' "----------------------- Hyperfocus-writing in Vim
-Plug 'RRethy/vim-illuminate' "--- Auto highlight other uses of word under cursor
+Plug 'RRethy/vim-illuminate' " -- Auto highlight other uses of word under cursor
 
 " Searching
-Plug 'voldikss/vim-search-me' "------------------------ Search google within vim
+Plug 'voldikss/vim-search-me' " ----------------------- Search google within vim
 
 " }}}
 
@@ -233,7 +214,6 @@ else
 endif
 
 " }}}
-Plug 'tomasiser/vim-code-dark'
 
 " NERD Commenter {{{
 
@@ -241,5 +221,5 @@ Plug 'preservim/nerdcommenter' " -----------------Comment functions so powerfull
 
 " }}}
 
-call plug#end() "---------------------------------------- End of Vim-Plug define
+call plug#end() " --------------------------------------- End of Vim-Plug define
 

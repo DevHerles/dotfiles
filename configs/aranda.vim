@@ -15,7 +15,7 @@ nnoremap <silent> <F9> :windo diffthis<CR>
 nnoremap <Leader>rn :!mv <C-R>=expand("%")<CR> " ------------rename current file
 nnoremap <Leader><Leader> zz " --------------------------------Center the screen
 nnoremap Y y$ " ------------------------------------------------Act like D and C
-vnoremap <leader>cc "*y " ------------------------------------Copy from register
+noremap <leader>cc "*y " ------------------------------------Copy from register
 map <leader>vv "*p " ----------------------------------------Paste from register
 nnoremap <silent> <Leader>= gg=G
 
@@ -50,8 +50,8 @@ vnoremap <A-k> :m '<-2<CR>gv=gv " ------------------------------------Move lines
 nnoremap <Leader>p g; " ----Jump back to your last edit (do this in normal mode)
 nnoremap <Leader>n g, " ----Jump back to your last edit (do this in normal mode)
 
-nnoremap <Leader>o ^o	" -Jump back to the position you were last (Out),jump back
-nnoremap <Leader>i ^i	" ---Jump back to the position you were last (In), forward
+nnoremap <Leader>o ^o " -Jump back to the position you were last (Out),jump back
+nnoremap <Leader>i ^i " ---Jump back to the position you were last (In), forward
 
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR> " ------Clear search highlight
 
@@ -176,6 +176,49 @@ noremap <Leader>f :FZF<CR>
 " COC {{{
 
 noremap <Leader>e :CocCommand explorer<CR>
+nmap <silent><leader>xa <Plug>(coc-codelens-action)
+vmap <silent><leader>a  <Plug>(coc-codeaction-selected)
+nmap <silent><leader>.  <Plug>(coc-codeaction)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gl :CocList <CR>
+nmap <silent> go :CocList outline<CR>
+nmap <silent> gL :CocListResume <CR>
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Show signature help while editing
+autocmd CursorHoldI * silent! call CocActionAsync('showSignatureHelp')
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+nmap <silent> gR <Plug>(coc-rename)
+nmap <silent> gI <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+nmap <silent> ge <Plug>(coc-refactor)
+" the <CR> should not be necessary but i get some unwanted output
+nmap <silent> ga <Plug>(coc-codeaction-selected)<CR>
+vmap <silent> ga <Plug>(coc-codeaction-selected)<CR>
+nmap <silent> gA :CocAction <CR>
+nmap <silent> gf <Plug>(coc-fix-current)
+
+autocmd User CocQuickfixChange :call fzf_quickfix#run()
+
+
 
 " }}}
 
@@ -199,3 +242,6 @@ augroup END
 
 " }}}
 
+let g:blamer_enabled = 0
+let g:blamer_delay = 100
+let g:blamer_prefix = ' --> '

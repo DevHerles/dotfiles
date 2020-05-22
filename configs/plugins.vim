@@ -9,7 +9,7 @@
 
 " NERDTREE {{{
 
-let g:NERDTreeWinSize=30 "-------------------------------------- Default columns
+let g:NERDTreeWinSize=30 " ------------------------------------- Default columns
 let g:NERDTreeNaturalSort = 1
 let g:NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$', 'node_modules']
 let g:NERDTreeIndicatorMapCustom = {
@@ -43,24 +43,22 @@ let g:DevIconsEnableFoldersOpenClose = 1
 
 " COLORS SOLARIZED {{{
 
-" let g:onedark_terminal_italics = 1 "---------------------- Italic comment's code
 let g:onedark_termcolors=256
-:silent! colorscheme aranda "--------------------------------- Set onedark theme
-hi Normal guibg=NONE ctermbg=NONE "---------------- Transparent background color
+:silent! colorscheme aranda " -------------------------------- Set onedark theme
+:hi Normal guibg=NONE ctermbg=NONE " -------------- Transparent background color
 
 " }}}
 
 " AIRLINE {{{
 
-let g:airline_theme='aranda' "--------------------------- Set status bar's theme
-let g:airline_powerline_fonts = 1 "----------- Just work with patched NERD fonts
-let g:airline_section_c = '%t' "--filename "-------------- Only show file's name
-let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "- Hide format type
-
-let g:airline#extensions#tabline#enabled = 1 "------------------- Enable tabline
-let g:airline#extensions#tabline#fnamemod = ':t' "--- Just show file name in tab
-let g:airline#extensions#tabline#enabled=1 "--------- Buffers at the top as tabs
-let g:airline#extensions#tabline#show_tab_type=1 "---------- Don't show tab type
+let g:airline_theme='aranda' " -------------------------- Set status bar's theme
+let g:airline_powerline_fonts = 1 " ---------- Just work with patched NERD fonts
+let g:airline_section_c = '%t' "--filename " " ----------- Only show file's name
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' "  Hide format type
+let g:airline#extensions#tabline#enabled = 1 " ------------------ Enable tabline
+let g:airline#extensions#tabline#fnamemod = ':t' " -- Just show file name in tab
+let g:airline#extensions#tabline#enabled=1 " -------- Buffers at the top as tabs
+let g:airline#extensions#tabline#show_tab_type=1 " --------- Don't show tab type
 
 " }}}
 
@@ -93,7 +91,7 @@ let g:airline#extensions#tagbar#enabled     = 0
 let g:airline#extensions#virtualenv#enabled = 0
 let g:airline#extensions#whitespace#enabled = 0
 
-set noshowmode "----------------- Don't show mode (Normal, Insert...) in airline
+set noshowmode " ---------------- Don't show mode (Normal, Insert...) in airline
 
 " }}}
 
@@ -161,7 +159,7 @@ augroup END
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
-let g:user_emmet_leader_key=',' " Trigger emmet with ,,
+let g:user_emmet_leader_key=',' " ------------------------ Trigger emmet with ,,
 
 autocmd FileType html,css,scss,sass,less,typescript EmmetInstall " Support files
 
@@ -169,10 +167,8 @@ autocmd FileType html,css,scss,sass,less,typescript EmmetInstall " Support files
 
 " EASY MOTION {{{
 
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
+let g:EasyMotion_do_mapping = 0 " --------------------- Disable default mappings
+let g:EasyMotion_smartcase = 1 " -------------- Turn on case insensitive feature
 
 " Mappings
 map <Leader>j <Plug>(easymotion-j)
@@ -204,7 +200,7 @@ let g:pear_tree_repeatable_expand = 0
 
 " AIRWRAP {{{
 
-nnoremap <silent> gw :ArgWrap<CR>
+"nnoremap <silent> gw :ArgWrap<CR>
 
 " }}}
 
@@ -250,12 +246,6 @@ hi link illuminatedWord Visual
 
 let g:vcoolor_map        = '<localleader>c'
 let g:vcool_ins_rgba_map = '<localleader>C'
-
-" }}}
-
-" GOYO.VIM {{{
-
-nnoremap <Leader>z :Goyo<CR>
 
 " }}}
 
