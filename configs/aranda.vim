@@ -169,7 +169,7 @@ endif
 " RANGER {{{
 
 noremap <Leader>t :RangerCurrentDirectory<CR>
-noremap <Leader>f :FZF<CR>
+noremap <Leader>p :FZF<CR>
 
 " }}}
 
@@ -178,7 +178,9 @@ noremap <Leader>f :FZF<CR>
 noremap <Leader>e :CocCommand explorer<CR>
 nmap <silent><leader>xa <Plug>(coc-codelens-action)
 vmap <silent><leader>a  <Plug>(coc-codeaction-selected)
-nmap <silent><leader>.  <Plug>(coc-codeaction)
+nmap <silent><leader><leader>.  <Plug>(coc-codeaction)
+nmap <silent><leader><leader>e :CocCommand flutter.emulators<CR>
+nmap <silent><leader><leader>r :CocCommand flutter.run<CR>
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)

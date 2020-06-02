@@ -7,16 +7,16 @@
 "         __/ |
 "        |___/
 
-call plug#begin('~/.config/nvim/plugged') "---------------------- Start vim plug
+call plug#begin('~/.config/nvim/plugged') " --------------------- Start vim plug
 
 Plug 'APZelos/blamer.nvim'
 
 " VIM-CODEFMT {{{
 
-Plug 'google/vim-codefmt'
-Plug 'google/vim-maktaba' "----------Add maktaba and codefmt to the runtimepath.
-Plug 'google/vim-codefmt' "-(The latter must be installed before it can be used.)
-Plug 'google/vim-glaive' "-----Is used to configure codefmt's maktaba flags. See
+"Plug 'google/vim-codefmt'
+"Plug 'google/vim-maktaba' " ---------Add maktaba and codefmt to the runtimepath.
+"Plug 'google/vim-codefmt' " -The latter must be installed before it can be used.
+"Plug 'google/vim-glaive' " ----Is used to configure codefmt's maktaba flags. See
 " `:help :Glaive` for usage.
 
 " }}}
@@ -91,7 +91,7 @@ Plug 'scrooloose/nerdtree' " ----------------------------------------- Nerd Tree
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " - Nerdtree syntax & Icon colors
 Plug 'ryanoasis/vim-devicons' " ------------------------------------------ Icons
 Plug 'easymotion/vim-easymotion' " ---------- Jump around the screen like a boss
-Plug 'andymass/vim-matchup' " ------------ Better % and highlight matching words
+"Plug 'andymass/vim-matchup' " ------------ Better % and highlight matching words
 Plug 'tommcdo/vim-exchange' " ------------------------------- Easy text exchange
 Plug 'rhysd/clever-f.vim' " ------------------------------- Make f more powerful
 
