@@ -247,3 +247,5 @@ augroup END
 let g:blamer_enabled = 0
 let g:blamer_delay = 100
 let g:blamer_prefix = ' --> '
+
+autocmd FileType py,dart,xml,html autocmd BufWritePre <buffer> %s/\s\+$//e
