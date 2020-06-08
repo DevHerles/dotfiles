@@ -10,6 +10,13 @@ function installAdminTools() {
     sudo apt-get install ctags
   fi
 
+  if which xsel > /dev/null; then
+    echo "xsel is already installed."
+  else
+    echo "Installing xsel..."
+    sudo apt-get install xsel
+  fi
+
   if which ruby > /dev/null; then
     echo "ruby is already installed."
   else
