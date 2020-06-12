@@ -1,7 +1,55 @@
 #!/usr/bin/env bash
 
+function installFlutter() {
+  if which flutter > /dev/null; then
+    echo "flutter is already installed."
+  else
+    echo "Installing flutter..."
+    git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME
+  fi
+
+  if which adb > /dev/null; then
+    echo "adb are already installed."
+  else
+    echo "Installing adb..."
+    sudo apt-get install adb
+    sudo usermod -aG plugdev $LOGNAME
+  fi
+}
+
+function installPostgresql() {
+  if which psql > /dev/null; then
+    echo "postgresql is already installed."
+  else
+    sudo apt update
+    echo "Installing postgresql..."
+    sudo apt install postgresql postgresql-contrib
+  fi
+}
+
 function installAdminTools() {
   echo "Installing admin tools"
+
+  if which htop > /dev/null; then
+    echo "htop is already installed."
+  else
+    echo "Installing htop..."
+    sudo apt-get install htop
+  fi
+
+  if which ranger > /dev/null; then
+    echo "ranger is already installed."
+  else
+    echo "Installing ranger..."
+    sudo apt-get install ranger
+  fi
+
+  if which netstat > /dev/null; then
+    echo "net-tools are already installed."
+  else
+    echo "Installing net-tools..."
+    sudo apt-get install net-tools
+  fi
 
   if which ctags > /dev/null; then
     echo "ctags is already installed."
@@ -40,11 +88,27 @@ function installAdminTools() {
     sudo apt-get install ack-grep
   fi
 
+  if which curl > /dev/null; then
+    echo "curl is already installed."
+  else
+    echo "Installing curl..."
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install curl
+  fi
+
+  if which npm > /dev/null; then
+    echo "npm is already installed."
+  else
+    echo "Installing npm..."
+    sudo apt install npm
+  fi
+
   if which node > /dev/null; then
     echo "nodejs is already installed."
   else
     echo "Installing NodeJs..."
-    curl -L https://git.io/n-install | bash
+    sudo apt install nodejs
   fi
 
   if which vtop > /dev/null; then
@@ -204,8 +268,14 @@ function setupVim() {
   }
 
 function setupTmux() {
-  echo "Installing tmux plugin manager..."
+  if which tmux > /dev/null; then
+    echo "tmux is already installed."
+  else
+    echo "Installing tmux..."
+    sudo apt install tmux
+  fi
 
+  echo "Installing tmux plugin manager..."
   if [ -d ~/.tmux/plugins/tpm ]; then
     cd ~/.tmux/plugins/tpm && git pull
   else
@@ -235,17 +305,26 @@ function installDocker() {
     sudo usermod -aG docker $USER
     newgrp docker
   fi
+  if which docker-compose > /dev/null; then
+    echo "docker-compose is already installed."
+  else
+    echo "Installing docker-compose..."
+    sudo apt install docker-compose
+  fi
 }
 
 function install() {
-  echo "Beginning Installation..."
+  echo "Beginning installation..."
   installAdminTools
+  installPostgresql
+  installFlutter
   installOhMyZSH
   setupVim
-  linkingDotFiles
   setupTmux
+  linkingDotFiles
   installDocker
   setupDirColors
+  echo "End installation..."
 }
 
 install
