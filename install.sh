@@ -30,6 +30,40 @@ function installPostgresql() {
 function installAdminTools() {
   echo "Installing admin tools"
 
+  if which curl > /dev/null; then
+    echo "curl is already installed."
+  else
+    echo "Installing curl..."
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install curl
+  fi
+
+  if which pip > /dev/null; then
+    echo "pip is already installed."
+  else
+    echo "Installing pip..."
+    curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+    sudo python2 get-pip.py
+    rm get-pip.py
+    pip install --user jedi
+    pip install --user pep8
+  fi
+
+  if which pip3 > /dev/null; then
+    echo "pip3 is already installed."
+  else
+    echo "Installing pip3..."
+    sudo apt-get install python3-pip
+  fi
+
+  if which xclip > /dev/null; then
+    echo "xclip is already installed."
+  else
+    echo "Installing xclip..."
+    sudo apt-get install xclip
+  fi
+
   if which htop > /dev/null; then
     echo "htop is already installed."
   else
@@ -86,15 +120,6 @@ function installAdminTools() {
   else
     echo "Installing ack-grep..."
     sudo apt-get install ack-grep
-  fi
-
-  if which curl > /dev/null; then
-    echo "curl is already installed."
-  else
-    echo "Installing curl..."
-    sudo apt update
-    sudo apt upgrade
-    sudo apt install curl
   fi
 
   if which npm > /dev/null; then
