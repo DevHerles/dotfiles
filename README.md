@@ -30,6 +30,30 @@ zsh will be set to be the default shell. Symlinks will be set up for `.vimrc`, `
 
 Be sure to install the font in `fonts/`and set this to be the default font for your terminal
 
+## PostgreSQL: Allow Remote Connections
+```bash
+# vim /etc/postgresql/12/main/postgresql.conf
+
+listen_addresses = '*'
+
+# sudo systemctl restart postgresql
+```
+
+```bash
+# vim /etc/postgresql/12/main/pg_hba.conf
+
+host    all             all              0.0.0.0/0                       md5
+host    all             all              ::/0                            md5
+```
+
+## Create odoo role in PostgreSQL
+
+```bash
+# sudo su - postgres
+
+postgres=# CREATE ROLE odoo WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD 'odoo';
+```
+
 ## Installation Notes
 
 Your computer password is needed to change shells which is a sudo operation
