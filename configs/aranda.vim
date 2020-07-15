@@ -4,7 +4,7 @@ nnoremap n nzz
 nnoremap N Nzz
 
 nnoremap <tab><tab> <c-^> " -------------------Switch between the last two files
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left> " replace word under
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>  "-replace word under
 vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left> " cursor, globally, with c
 map <F7> mzgg=G`z " --------re-indent file and jump back to where the cursor was
 
@@ -15,7 +15,7 @@ nnoremap <silent> <F9> :windo diffthis<CR>
 nnoremap <Leader>rn :!mv <C-R>=expand("%")<CR> " ------------rename current file
 nnoremap <Leader><Leader> zz " --------------------------------Center the screen
 nnoremap Y y$ " ------------------------------------------------Act like D and C
-noremap <leader>cc "*y " ------------------------------------Copy from register
+noremap <leader><leader>c "*y " ------------------------------------Copy from register
 map <leader>vv "*p " ----------------------------------------Paste from register
 nnoremap <silent> <Leader>= gg=G
 
@@ -32,9 +32,10 @@ noremap <C-s> :w<CR>
 noremap <C-u> :e ++ff=dos<CR>
 nnoremap <silent> L :call MyNext()<CR>
 nnoremap <silent> H :call MyPrev()<CR>
-
-cmap w!! w !sudo tee > /dev/null % " ------When I forgot to start vim using sudo
-nnoremap ,w :call SwapSplitResizeShortcuts()<CR> " -------Resizing split windows
+" ------When I forgot to start vim using sudo
+cnoremap .w execute 'silent! write !SUDO_ASKPASS=`which ssh-askpass` sudo tee % >/dev/null' <bar> edit!
+"--------Resizing split windows
+nnoremap ,w :call SwapSplitResizeShortcuts()<CR>
 imap jk <Esc> " ------------------------------------------Escape for insert mode
 map 0 ^ " ---------------------------------------------Firs char in current line
 
@@ -60,7 +61,7 @@ vmap > >gv " ---------------Vmap for maintain Visual Mode after shifting > and <
 
 nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR> " -Change to current working directory
 
-map <Leader>v :e $MYVIMRC<CR> " -----------------------------------Open init.vim
+map ,v :e $MYVIMRC<CR> " ------------------------------------------Open init.vim
 
 set undofile " -------------Enable persistent undo so that undo history persists
 set undodir=~/.vim/undo " ------------across vim sessions - works with vim-mundo
@@ -108,12 +109,6 @@ endfunction
 
 highlight BadWhitespace ctermbg=red guibg=default
 
-"autocmd InsertEnter * highlight CursorLine guibg=#000000 guifg=fg
-"autocmd InsertLeave * highlight CursorLine guibg=#000000 guifg=fg
-
-"autocmd InsertEnter * highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=black gui=bold
-"autocmd InsertLeave * highlight CursorColumn ctermfg=Black ctermbg=Yellow cterm=bold guifg=Black guibg=black gui=NONE
-
 " }}}
 
 " ACK {{{
@@ -139,29 +134,29 @@ nnoremap <Leader>ax :Ack!<Space><C-R><C-W> --xml<CR> " -------------------------
 " RIPGREP {{{
 
 if executable('rg')
-  "" Set default grep to ripgrep
-  set grepprg=rg\ --vimgrep
+    "" Set default grep to ripgrep
+    set grepprg=rg\ --vimgrep
 
-  "" Set default ripgrep configs for fzf
-  "# --files: List files that would be searched but do not search
-  "# --no-ignore: Do not respect .gitignore, etc...
-  "# --hidden: Search hidden files and folders
-  "# --follow: Follow symlinks
-  "# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-  let $FZF_DEFAULT_COMMAND ='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+    "" Set default ripgrep configs for fzf
+    "# --files: List files that would be searched but do not search
+    "# --no-ignore: Do not respect .gitignore, etc...
+    "# --hidden: Search hidden files and folders
+    "# --follow: Follow symlinks
+    "# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+    let $FZF_DEFAULT_COMMAND ='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 
-  "" Define custom :Find command to leverage rg
-  " --column: Show column number
-  " --line-number: Show line number
-  " --no-heading: Do not show file headings in results
-  " --fixed-strings: Search term as a literal string
-  " --ignore-case: Case insensitive search
-  " --no-ignore: Do not respect .gitignore, etc...
-  " --hidden: Search hidden files and folders
-  " --follow: Follow symlinks
-  " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-  " --color: Search color options
-  command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+    "" Define custom :Find command to leverage rg
+    " --column: Show column number
+    " --line-number: Show line number
+    " --no-heading: Do not show file headings in results
+    " --fixed-strings: Search term as a literal string
+    " --ignore-case: Case insensitive search
+    " --no-ignore: Do not respect .gitignore, etc...
+    " --hidden: Search hidden files and folders
+    " --follow: Follow symlinks
+    " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
+    " --color: Search color options
+    command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 endif
 
 " }}}
@@ -175,6 +170,37 @@ noremap <Leader>p :FZF<CR>
 
 " COC {{{
 
+" coc-snippets
+" Use <C-l> for trigger snippet expand.
+"imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+"vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+inoremap <silent><expr> <TAB>
+            \ pumvisible() ? coc#_select_confirm() :
+            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
+
+function! s:check_back_space() abort
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<C-tab>'
+let g:coc_snippet_prev = '<S-tab>'
+
+" coc-flutter
 noremap <Leader>e :CocCommand explorer<CR>
 nmap <silent><leader>xa <Plug>(coc-codelens-action)
 vmap <silent><leader>a  <Plug>(coc-codeaction-selected)
@@ -195,11 +221,11 @@ nmap <silent> gL :CocListResume <CR>
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
-  if &filetype == 'vim'
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
+    if &filetype == 'vim'
+        execute 'h '.expand('<cword>')
+    else
+        call CocAction('doHover')
+    endif
 endfunction
 
 " Show signature help while editing
@@ -220,8 +246,6 @@ nmap <silent> gf <Plug>(coc-fix-current)
 
 autocmd User CocQuickfixChange :call fzf_quickfix#run()
 
-
-
 " }}}
 
 " LAZYGIT {{{
@@ -234,12 +258,11 @@ noremap <silent> <Leader>z :FloatermNew --height=0.7 --width=0.9 --name=Zhell --
 " CODEFMT {{{
 
 augroup autoformat_settings
-  autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-  autocmd FileType dart AutoFormatBuffer dartfmt
-  autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-  autocmd FileType java AutoFormatBuffer google-java-format
-  autocmd FileType python AutoFormatBuffer yapf
-  " Alternative: autocmd FileType python AutoFormatBuffer autopep8
+    autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+    autocmd FileType dart AutoFormatBuffer dartfmt
+    autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+    autocmd FileType python AutoFormatBuffer yapf
+    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
 augroup END
 
 " }}}
@@ -248,4 +271,4 @@ let g:blamer_enabled = 0
 let g:blamer_delay = 100
 let g:blamer_prefix = ' --> '
 
-autocmd FileType py,dart,xml,html autocmd BufWritePre <buffer> %s/\s\+$//e
+autocmd FileType py,dart,xml,html,vim autocmd BufWritePre <buffer> %s/\s\+$//e

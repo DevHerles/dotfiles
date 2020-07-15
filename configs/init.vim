@@ -9,6 +9,11 @@
 
 call plug#begin('~/.config/nvim/plugged') " --------------------- Start vim plug
 
+Plug 'skbolton/embark'
+Plug 'google/yapf'
+Plug 'google/vim-maktaba'
+Plug 'google/vim-codefmt'
+
 "Plug 'APZelos/blamer.nvim'
 
 " VIM-CODEFMT {{{

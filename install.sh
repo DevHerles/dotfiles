@@ -55,6 +55,7 @@ function installAdminTools() {
   else
     echo "Installing pip3..."
     sudo apt-get install python3-pip
+    sudo pip3 install -U jedi
   fi
 
   if which xclip > /dev/null; then
@@ -127,6 +128,7 @@ function installAdminTools() {
   else
     echo "Installing npm..."
     sudo apt install npm
+    sudo npm install -g neovim
   fi
 
   if which node > /dev/null; then
