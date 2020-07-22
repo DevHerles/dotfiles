@@ -23,7 +23,7 @@ set relativenumber 		" Show relative line numbers
 set cursorline 			" Highlight current line
 set cursorcolumn		" Highlight current column
 set showmatch 			" Show matching part of bracket pairs [] () {}
-set background=dark
+" set background=dark
 set gcr=a:blinkon0 		" Disable the blinking cursor.
 set scrolloff=3
 set laststatus=2 		" Status bar
@@ -87,7 +87,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 "*****************************************************************************
 "" Plug install packages
 "*****************************************************************************
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' } | Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'scrooloose/nerdtree' | Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons' | Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
@@ -152,12 +152,6 @@ let mapleader="\<Space>"
 let NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$', 'node_modules']     " Ignore files in NERDTree
 let NERDTreeWinSize=40
 
-function! StartUp()
-    if 0 == argc()
-        NERDTree
-    end
-endfunction
-
 " NERDTree's File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
  exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -165,7 +159,6 @@ function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
 endfunction
 
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-autocmd VimEnter * call StartUp()
 nnoremap <silent><Leader>t :NERDTreeToggle<CR>
 
 let g:NERDTreeFileExtensionHighlightFullName = 1
