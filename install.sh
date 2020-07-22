@@ -56,6 +56,8 @@ function installAdminTools() {
     echo "Installing pip3..."
     sudo apt-get install python3-pip
     sudo pip3 install -U jedi
+    sudo pip3 install black
+    sudo pip3 install isort
   fi
 
   if which xclip > /dev/null; then

@@ -13,28 +13,7 @@ Plug 'skbolton/embark'
 Plug 'google/yapf'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
-
-"Plug 'APZelos/blamer.nvim'
-
-" VIM-CODEFMT {{{
-
-"Plug 'google/vim-codefmt'
-"Plug 'google/vim-maktaba' " ---------Add maktaba and codefmt to the runtimepath.
-"Plug 'google/vim-codefmt' " -The latter must be installed before it can be used.
-"Plug 'google/vim-glaive' " ----Is used to configure codefmt's maktaba flags. See
-" `:help :Glaive` for usage.
-
-" }}}
-
-" VIM-FLOATERM {{{
-
 Plug 'voldikss/vim-floaterm'
-
-" }}}
-
-" VIM-JSON {{{
-
-"Plug 'elzr/vim-json'
 
 " }}}
 
@@ -61,7 +40,6 @@ Plug 'terryma/vim-expand-region' " Press + to expand the visual selection and _ 
 
 " COLORS, THEMES {{{
 
-"Plug 'joshdick/onedark.vim'
 Plug 'DevHerles/aranda', { 'rtp': 'vim' }
 
 " }}}
@@ -84,42 +62,12 @@ Plug 'junegunn/fzf.vim' " ------------------------------------------- fzf in vim
 " RANGER {{{
 
 Plug 'francoiscabrol/ranger.vim' " ---------Ranger integration in vim and neovim
-"if has('nvim')
-  "Plug 'rbgrouleff/bclose.vim' " For neovim, dependency to the plugin bclose.vim
-"endif
 
 " }}}
 
 " NAVIGATE {{{
 
-Plug 'scrooloose/nerdtree' " ----------------------------------------- Nerd Tree
-"Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " - Nerdtree syntax & Icon colors
-"Plug 'ryanoasis/vim-devicons' " ------------------------------------------ Icons
 Plug 'easymotion/vim-easymotion' " ---------- Jump around the screen like a boss
-"Plug 'andymass/vim-matchup' " ------------ Better % and highlight matching words
-"Plug 'tommcdo/vim-exchange' " ------------------------------- Easy text exchange
-Plug 'rhysd/clever-f.vim' " ------------------------------- Make f more powerful
-
-" }}}
-
-" SYNTAX HIGHTLIGHT {{{
-
-"Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " Typescript's Syntax
-
-" Help colorize text color
-"Plug 'ap/vim-css-color', {
-      "\ 'for': [
-      "\ 'html',
-      "\ 'css',
-      "\ 'scss',
-      "\ 'sass',
-      "\ 'less'
-      "\ ] }
-"Plug 'Valloric/MatchTagAlways' " Always highlights the XML/HTML tags that enclose your cursor location
-"Plug 'MTDL9/vim-log-highlighting', {'for': 'log'} " ---------------- For Vim Log
-
-" Frameworks
-"Plug 'MaxMEllon/vim-jsx-pretty' " ---------------------------------------- React
 
 " }}}
 
@@ -128,60 +76,17 @@ Plug 'rhysd/clever-f.vim' " ------------------------------- Make f more powerful
 Plug 'tmsvg/pear-tree' " ------------------------------------ Auto pair brackets
 "Plug 'alvan/vim-closetag' " -------------------------------- Auto close html tag
 Plug 'tpope/vim-surround' " -------------------------------------- Auto surround
-"Plug 'tpope/vim-commentary' " ------------------------------ Comment code faster
 Plug 'tpope/vim-repeat' " ----------------------------- dot repeat with pluggins
 Plug 'Yggdroot/indentLine' " --------------------------- Indent code with v-line
-"Plug 'wellle/targets.vim' " -------------------- Provides additional text object
 Plug 'mg979/vim-visual-multi' " -------------------------------- Multiple Cursor
-"Plug 'mattn/emmet-vim' " ----------------------------------------- Emmet for vim
-
-" }}}
-
-" BEAUTIFY CODE {{{
-
-"Plug 'prettier/vim-prettier', {
-      "\ 'do': 'npm install',
-      "\ 'branch': 'release/1.x',
-      "\ 'for': [
-      "\ 'javascript',
-      "\ 'typescript',
-      "\ 'css',
-      "\ 'less',
-      "\ 'sass',
-      "\ 'scss',
-      "\ 'json',
-      "\ 'markdown',
-      "\ 'html' ] }
 
 " }}}
 
 " UTILS {{{
 
 Plug 'NLKNguyen/copy-cut-paste.vim' " --------------- Copy, Paste with Clipboard
-Plug 'kyoz/ezbuf.vim' " ------------------------------ Fast and easy use buffers
-Plug 'kyoz/npm.vim' " ------------------------- Work with npm more easier in Vim
-Plug 'segeljakt/vim-silicon'
-
-" Markdown
-"Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & npm install'  }
-"Plug 'godlygeek/tabular', {'for': 'markdown'} " ------------- Alignment for text
-"Plug 'dhruvasagar/vim-table-mode',{'for': 'markdown', 'do': ':TableFormat'}
-"Plug 'lervag/vimtex', {'for': 'tex'} " ------------------ For editing Latex file
-
-" Performance
-"Plug 'yardnsm/vim-import-cost', { 'do': 'npm install' }
-"Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}
-
-" Colors
-"Plug 'KabbAmine/vCoolor.vim' " ------------------------------------ Color picker
-"Plug 'guns/xterm-color-table.vim'
-
-" Focus
+"Plug 'segeljakt/vim-silicon' " ---------------------------- Coud be enteresting
 Plug 'RRethy/vim-illuminate' " -- Auto highlight other uses of word under cursor
-
-" Searching
-"Plug 'voldikss/vim-search-me' " ----------------------- Searh google within vim
-
 " }}}
 
 " AUTOCOMPLETE {{{

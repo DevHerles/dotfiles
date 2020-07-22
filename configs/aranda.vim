@@ -168,86 +168,6 @@ noremap <Leader>p :FZF<CR>
 
 " }}}
 
-" COC {{{
-
-" coc-snippets
-" Use <C-l> for trigger snippet expand.
-"imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-"vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
-
-" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
-
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? coc#_select_confirm() :
-            \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-let g:coc_snippet_next = '<C-tab>'
-let g:coc_snippet_prev = '<S-tab>'
-
-" coc-flutter
-noremap <Leader>e :CocCommand explorer<CR>
-nmap <silent><leader>xa <Plug>(coc-codelens-action)
-vmap <silent><leader>a  <Plug>(coc-codeaction-selected)
-nmap <silent><leader><leader>.  <Plug>(coc-codeaction)
-nmap <silent><leader><leader>e :CocCommand flutter.emulators<CR>
-nmap <silent><leader><leader>r :CocCommand flutter.run<CR>
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gl :CocList <CR>
-nmap <silent> go :CocList outline<CR>
-nmap <silent> gL :CocListResume <CR>
-
-" Use K for show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-    if &filetype == 'vim'
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-" Show signature help while editing
-autocmd CursorHoldI * silent! call CocActionAsync('showSignatureHelp')
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-nmap <silent> gR <Plug>(coc-rename)
-nmap <silent> gI <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ge <Plug>(coc-refactor)
-" the <CR> should not be necessary but i get some unwanted output
-nmap <silent> ga <Plug>(coc-codeaction-selected)<CR>
-vmap <silent> ga <Plug>(coc-codeaction-selected)<CR>
-nmap <silent> gA :CocAction <CR>
-nmap <silent> gf <Plug>(coc-fix-current)
-
-autocmd User CocQuickfixChange :call fzf_quickfix#run()
-
-" }}}
-
 " LAZYGIT {{{
 
 noremap <silent> <Leader>g :FloatermNew --height=0.8 --width=0.9 --name=Lazygit --autoclose=2 lazygit <CR>
@@ -266,9 +186,5 @@ augroup autoformat_settings
 augroup END
 
 " }}}
-
-let g:blamer_enabled = 0
-let g:blamer_delay = 100
-let g:blamer_prefix = ' --> '
 
 autocmd FileType py,dart,xml,html,vim autocmd BufWritePre <buffer> %s/\s\+$//e
