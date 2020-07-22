@@ -22,3 +22,5 @@ alias glo="git log --oneline --pretty=format:'%C(#d79921)%h%Creset -%C(yellow)%d
 alias gpf="git add . & git commit --amend --no-edit & git push -f"
 alias gca="git add . & git commit --amend --no-edit"
 alias gdf="git diff"
+
+alias j=jump

@@ -1,244 +1,331 @@
 #!/usr/bin/env bash
 
-function installHomebrew() {
+function installFlutter() {
+  if which flutter > /dev/null; then
+    echo "flutter is already installed."
+  else
+    echo "Installing flutter..."
+    git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME
+  fi
 
-    echo "==================================="
-    echo "Installing homebrew"
-    echo "==================================="
-
-    cd ~/
-
-    which -s brew > /dev/null
-    if [[ $? -eq 1 ]]; then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    else
-        brew upgrade
-    fi
+  if which adb > /dev/null; then
+    echo "adb are already installed."
+  else
+    echo "Installing adb..."
+    sudo apt-get install adb
+    sudo usermod -aG plugdev $LOGNAME
+  fi
 }
 
-function installHomebrewPackages() {
-
-    echo "=================================="
-    echo "Installing homebrew packages:"
-    echo "git"
-    echo "neovim"
-    echo "tmux"
-    echo "zsh"
-    echo "fzf"
-    echo "bat"
-    echo "icdiff"
-    echo "shpotify"
-    echo "=================================="
-
-    cd ~/
-
-    brew install git
-    brew install neovim
-    brew install tmux
-    brew install zsh
-    brew install fzf
-    brew install bat
-    brew install icdiff
-    brew install shpotify
-
-    # Sneak on colorls here --> https://github.com/athityakumar/colorls
-    gem install colorls
+function installPostgresql() {
+  if which psql > /dev/null; then
+    echo "postgresql is already installed."
+  else
+    sudo apt update
+    echo "Installing postgresql..."
+    sudo apt install postgresql postgresql-contrib
+  fi
 }
 
-function installNodeJS() {
+function installAdminTools() {
+  echo "Installing admin tools"
 
-    echo "==================================="
-    echo "Installing n and NodeJS"
-    echo "==================================="
+  if which curl > /dev/null; then
+    echo "curl is already installed."
+  else
+    echo "Installing curl..."
+    sudo apt update
+    sudo apt upgrade
+    sudo apt install curl
+  fi
 
-    cd ~/
+  if which pip > /dev/null; then
+    echo "pip is already installed."
+  else
+    echo "Installing pip..."
+    curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+    sudo python2 get-pip.py
+    rm get-pip.py
+    pip install --user jedi
+    pip install --user pep8
+  fi
 
-    curl -L https://git.io/n-install | bash
-}
+  if which pip3 > /dev/null; then
+    echo "pip3 is already installed."
+  else
+    echo "Installing pip3..."
+    sudo apt-get install python3-pip
+    sudo pip3 install -U jedi
+    sudo pip3 install black
+    sudo pip3 install isort
+  fi
 
-function installNpmPackages() {
+  if which xclip > /dev/null; then
+    echo "xclip is already installed."
+  else
+    echo "Installing xclip..."
+    sudo apt-get install xclip
+  fi
 
-    echo "==================================="
-    echo "Installing global npm packages"
-    echo "vtop"
-    echo "==================================="
+  if which htop > /dev/null; then
+    echo "htop is already installed."
+  else
+    echo "Installing htop..."
+    sudo apt-get install htop
+  fi
 
-    cd ~/
+  if which ranger > /dev/null; then
+    echo "ranger is already installed."
+  else
+    echo "Installing ranger..."
+    sudo apt-get install ranger
+  fi
 
-    npm i -g vtop
-}
+  if which netstat > /dev/null; then
+    echo "net-tools are already installed."
+  else
+    echo "Installing net-tools..."
+    sudo apt-get install net-tools
+  fi
 
-function installTools() {
+  if which ctags > /dev/null; then
+    echo "ctags is already installed."
+  else
+    echo "Installing ctags..."
+    sudo apt-get install ctags
+  fi
 
-    echo "==================================="
-    echo "Installing admin tools"
-    echo "dfc"
-    echo "vivid"
-    echo "tree"
-    echo "==================================="
+  if which xsel > /dev/null; then
+    echo "xsel is already installed."
+  else
+    echo "Installing xsel..."
+    sudo apt-get install xsel
+  fi
 
+  if which ruby > /dev/null; then
+    echo "ruby is already installed."
+  else
+    echo "Installing ruby..."
+    sudo apt-get install ruby-full
+  fi
+
+  if which lazygit > /dev/null; then
+    echo "lazygit is already installed."
+  else
+    echo "Installing lazygit..."
+    sudo add-apt-repository ppa:lazygit-team/release
+    sudo apt-get update
+    sudo apt-get install lazygit
+  fi
+
+  if which ack > /dev/null; then
+    echo "Ack is already installed."
+  else
+    echo "Installing ack-grep..."
+    sudo apt-get install ack-grep
+  fi
+
+  if which npm > /dev/null; then
+    echo "npm is already installed."
+  else
+    echo "Installing npm..."
+    sudo apt install npm
+    sudo npm install -g neovim
+  fi
+
+  if which node > /dev/null; then
+    echo "nodejs is already installed."
+  else
+    echo "Installing NodeJs..."
+    sudo apt install nodejs
+  fi
+
+  if which vtop > /dev/null; then
+    echo "vtop is already installed."
+  else
+    echo "Installing vtop..."
+    sudo npm i -g vtop
+  fi
+
+  if which bat > /dev/null; then
+    echo "bat is already installed."
+  else
+    echo "Installing bat..."
+    wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb
+    sudo dpkg -i bat_0.11.0_amd64.deb && rm bat_0.11.0_amd64.deb
+  fi
+
+  if which tree > /dev/null; then
+    echo "tree is already installed."
+  else
+    echo "Installing tree..."
     sudo apt install tree
+  fi
 
-    if [ -f /usr/bin/dfc ]; then
-       echo "dfc is already installed"
-    else
-       sudo apt-get install dfc
-    fi
+  if [ -f /usr/bin/dfc ]; then
+    echo "dfc is already installed"
+  else
+    echo "Installing dfc..."
+    sudo apt-get install dfc
+  fi
 
-    if [ -f /usr/bin/vivid ]; then
-       echo "vivid is already installed"
-    else
-       wget "https://github.com/sharkdp/vivid/releases/download/v0.4.0/vivid_0.4.0_amd64.deb"
-       sudo dpkg -i vivid_0.4.0_amd64.deb
-    fi
+  if [ -f /usr/bin/vivid ]; then
+    echo "vivid is already installed"
+  else
+    echo "Downloading vivid0.4.0..."
+    wget "https://github.com/sharkdp/vivid/releases/download/v0.4.0/vivid_0.4.0_amd64.deb"
+    echo "Installing vivid0.4.0..."
+    sudo dpkg -i vivid_0.4.0_amd64.deb
+  fi
 
-    export LS_COLORS="$(vivid generate snazzy)"
-
+  export LS_COLORS="$(vivid generate snazzy)"
 }
 
 function installOhMyZSH() {
+  echo "Installing ZSH y git-core..."
 
-    echo "==================================="
-    echo "Installing ZSH y git-core"
-    echo "zsh"
-    echo "git-core"
-    echo "==================================="
-
-    cd ~/
+  cd ~/
+  if which zsh > /dev/null; then
+    echo "zsh is already installed."
+  else
+    echo "Installing zsh"
     sudo apt-get install zsh
+  fi
+
+  if which git > /dev/null; then
+    echo "Git is already installed."
+  else
+    echo "Installing git..."
     sudo apt-get install git-core
+  fi
 
-    if [ -d ~/.oh-my-zsh ]; then
-       if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
-          rm ~/.oh-my-zsh/themes/asf.zsh-theme
-       fi
-       cd ~/.oh-my-zsh && git pull;
-    else
-       wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+  if [ -d ~/.oh-my-zsh ]; then
+    if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
+      rm ~/.oh-my-zsh/themes/asf.zsh-theme
     fi
+    cd ~/.oh-my-zsh && git pull;
+  else
+    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+  fi
 
-    if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-       cd ~/.oh-my-zsh && git pull;
-    else
-       git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    fi
+  if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
+    cd ~/.oh-my-zsh && git pull;
+  else
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  fi
 
-    if [ -d ~/.oh-my-zsh/custom/plugins/zsh-completions ]; then
-       cd ~/.oh-my-zsh && git pull;
-    else
-       git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
-    fi
+  if [ -d ~/.oh-my-zsh/custom/plugins/zsh-completions ]; then
+    cd ~/.oh-my-zsh && git pull;
+  else
+    git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+  fi
 
-    if [ -d ~/.dotfiles/gruvbox ]; then
-       cd ~/.dotfiles/gruvbox && git pull;
-    fi
-    # git clone https://github.com/commanderkelso/oh-my-zsh-gruvbox-powerline-theme.git
-    # mv ~/oh-my-zsh-gruvbox-powerline-theme ~/.dotfiles/gruvbox/
-    # rm ~/.oh-my-zsh/themes/gruvbox-powerline.zsh-theme
-    # ln -s ~/.dotfiles/gruvbox/gruvbox-powerline.zsh-theme ~/.oh-my-zsh/themes
+  if [ -d ~/.dotfiles/gruvbox ]; then
+    cd ~/.dotfiles/gruvbox && git pull;
+  fi
 
-    ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+  if [ -f ~/.zshrc ]; then
+    rm ~/.zshrc
+  fi
 
+  ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+
+  if [ $SHELL == "/usr/bin/zsh" ]; then
+    echo "Skipping, your current console is already zsh..."
+  else
+    echo "Changing console to zsh..."
     chsh -s `which zsh`
-
+  fi
 }
-function cloneDotfiles() {
 
-    echo "==================================="
-    echo "Cloning dotfiles"
-    echo "==================================="
+function linkingDotFiles() {
+  cd ~/
 
-    cd ~/
+  echo "Linking asf.zsh-theme..."
+  ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
 
-    if [ -d ~/.dotfiles ]; then
-        rm -rf ~/.dotfiles
-    fi
+  echo "Linking .gitconfig..."
+  ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 
-    git clone https://github.com/DevHerles/dotfiles.git ~/.dotfiles
+  echo "Linking init.vim..."
+  ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
 
-    cp ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
-    # echo "Installing z.sh"
-    # git clone https://github.com/rupa/z.git ~/
-
-    # Create secret keys file - used to store local env vars
-    # touch ~/dotfile/secret-keys.sh
+  echo "Linking configs folder..."
+  ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
 }
 
 function setupVim() {
-    echo "==================================="
-    echo "Setting up vim and neovim"
-    echo "==================================="
+  echo "Setting up vim and neovim..."
+  cd ~/
 
-    cd ~/
-
-    # Link vimrc for both vim and neovim
-    if [ -f ~/.vimrc ]; then
-        rm ~/.vimrc
-    fi
-    if [ -f ~/.config/nvim/init.vim ]; then
-        rm ~/.config/nvim/init.vim
-    fi
-    ln -sf ~/.dotfiles/.vimrc ~/.vimrc
-    ln -sf ~/.dotfiles/.vimrc ~/.config/nvim/init.vim
+  if which nvim > /dev/null; then
+    echo "Neovim is already installed"
+  else
+    echo "Installing Neovim..."
+    sudo apt-get install software-properties-common
+    sudo add-apt-repository ppa:neovim-ppa/stable
+    sudo apt-get update
+    sudo apt-get install neovim
+    sudo apt-get install python-dev python-pip python3-dev python3-pip
+    sudo apt-get install python-neovim
+    sudo apt-get install python3-neovim
+    sudo gem install neovim
+  fi
 
     # Set up colors folder
     mkdir -p ~/.vim/colors
     mkdir -p ~/.config/nvim/colors
 
     # Install vim-plug
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
+      echo "Vim-plug is already installed"
+    else
+      echo "Installing vim-plug..."
+      curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      echo "Once this process is complete open vim and run :PlugInstall"
+    fi
 
     local colors=($(ls ~/.dotfiles/vim_colors))
     for colorFile in $colors
     do
-        ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.vim/colors/$colorFile
-        ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.config/nvim/colors/$colorFile
+      ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.vim/colors/$colorFile
+      ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.config/nvim/colors/$colorFile
     done
 
-    echo "==================================="
     echo "Vim and neovim setup complete"
-    echo "Once this process is complete open vim and run :PlugInstall"
-    echo "==================================="
-
-}
+  }
 
 function setupTmux() {
-    echo "==================================="
-    echo "Installing tmux                    "
-    echo "==================================="
-    sudo apt  install tmux
+  if which tmux > /dev/null; then
+    echo "tmux is already installed."
+  else
+    echo "Installing tmux..."
+    sudo apt install tmux
+  fi
 
-    echo "==================================="
-    echo "Installing tmux plugin manager"
-    echo "==================================="
+  echo "Installing tmux plugin manager..."
+  if [ -d ~/.tmux/plugins/tpm ]; then
+    cd ~/.tmux/plugins/tpm && git pull
+  else
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
 
-    if [ -d ~/.tmux/plugins/tpm ]; then
-       cd ~/.tmux/plugins/tpm && git pull
-    else
-       git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    fi
-
-    cd ~/
-    echo "==================================="
-    echo "Linking tmux config"
-    echo "==================================="
-    file=".tmux.conf"
-    if [ -f $file ] ; then
-        rm $file
-    fi
-    ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
+  cd ~/
+  echo "Linking .tmux.conf..."
+  ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
 }
 
 function setupDirColors() {
-    echo "==================================="
-    echo "Setup dircolors"
-    echo "==================================="
-
-    eval $( dircolors -b ~/.dotfiles/dir_colors )
+  echo "Setup dircolors..."
+  eval $( dircolors -b ~/.dotfiles/dir_colors )
 }
 
 function installDocker() {
+  if which docker > /dev/null; then
+    echo "Docker is already installed."
+  else
+    echo "Installing docker..."
     sudo apt install docker.io
     sudo systemctl start docker
     sudo systemctl enable docker
@@ -246,36 +333,27 @@ function installDocker() {
     sudo groupadd docker
     sudo usermod -aG docker $USER
     newgrp docker
-}
-
-function installVimPlug() {
-    sudo apt install curl
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-}
-
-function installNeoVim() {
-    sudo apt install neovim
+  fi
+  if which docker-compose > /dev/null; then
+    echo "docker-compose is already installed."
+  else
+    echo "Installing docker-compose..."
+    sudo apt install docker-compose
+  fi
 }
 
 function install() {
-
-    echo "==================================="
-    echo "Beginning Installation..."
-    echo "==================================="
-
-    # installHomebrew
-    # installHomebrewPackages
-    # installNodeJS
-    # installNpmPackages
-    installNeoVim
-    installVimPlug
-    installTools
-    installOhMyZSH
-    cloneDotfiles
-    setupVim
-    setupTmux
-    #setupDirColors
+  echo "Beginning installation..."
+  installAdminTools
+  installPostgresql
+  installFlutter
+  installOhMyZSH
+  setupVim
+  setupTmux
+  linkingDotFiles
+  installDocker
+  setupDirColors
+  echo "End installation..."
 }
 
 install

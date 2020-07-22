@@ -204,7 +204,7 @@ if !exists('g:not_finish_vimplug')
       set guicursor=n-v-c:block-Cursor/lCursor-blinkon0,i-ci:ver25-Cursor/lCursor,r-cr:hor20-Cursor/lCursor
   endif
 endif
-colorscheme gruvbox
+colorscheme default
 
 "*****************************************************************************
 " Deoplete
@@ -492,10 +492,10 @@ cmap w!! w !sudo tee > /dev/null %
 nnoremap ,w :call SwapSplitResizeShortcuts()<CR>
 imap jk <Esc>
 map 0 ^
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/ " it will mark +80 characters as error
-let &colorcolumn=join(range(81,999),",")
-let &colorcolumn="80,".join(range(81,999),",")
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/ " it will mark +80 characters as error
+"let &colorcolumn=join(range(81,999),",")
+"let &colorcolumn="80,".join(range(81,999),",")
 " Search in line
 noremap <Leader>( ?(<CR>a
 
@@ -779,7 +779,7 @@ fun! s:EightyLine()
  if !exists('w:eightyline')
   let w:eightyline = 1
   :set colorcolumn=80  " highlight three columns after 'textwidth'
-  :highlight ColorColumn ctermbg=16 guibg=#000000
+  ":highlight ColorColumn ctermbg=16 guibg=#000000
  else
   unl w:eightyline
   :set colorcolumn=80  " highlight three columns after 'textwidth'
@@ -801,3 +801,11 @@ else
     silent !echo -ne "\033]Pl3971ED\033\\"
     autocmd VimLeave * silent !echo -ne "\033]Pl3971ED\033\\"
 endif
+
+highlight Normal ctermbg=None
+
+autocmd InsertEnter * highlight CursorLine guibg=#000050 guifg=fg
+autocmd InsertLeave * highlight CursorLine guibg=#004000 guifg=fg
+
+autocmd InsertEnter * highlight CursorColumn ctermfg=White ctermbg=Yellow cterm=bold guifg=white guibg=yellow gui=bold
+autocmd InsertLeave * highlight CursorColumn ctermfg=Black ctermbg=Yellow cterm=bold guifg=Black guibg=yellow gui=NONE
