@@ -1,45 +1,10 @@
-"  _   __
-" | | / /
-" | |/ / _   _  ___ ____
-" |    \| | | |/ _ \_  /  Author: Kyoz
-" | |\  \ |_| | (_) / /   Github: github.com/banminkyoz
-" \_| \_/\__, |\___/___|  Email : banminkyoz@gmail.com
-"         __/ |
-"        |___/
-
-" NERDTREE {{{
-
-let g:NERDTreeWinSize=30 " ------------------------------------- Default columns
-let g:NERDTreeNaturalSort = 1
-let g:NERDTreeIgnore=['\.pyc$', '\.pyo$', '__pycache__$', 'node_modules']
-let g:NERDTreeIndicatorMapCustom = {
-  \ "Modified"  : "✹",
-  \ "Staged"    : "✚",
-  \ "Untracked" : "✭",
-  \ "Renamed"   : "➜",
-  \ "Unmerged"  : "═",
-  \ "Deleted"   : "✖",
-  \ "Dirty"     : "✗",
-  \ "Clean"     : "✔︎",
-  \ 'Ignored'   : '☒',
-  \ "Unknown"   : "?"
-  \ }
-highlight! link NERDTreeFlags NERDTreeDir
-
-" Mappings
-" noremap <Leader>t :NERDTreeToggle<CR> "----------------------- NERDTree Toggle
-
-" }}}
-
-" DEVICIONS {{{
-
-" Fix folders and files weird align
-let g:WebDevIconsNerdTreeBeforeGlyphPadding = ''
-let g:WebDevIconsNerdTreeAfterGlyphPadding = '  '
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-let g:DevIconsEnableFoldersOpenClose = 1
-
-" }}}
+"  ________                ___ ___               .__
+"  \______ \   _______  __/   |   \   ___________|  |   ____   ______
+"   |    |  \_/ __ \  \/ /    ~    \_/ __ \_  __ \  | _/ __ \ /  ___/
+"   |    `   \  ___/\   /\    Y    /\  ___/|  | \/  |_\  ___/ \___ \
+"  /_______  /\___  >\_/  \___|_  /  \___  >__|  |____/\___  >____  >
+"          \/     \/            \/       \/                \/     \/
+" | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
 
 " COLORS SOLARIZED {{{
 
@@ -106,13 +71,8 @@ command! -bang -nargs=? -complete=dir DefaultFiles
   \ call fzf#vim#files(<q-args>, {'source': 'ag --hidden --skip-vcs-ignores --ignore .git -g ""'}, <bang>0)
 
 " Mappings
-nmap <leader>f        :Files<cr>
-nmap <leader>F        :DefaultFiles<cr>
-nmap <leader>l        :BLines<cr>
-nmap <leader>L        :Lines<cr>
-nmap <leader><leader> :Buffers<cr>
+nmap <leader>f        :FZF<cr>
 nmap <leader>c        :Commits<cr>
-nmap <leader>a        :Ag<cr>
 
 " Remapping alt-a, alt-d to ctrl-a, ctrl-d to use on oxs
 autocmd VimEnter *
@@ -153,18 +113,6 @@ augroup END
 
 " }}}
 
-" EMMET {{{
-
-" Enable just for html, css
-let g:user_emmet_install_global = 0
-autocmd FileType html,css EmmetInstall
-
-let g:user_emmet_leader_key=',' " ------------------------ Trigger emmet with ,,
-
-autocmd FileType html,css,scss,sass,less,typescript EmmetInstall " Support files
-
-" }}}
-
 " EASY MOTION {{{
 
 let g:EasyMotion_do_mapping = 0 " --------------------- Disable default mappings
@@ -198,27 +146,6 @@ let g:pear_tree_repeatable_expand = 0
 
 " }}}
 
-" AIRWRAP {{{
-
-"nnoremap <silent> gw :ArgWrap<CR>
-
-" }}}
-
-" MARKDOWN SYNTAX {{{
-
-autocmd FileType markdown let g:indentLine_enabled=0 " Prevent markdown side effect
-let g:vim_markdown_conceal = 0
-let g:vim_markdown_folding_disabled = 1
-let g:vim_markdown_conceal_code_blocks = 0
-
-" }}}
-
-" MARDOWN-PREVIEW {{{
-
-nmap <leader>m <Plug>MarkdownPreviewToggle
-
-" }}}
-
 " PRETTIER {{{
 
 let g:prettier#autoformat = 0
@@ -228,38 +155,8 @@ let g:prettier#config#bracket_spacing = 'false'
 
 " }}}
 
-" VIM-MATCHUP {{{
-
-let g:matchup_matchpref = {}
-let g:matchup_matchpref.vue = {'tagnameonly': 1}
-let g:matchup_matchpref.html = {'tagnameonly': 1}
-
-" }}}
-
 " VIM-ILLUMINATE {{{
 
 hi link illuminatedWord Visual
 
 " }}}
-
-" VCOOLOR {{{
-
-let g:vcoolor_map        = '<localleader>c'
-let g:vcool_ins_rgba_map = '<localleader>C'
-
-" }}}
-
-" LIMELIGHT {{{
-
-" Config color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
-
-" Itegrate with Goyo.vim
-autocmd! User GoyoEnter Limelight
-" autocmd! User GoyoLeave Limelight!
-" A workaround for https://github.com/junegunn/goyo.vim/issues/160
-autocmd! User GoyoLeave silent! source $HOME/.config/nvim/init.vim
-
-" }}}
-

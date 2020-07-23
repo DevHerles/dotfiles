@@ -6,18 +6,15 @@
 "          \/     \/            \/       \/                \/     \/
 " | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
 
-" INDENT {{{
+" CODEFoRMAT {{{
 
-"let g:indentLine_setColors = 0
-let g:indentLine_color_term = 239
-let g:indentLine_char = '▏'
-
-augroup languages_indent
-    autocmd!
-    autocmd FileType vim    setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-    autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
-    autocmd FileType xml    setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
-    autocmd FileType json   setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+augroup autoformat_settings
+    autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
+    autocmd FileType dart AutoFormatBuffer dartfmt
+    autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
+    autocmd FileType python AutoFormatBuffer yapf
+    autocmd FileType xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
+    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
 augroup END
 
 " }}}

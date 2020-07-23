@@ -1,72 +1,96 @@
+"  ________                ___ ___               .__
+"  \______ \   _______  __/   |   \   ___________|  |   ____   ______
+"   |    |  \_/ __ \  \/ /    ~    \_/ __ \_  __ \  | _/ __ \ /  ___/
+"   |    `   \  ___/\   /\    Y    /\  ___/|  | \/  |_\  ___/ \___ \
+"  /_______  /\___  >\_/  \___|_  /  \___  >__|  |____/\___  >____  >
+"          \/     \/            \/       \/                \/     \/
+" | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
+
 " WINDOW {{{
 
 nnoremap n nzz
 nnoremap N Nzz
 
-nnoremap <tab><tab> <c-^> " -------------------Switch between the last two files
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>  "-replace word under
-vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left> " cursor, globally, with c
-map <F7> mzgg=G`z " --------re-indent file and jump back to where the cursor was
+" --------------------------------------------Switch between the last two files
+nnoremap <tab><tab> <c-^>
+nnoremap <silent><Leader>r :e!<CR>
+"map <F7> mzgg=G`z " --------re-indent file and jump back to where the cursor was
 
-nnoremap <silent> <leader>zi :setlocal foldmethod=indent<CR> " fold file based on indent
 
-nnoremap <silent> <F9> :windo diffthis<CR>
+"nnoremap <silent> <F9> :windo diffthis<CR>
 
-nnoremap <Leader>rn :!mv <C-R>=expand("%")<CR> " ------------rename current file
-nnoremap <Leader><Leader> zz " --------------------------------Center the screen
-nnoremap Y y$ " ------------------------------------------------Act like D and C
-noremap <leader><leader>c "*y " ------------------------------------Copy from register
-map <leader>vv "*p " ----------------------------------------Paste from register
-nnoremap <silent> <Leader>= gg=G
+"nnoremap <Leader>rn :!mv <C-R>=expand("%")<CR> " ------------rename current file
+"nnoremap <Leader><Leader> zz " --------------------------------Center the screen
 
-nnoremap <silent> <Leader>q :bdelete<CR> " ------------Delete the current buffer
-nnoremap <silent> <Leader>Q :bufdo! bd<CR> " Deletes all except with unwritten changes
-nnoremap <silent> <Leader>+ :vertical resize +20<CR>
+" -------------------------------------------------------------Act like D and C
+nnoremap Y y$
+
+"noremap <leader><leader>c "*y " ------------------------------------Copy from register
+"map <leader>vv "*p " ----------------------------------------Paste from register
+"nnoremap <silent> <Leader>= gg=G
+
+" ----------------------------------------------------Delete the current buffer
+nnoremap <silent> <Leader>q :bdelete<CR>
+
+" ------------------------------------Deletes all except with unwritten changes
+nnoremap <silent><Leader>Q :bufdo! bd<CR>
+nnoremap <silent><Leader>+ :vertical resize +20<CR>
 nnoremap <silent> <Leader>- :vertical resize -20<CR>
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+noremap <silent> <Leader>h :<C-u>split<CR>
+noremap <silent> <Leader>v :<C-u>vsplit<CR>
 noremap <C-j> <C-w>j
 noremap <C-l> <C-w>l
 noremap <C-h> <C-w>h
-noremap <C-s> :w<CR>
-noremap <C-u> :e ++ff=dos<CR>
+noremap <silent> <Leader>w :wa<CR>
 nnoremap <silent> L :call MyNext()<CR>
 nnoremap <silent> H :call MyPrev()<CR>
 " ------When I forgot to start vim using sudo
-cnoremap .w execute 'silent! write !SUDO_ASKPASS=`which ssh-askpass` sudo tee % >/dev/null' <bar> edit!
-"--------Resizing split windows
-nnoremap ,w :call SwapSplitResizeShortcuts()<CR>
-imap jk <Esc> " ------------------------------------------Escape for insert mode
-map 0 ^ " ---------------------------------------------Firs char in current line
+"cnoremap <C-s>w execute 'silent! write !SUDO_ASKPASS=`which ssh-askpass` sudo tee % >/dev/null' <bar> edit!
 
-noremap <Leader>d yyp " ----------------------------------duplicate current line
+" -------------------------------------------------------Resizing split windows
+"nnoremap ,w :call SwapSplitResizeShortcuts()<CR>
+" -------------------------------------------------------Escape for insert mode
+imap jk <Esc>
 
-nnoremap <A-j> :m .+1<CR>== " ----------------------------------------Move lines
-nnoremap <A-k> :m .-2<CR>== " ----------------------------------------Move lines
-inoremap <A-j> <Esc>:m .+1<CR>==gi " ---------------------------------Move lines
-inoremap <A-k> <Esc>:m .-2<CR>==gi " ---------------------------------Move lines
-vnoremap <A-j> :m '>+1<CR>gv=gv " ------------------------------------Move lines
-vnoremap <A-k> :m '<-2<CR>gv=gv " ------------------------------------Move lines
+" ----------------------------------------------------Firs char in current line
+map 0 ^
 
-nnoremap <Leader>p g; " ----Jump back to your last edit (do this in normal mode)
-nnoremap <Leader>n g, " ----Jump back to your last edit (do this in normal mode)
+" -------------------------------------------------------duplicate current line
+noremap <Leader>d yyp
 
-nnoremap <Leader>o ^o " -Jump back to the position you were last (Out),jump back
-nnoremap <Leader>i ^i " ---Jump back to the position you were last (In), forward
+" ---------------------------------------------------------Move lines (UP/DoWN)
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
-nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR> " ------Clear search highlight
+" ------------------------ Jump back to your last edit (do this in normal mode)
+nnoremap <Leader>p g;
 
-vmap < <gv " ---------------Vmap for maintain Visual Mode after shifting > and <
-vmap > >gv " ---------------Vmap for maintain Visual Mode after shifting > and <
+" -------------------------Jump back to your last edit (do this in normal mode)
+nnoremap <Leader>n g,
 
-nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR> " -Change to current working directory
+"nnoremap <Leader>o ^o " -Jump back to the position you were last (Out),jump back
+"nnoremap <Leader>i ^i " ---Jump back to the position you were last (In), forward
 
-map ,v :e $MYVIMRC<CR> " ------------------------------------------Open init.vim
+" -------------------------------------------------------Clear search highlight
+nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR>
 
-set undofile " -------------Enable persistent undo so that undo history persists
-set undodir=~/.vim/undo " ------------across vim sessions - works with vim-mundo
+" -------------------------Vmap for maintain Visual Mode after shifting > and <
+vmap < <gv
 
-" MyNext() and MyPrev(): Movement between tabs OR buffers
+" -------------------------Vmap for maintain Visual Mode after shifting > and <
+vmap > >gv
+
+" ------------------------------------------Change to current working directory
+nnoremap <Leader>cd :cd %:p:h<CR>:pwd<CR>
+
+" ----------------------------------------------------------------Open init.vim
+map ,v :e $MYVIMRC<CR>
+
+" ----------------------MyNext() and MyPrev(): Movement between tabs OR buffers
 function! MyNext()
     if exists( '*tabpagenr' ) && tabpagenr('$') != 1
         " Tab support && tabs open
@@ -86,7 +110,7 @@ function! MyPrev()
     endif
 endfunction
 
-" SwapSplitResizeShortcuts(): Resizing split windows
+" ---------------------------SwapSplitResizeShortcuts(): Resizing split windows
 if !exists( 'g:resizeshortcuts' )
     let g:resizeshortcuts = 'horizontal'
     nnoremap _ <C-w>-
@@ -120,14 +144,12 @@ let g:ackhighlight = 1
 cnoreabbrev Ack Ack!
 cnoreabbrev ack Ack!
 nnoremap <Leader>a :Ack!<Space><C-R><C-W>
-nnoremap <Leader>ff 0yi":Ack!<Space>'<C-R>" = fields' --py<CR> " ----Where the field was defined
-nnoremap <Leader>fm 0yi":Ack!<Space>"def <C-R>"" --py<CR> " ---------Where de method was defined
-nnoremap <Leader>mn yit:Ack!<Space>"_name = '<C-R>"'" --py<CR> " ----Where de module was defined
-vnoremap <Leader>mn y:Ack!<Space>"_name = '<C-R>"'" --py<CR> " ------Where de module was defined
-vnoremap <Leader>ai y:Ack!<Space>"_inherit = '<C-R>"'" --py<CR> " -Where de module was inherited
-nnoremap <Leader>mi yit:Ack!<Space>"_inherit = '<C-R>"'" --py<CR> "Where de module was inherited
-nnoremap <Leader>ap :Ack!<Space><C-R><C-W> --py<CR> " -----------------------In all Python files
-nnoremap <Leader>ax :Ack!<Space><C-R><C-W> --xml<CR> " -------------------------In all XML files
+
+" -----------------------------------------------------------In all Python files
+nnoremap <Leader>ap :Ack!<Space><C-R><C-W> --py<CR>
+
+" --------------------------------------------------------------In all XML files
+nnoremap <Leader>ax :Ack!<Space><C-R><C-W> --xml<CR>
 
 " }}}
 
@@ -161,13 +183,6 @@ endif
 
 " }}}
 
-" RANGER {{{
-
-noremap <Leader>t :RangerCurrentDirectory<CR>
-noremap <Leader>p :FZF<CR>
-
-" }}}
-
 " LAZYGIT {{{
 
 noremap <silent> <Leader>g :FloatermNew --height=0.8 --width=0.9 --name=Lazygit --autoclose=2 lazygit <CR>
@@ -175,16 +190,14 @@ noremap <silent> <Leader>z :FloatermNew --height=0.7 --width=0.9 --name=Zhell --
 
 " }}}
 
-" CODEFMT {{{
+" DELETE TRAILING {{{
 
-augroup autoformat_settings
-    autocmd FileType c,cpp,proto,javascript,arduino AutoFormatBuffer clang-format
-    autocmd FileType dart AutoFormatBuffer dartfmt
-    autocmd FileType html,css,sass,scss,less,json AutoFormatBuffer js-beautify
-    autocmd FileType python AutoFormatBuffer yapf
-    " Alternative: autocmd FileType python AutoFormatBuffer autopep8
-augroup END
+func! DeleteTrailingWS()
+  exe "normal mz"
+  %s/\s\+$//ge " /\s\+$/ regex for one or more whitespace characters followed by the end of a line
+  exe "normal `z"
+endfunc
+
+autocmd BufWrite *.* :call DeleteTrailingWS()
 
 " }}}
-
-autocmd FileType py,dart,xml,html,vim autocmd BufWritePre <buffer> %s/\s\+$//e

@@ -131,6 +131,7 @@ function installAdminTools() {
     echo "Installing npm..."
     sudo apt install npm
     sudo npm install -g neovim
+    sudo npm install -g js-beautify
   fi
 
   if which node > /dev/null; then

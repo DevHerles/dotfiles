@@ -1,85 +1,94 @@
 {
-  // coc settings
-  "coc.preferences.snippets.enable": true,
-  "coc.preferences.snippetStatusText": "🌈",
-  "coc.preferences.formatOnType": false,
-  "codeLens.enable": true,
-  "suggest.echodocSupport": true,
-  "diagnostic.virtualText": true,
+    // coc settings
 
-  // diagnostic
-  "diagnostic.infoSign": "i",
-  "diagnostic.hintSign": "*",
-  "diagnostic.warningSign": "!",
-  "diagnostic.errorSign": "x",
-  "diagnostic.enable": true,
-  "diagnostic.signOffset": 9999999,
-  "diagnostic.highlightOffset": 9999999,
-  "diagnostic.refreshOnInsertMode": true,
+    "coc.preferences.snippets.enable": true,
+    "coc.preferences.snippetStatusText": "🌈",
+    "coc.preferences.formatOnType": false,
+    "coc.preferences.formatOnSaveFiletypes": ["xml", "dart"],
+    "codeLens.enable": true,
+    "suggest.echodocSupport": true,
+    "diagnostic.virtualText": true,
 
-  // suggest
-  "suggest.detailField": "abbr",
-  "suggest.detailMaxLength": 30,
-  "suggest.maxCompleteItemCount": 50,
-  "suggest.maxPreviewWidth": 80,
-  "suggest.triggerAfterInsertEnter": false,
+    // diagnostic
+    "diagnostic.infoSign": "i",
+    "diagnostic.hintSign": "*",
+    "diagnostic.warningSign": "!",
+    "diagnostic.errorSign": "x",
+    "diagnostic.enable": true,
+    "diagnostic.signOffset": 9999999,
+    "diagnostic.highlightOffset": 9999999,
+    "diagnostic.refreshOnInsertMode": true,
 
-  // priority
-  "suggest.languageSourcePriority": 9999,
-  "coc.source.syntax.priority": 10,
-  "coc.source.file.priority": 4,
-  "coc.source.around.priority": 3,
-  "coc.source.tag.priority": 2,
-  "coc.source.emoji.priority": 2,
-  "coc.source.dictionary.priority": 1,
-  "coc.source.buffer.priority": 1,
+    // suggest
+    "suggest.detailField": "abbr",
+    "suggest.detailMaxLength": 30,
+    "suggest.maxCompleteItemCount": 50,
+    "suggest.maxPreviewWidth": 80,
+    "suggest.triggerAfterInsertEnter": false,
 
-  // snippets
-  "snippets.extends": {
-    "scss": ["css"],
-    "sass": ["css"],
-    "less": ["css"],
-    "typescript": ["javascript", "angulartypescript"],
-    "html": ["angularhtml", "angularmaterial", "angularflexlayout"]
-  },
+    // priority
+    "suggest.languageSourcePriority": 9999,
+    "coc.source.syntax.priority": 10,
+    "coc.source.file.priority": 4,
+    "coc.source.around.priority": 3,
+    "coc.source.tag.priority": 2,
+    "coc.source.emoji.priority": 2,
+    "coc.source.dictionary.priority": 1,
+    "coc.source.buffer.priority": 1,
 
-  // html
-  "html.suggest.ionic": true,
+    // snippets
+    "snippets.extends": {
+        "scss": ["css"],
+        "sass": ["css"],
+        "less": ["css"],
+        "xml": ["xml"],
+        "vim": ["vim"],
+        "snippets": ["snippets"],
+        "typescript": ["javascript", "angulartypescript"],
+        "html": ["angularhtml", "angularmaterial", "angularflexlayout"]
+    },
 
-  // emoji
-  "coc.source.emoji.filetypes": [
-    "markdown",
-    "gitcommit"
-  ],
+    // html
+    "html.suggest.ionic": true,
 
-  // eslint
-  "eslint.enable": true,
-  "eslint.filetypes": [
-    "javascript",
-    "javascript.jsx",
-    "javascriptreact"
-  ],
-  "eslint.autoFix": false,
-  "eslint.autoFixOnSave": false,
+    // emoji
+    "coc.source.emoji.filetypes": [
+        "markdown",
+        "gitcommit"
+    ],
 
-  // tslint
-  "tslint.enable": true,
-  "tslint.autoFixOnSave": false,
+    // eslint
+    "eslint.enable": true,
+    "eslint.filetypes": [
+        "javascript",
+        "javascript.jsx",
+        "javascriptreact"
+    ],
+    "eslint.autoFix": false,
+    "eslint.autoFixOnSave": false,
 
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "/usr/local/bin/black",
-  "python.sortImports.path": "~/.local/bin/isort",
+    // tslint
+    "tslint.enable": true,
+    "tslint.autoFixOnSave": false,
 
-  // explorer
-  "explorer.width": 30,
-  "explorer.icon.enableNerdfont": true,
-  "explorer.previewAction.onHover": false,
-  "explorer.icon.enableVimDevicons": false,
-  "explorer.keyMappings": {
-    "<cr>": ["expandable?", "expand", "open"],
-    "v": "open:vsplit"
-  }
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "black",
+    "python.formatting.blackPath": "/usr/local/bin/black",
+    "python.sortImports.path": "~/.local/bin/isort",
+    "snippets.ultisnips.directories": ["~/.dotfiles/my_snippets"],
+
+    // java
+    "xml.java.home": "/usr/local/java/jdk-14.0.2",
+
+    // explorer
+    "explorer.width": 40,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.icon.enableVimDevicons": false,
+    "explorer.keyMappings": {
+        "<cr>": ["expandable?", "expand", "open"],
+        "v": "open:vsplit"
+    }
 }

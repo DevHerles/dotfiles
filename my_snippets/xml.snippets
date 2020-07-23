@@ -1,3 +1,11 @@
+#  ________                ___ ___               .__
+#  \______ \   _______  __/   |   \   ___________|  |   ____   ______
+#   |    |  \_/ __ \  \/ /    ~    \_/ __ \_  __ \  | _/ __ \ /  ___/
+#   |    `   \  ___/\   /\    Y    /\  ___/|  | \/  |_\  ___/ \___ \
+#  /_______  /\___  >\_/  \___|_  /  \___  >__|  |____/\___  >____  >
+#          \/     \/            \/       \/                \/     \/
+# | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
+
 # xml declaration
 snippet odoo "Complete Odoo template"
 <?xml version="1.0" encoding="utf-8"?>
@@ -115,12 +123,14 @@ snippet odoo "Complete Odoo template"
 	</data>
 </odoo>
 endsnippet
-snippet mroot
+
+snippet mroot "my_snippets"
 <menuitem
 	id="${1:model_name}_menu_root"
 	name="${2:Main Menu}"
 	sequence="${3:1}"/>
 endsnippet
+
 snippet menuitem "Odoo root menuitem, menuitem and action"
 <record id="${1:module_name}_${2:model}_${3:name}_action" model="ir.actions.act_window">
 	<field name="name">$1.$2.$3.action</field>
@@ -143,14 +153,16 @@ snippet menuitem "Odoo root menuitem, menuitem and action"
 	sequence="1"
 	groups="$1_group_admin"/>
 endsnippet
-snippet record "Odoo security category"
+
+snippet odoo_record_cateory "Odoo security category"
 <record id="${1:module_name}_category" model="ir.module.category">
 	<field name="name">${2:Module name category}</field>
 	<field name="description">${3:Access level for} $2</field>
 	<field name="sequence">${4:999}</field>
 </record>
 endsnippet
-snippet record "Odoo action record"
+
+snippet odoo_odoo_record_action "Odoo action record"
 <record id="${1:module_name}_${2:model}_${3:name}_action" model="ir.actions.act_window">
 	<field name="name">$1.$2.$3.action</field>
 	<field name="res_model">$1.$2.$3</field>
@@ -159,7 +171,8 @@ snippet record "Odoo action record"
 	<field name="target">new</field>
 </record>
 endsnippet
-snippet record "Odoo calendar view"
+
+snippet odoo_record_calendar "Odoo calendar view"
 <record id="${1:oeh}_${2:medical}_${3:inpatient}_calendar_view" model="ir.ui.view">
 	<field name="name">$1.$2.$3.calendar</field>
 	<field name="model">$1.$2.$3</field>
@@ -172,7 +185,8 @@ snippet record "Odoo calendar view"
 	</field>
 </record>
 endsnippet
-snippet wizard "Odoo wizard template"
+
+snippet odoo_wizard "Odoo wizard template"
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
@@ -234,7 +248,8 @@ class $2$3Wizard(models.TransientModel):
 	def apply(self):
 		return True
 endsnippet
-snippet report "Odoo report template"
+
+snippet odoo_report "Odoo report template"
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
@@ -360,13 +375,15 @@ snippet report "Odoo report template"
 	</data>
 </odoo>
 endsnippet
-snippet record "Odoo res.groups"
+
+snippet odoo_record_group "Odoo res.groups"
 <record id="${1:module_name}_group_${2:group}" model="res.groups">
 	<field name="name">${3:Group name}</field>
 	<field name="category_id" ref="$1.$1_category"/>
 </record>
 endsnippet
-snippet menuitem "Odoo menuitem and action"
+
+snippet odoo_record_menuitem "Odoo menuitem and action"
 <record id="${1:model_name}_action" model="ir.actions.act_window">
 	<field name="name">$3</field>
 	<field name="res_model">$2</field>
@@ -380,7 +397,8 @@ snippet menuitem "Odoo menuitem and action"
 	action="$1_action"
 	sequence="${5:1}"/>
 endsnippet
-snippet menuitem "Odoo menuitem"
+
+snippet odoo_menuitem "Odoo menuitem"
 <menuitem
 	id="${1:module_name}_menu_action"
 	name="${2:Sub Menu}"
@@ -388,10 +406,12 @@ snippet menuitem "Odoo menuitem"
 	action="$1_action"
 	sequence="${4:1}"/>
 endsnippet
+
 snippet ti
 <${1:}>${2}</$1>
 endsnippet
-snippet pivot "Odoo pivot"
+
+snippet odoo_record_pivot "Odoo pivot"
 <record id="${1:module_name}_$2_$3_view_pivot" model="ir.ui.view">
 	<field name="name">${2:module}.${3:name}.pivot</field>
 	<field name="model">$1.$2.$3</field>
@@ -405,6 +425,7 @@ snippet pivot "Odoo pivot"
 	</field>
 </record>
 endsnippet
+
 snippet table "HTML table"
 <table class="table table-condensed" style="border:none;">
 	<tbody>
@@ -417,7 +438,8 @@ snippet table "HTML table"
 	</tbody>
 </table>
 endsnippet
-snippet record "Odoo general record view"
+
+snippet odoo_record_inherit "Odoo general record view"
 <record id="${1:module_name}_${2:model}_${3:name}_view_$4" model="ir.ui.view">
 	<field name="name">$1.$2.$3.$4</field>
 	<field name="model">$1.$2.$3</field>
@@ -430,7 +452,8 @@ snippet record "Odoo general record view"
 	</field>
 </record>
 endsnippet
-snippet record "Odoo search record view"
+
+snippet odoo_record_search "Odoo search record view"
 <record id="${1:module_name}_${2:model}_${3:name}_view_search" model="ir.ui.view">
 	<field name="name">$1.$2.$3.search</field>
 	<field name="model">$1.$2.$3</field>
@@ -445,14 +468,16 @@ snippet record "Odoo search record view"
 	</field>
 </record>
 endsnippet
-snippet header "Odoo form header"
+
+snippet odoo_header "Odoo form header"
 <header>
 	<button name="function_name" states="state" string="Label" type="object"
 		attrs="{'invisible': [('state','!=','state')]}"/>
 	<field name="state" widget="statusbar"/>
 </header>
 endsnippet
-snippet form "Odoo form template"
+
+snippet odoo_form "Odoo form template"
 <form>
 	<header>
 		<button name="function_name" states="state" string="Label" type="object"
@@ -490,20 +515,15 @@ snippet form "Odoo form template"
 	</div>
 </form>
 endsnippet
-snippet chatter "Odoo form chatter"
+
+snippet odoo_chatter "Odoo form chatter"
 <div class="oe_chatter">
 	<field name="message_follower_ids" widget="mail_followers"/>
 	<field name="message_ids" widget="mail_thread"/>
 </div>
 endsnippet
-snippet action "Odoo action record"
-<record id="${1:module_name}_${2:model}_${3:name}_action" model="ir.actions.act_window">
-	<field name="name">$1.$2.$3.action</field>
-	<field name="res_model">$1.$2.$3</field>
-	<field name="view_mode">tree,form</field>
-</record>
-endsnippet
-snippet record "Odoo general inherit view"
+
+snippet odoo_record_inherit "Odoo general inherit view"
 <record id="${1:model_name}_view_$4_inherit_$5_$6" model="ir.ui.view">
 	<field name="name">$1.$2.$3.${4:form}</field>
 	<field name="model">${2:model}.${3:name}</field>
@@ -515,58 +535,69 @@ snippet record "Odoo general inherit view"
 	</field>
 </record>
 endsnippet
-snippet action "Odoo domain action"
+
+snippet odoo_action "Odoo domain action"
 <act_window id="$1_action"
 	name="${2:model.name}"
 	res_model="$2"
 	view_mode="tree,form"
 	domain="[('${3:field_name}_id', '=', default_$3_id)]"/>
 endsnippet
-snippet fields
+
+snippet odoo_fields "odoo o2m list"
 <field name="${1:name}" nolabel="${2:1}">
 	<tree editable="${3:bottom}">
 		<field name="${4:name}"/>${5}
 	</tree>
 </field>
 endsnippet
-snippet field
+
+snippet odoo_field "odoo field"
 <field name="${1:name}"/>
 endsnippet
-snippet fieldr
+
+snippet odoo_field_readonly "odoo field readonly"
 <field name="${1:name}" readonly="1"/>
 endsnippet
+
 snippet button
 <button name="${1:button_name}" string="${2:New button}" type="${3:object}"/>
 endsnippet
+
 snippet domain
 domain="[('${1:state}','${2:=}', ${3:True})]"
 endsnippet
+
 snippet required
 attrs="{'${1:required}': [('${2:state}','${3:=}', ${4:'value'})]}"
 endsnippet
+
 snippet readonly
 attrs="{'${1:readonly}': [('${2:state}','${3:=}', ${4:'value'})]}"
 endsnippet
+
 snippet invisible
 attrs="{'${1:invisible}': [('${2:state}','${3:=}', ${4:'value'})]}"
 endsnippet
+
 snippet onchange
 on_change="onchange_${1:method}(${2:argument}, context=context)"
 endsnippet
+
 snippet attribute
 <attribute name="${1:name}">${2:value}</attribute>
 endsnippet
+
 snippet label
 <label for="${1:field_name}"/>
 endsnippet
-snippet separator
-<separator string="${1:String}" colspan="${2:4}"/>
-endsnippet
+
 snippet group "Odoo group"
 <group colspan="${1:4}">
 	${2}
 </group>
 endsnippet
+
 snippet groups "Odoo group group"
 <group>
 	<group>
@@ -576,6 +607,7 @@ snippet groups "Odoo group group"
 	</group>
 </group>
 endsnippet
+
 snippet notebook
 <notebook colspan="4">
 	<page string="${1:String}">
@@ -583,44 +615,55 @@ snippet notebook
 	</page>
 </notebook>
 endsnippet
+
 snippet page
 <page string="${1:String}">
 	${2}
 </page>
 endsnippet
+
 snippet xpath
 <xpath expr="${1://field[@name='field_name']}" position="${2:replace|inside|before|after|attribute}">
 	${3}
 </xpath>
 endsnippet
+
 snippet opt
 options="{'no_create': ${1:True}, 'no_open': ${2:True}}"
 endsnippet
+
 snippet noc
 options="{'no_create': True}"
 endsnippet
+
 snippet nop
 options="{'no_open': True}"
 endsnippet
+
 snippet tbot
 <tree editable="bottom">
 	${1:...}
 </tree>
 endsnippet
+
 snippet ttop
 <tree editable="top">
 	${1:...}
 </tree>
 endsnippet
+
 snippet top
 editable="top"
 endsnippet
+
 snippet bot
 editable="bottom"
 endsnippet
+
 snippet context
 context="{'default_${1:field_name}': ${2:value}}"
 endsnippet
+
 snippet separator
 <separator>${1:separator}</separator>
 endsnippet

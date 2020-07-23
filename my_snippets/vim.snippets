@@ -1,0 +1,58 @@
+#  ________                ___ ___               .__
+#  \______ \   _______  __/   |   \   ___________|  |   ____   ______
+#   |    |  \_/ __ \  \/ /    ~    \_/ __ \_  __ \  | _/ __ \ /  ___/
+#   |    `   \  ___/\   /\    Y    /\  ___/|  | \/  |_\  ___/ \___ \
+#  /_______  /\___  >\_/  \___|_  /  \___  >__|  |____/\___  >____  >
+#          \/     \/            \/       \/                \/     \/
+# | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
+
+snippet fold "Vim fold"
+" ${1:foldName} {{{
+
+${0}
+
+" }}}
+endsnippet
+
+snippet	vim_func "Vim function"
+function! ${1:name}()
+	${0}
+endfunction
+endsnippet
+
+snippet	if "Vim if"
+	if ${1:condition}
+		${0}
+	endif
+endsnippet
+
+snippet	for "Vim for"
+	for ${1:condition}
+		${0}
+	endfor
+endsnippet
+
+snippet	while "Vim while"
+	while ${1:condition}
+		${0}
+	endwhile
+endsnippet
+
+snippet	aug "Vim augroup"
+	augroup ${1:name}
+		autocmd!
+		autocmd ${0}
+	augroup END
+endsnippet
+
+snippet sign "DevHerles' ASCII NVIM Sign"
+"  ________                ___ ___               .__
+"  \______ \   _______  __/   |   \   ___________|  |   ____   ______
+"   |    |  \_/ __ \  \/ /    ~    \_/ __ \_  __ \  | _/ __ \ /  ___/
+"   |    `   \  ___/\   /\    Y    /\  ___/|  | \/  |_\  ___/ \___ \
+"  /_______  /\___  >\_/  \___|_  /  \___  >__|  |____/\___  >____  >
+"          \/     \/            \/       \/                \/     \/
+" | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
+
+
+endsnippet

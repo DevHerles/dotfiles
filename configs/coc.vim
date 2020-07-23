@@ -1,49 +1,69 @@
-  let g:coc_global_extensions = [
-    \ 'coc-snippets',
-    \ 'coc-actions',
-    \ 'coc-lists',
-    \ 'coc-emmet',
-    \ 'coc-pairs',
-    \ 'coc-tsserver',
-    \ 'coc-floaterm',
-    \ 'coc-html',
-    \ 'coc-css',
-    \ 'coc-emoji',
-    \ 'coc-cssmodules',
-    \ 'coc-yaml',
-    \ 'coc-python',
-    \ 'coc-explorer',
-    \ 'coc-svg',
-    \ 'coc-prettier',
-    \ 'coc-vimlsp',
-    \ 'coc-xml',
-    \ 'coc-yank',
-    \ 'coc-json',
-    \ 'coc-marketplace',
-    \ ]
+"  ________                ___ ___               .__
+"  \______ \   _______  __/   |   \   ___________|  |   ____   ______
+"   |    |  \_/ __ \  \/ /    ~    \_/ __ \_  __ \  | _/ __ \ /  ___/
+"   |    `   \  ___/\   /\    Y    /\  ___/|  | \/  |_\  ___/ \___ \
+"  /_______  /\___  >\_/  \___|_  /  \___  >__|  |____/\___  >____  >
+"          \/     \/            \/       \/                \/     \/
+" | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
 
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" EXTENSIONS {{{
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" Install coc extensions
+if match(&rtp, 'coc.nvim') >= 0
+    let s:languages = [
+        \ 'coc-xml',
+        \ 'coc-html',
+        \ 'coc-css',
+        \ 'coc-tsserver',
+        \ 'coc-docker',
+        \ 'coc-gocode',
+        \ 'coc-json',
+        \ 'coc-python',
+        \ 'coc-rls',
+        \ 'coc-vimtex',
+        \ 'coc-vimlsp',
+        \ 'coc-svg',
+        \ 'coc-sh',
+        \ ]
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+    let s:frameworks = [
+        \ 'coc-angular',
+        \ 'coc-vimlsp',
+        \ ]
 
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if exists('*complete_info')
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+    let s:linters = [
+        \ 'coc-tslint',
+        \ 'coc-eslint',
+        \ 'coc-stylelint',
+        \ 'coc-diagnostic',
+        \ ]
+
+    let s:utils = [
+        \ 'coc-syntax',
+        \ 'coc-dictionary',
+        \ 'coc-lists',
+        \ 'coc-tag',
+        \ 'coc-emoji',
+        \ 'coc-github',
+        \ 'coc-snippets',
+        \ 'coc-calc',
+        \ 'coc-emmet',
+        \ 'coc-prettier',
+        \ 'coc-yank'
+        \ ]
+
+    let s:extensions = s:languages + s:frameworks + s:linters + s:utils
+
+    let g:coc_global_extensions = s:extensions
+
+    if exists('g:did_coc_loaded')
+        call coc#add_extension()
+    end
 endif
+
+" }}}
+
+" MAPPINGS {{{
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
@@ -79,6 +99,8 @@ function! s:show_documentation()
     call CocAction('doHover')
   endif
 endfunction
+
+" }}}
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -158,12 +180,12 @@ let g:coc_explorer_global_presets = {
 \   'floatingLeftside': {
 \      'position': 'floating',
 \      'floating-position': 'left-center',
-\      'floating-width': 30,
+\      'floating-width': 40,
 \   },
 \   'floatingRightside': {
 \      'position': 'floating',
 \      'floating-position': 'right-center',
-\      'floating-width': 30,
+\      'floating-width': 40,
 \   },
 \   'simplify': {
 \     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
@@ -176,19 +198,35 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 
 " Snippets
 " Use <C-l> for trigger snippet expand.
-imap <C-l> <Plug>(coc-snippets-expand)
+"imap <C-l> <Plug>(coc-snippets-expand)
 
 " Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
+"vmap <C-j> <Plug>(coc-snippets-select)
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
-let g:coc_snippet_next = '<c-j>'
+"let g:coc_snippet_next = '<leader-`>'
 
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
-let g:coc_snippet_prev = '<c-k>'
+"let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+imap <S-o> <Plug>(coc-snippets-expand-jump)
 
+" HIGHLIGHT {{{
 
-"noremap <Leader>e :CocCommand explorer<CR>
+hi CocErrorSign  ctermfg=Red guifg=#ef8189
+hi CocWarningSign  ctermfg=Brown guifg=#e8b586
+hi CocInfoSign  ctermfg=Yellow guifg=#61afef
+hi CocHintSign  ctermfg=Blue guifg=#56b6c2
+
+" }}}
+
+" EXTENSIONS SETTINGS {{{
+
+" coc-yank
+nnoremap <silent> <leader>y  :<C-u>CocList -A --normal yank<cr>
+
+" coc-prettier
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+
+" }}}

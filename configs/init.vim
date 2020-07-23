@@ -1,11 +1,10 @@
-"  _   __
-" | | / /
-" | |/ / _   _  ___ ____
-" |    \| | | |/ _ \_  /  Author: Kyoz
-" | |\  \ |_| | (_) / /   Github: github.com/banminkyoz
-" \_| \_/\__, |\___/___|  Email : banminkyoz@gmail.com
-"         __/ |
-"        |___/
+"  ________                ___ ___               .__
+"  \______ \   _______  __/   |   \   ___________|  |   ____   ______
+"   |    |  \_/ __ \  \/ /    ~    \_/ __ \_  __ \  | _/ __ \ /  ___/
+"   |    `   \  ___/\   /\    Y    /\  ___/|  | \/  |_\  ___/ \___ \
+"  /_______  /\___  >\_/  \___|_  /  \___  >__|  |____/\___  >____  >
+"          \/     \/            \/       \/                \/     \/
+" | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
 
 call plug#begin('~/.config/nvim/plugged') " --------------------- Start vim plug
 
@@ -14,6 +13,8 @@ Plug 'google/yapf'
 Plug 'google/vim-maktaba'
 Plug 'google/vim-codefmt'
 Plug 'voldikss/vim-floaterm'
+
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
 " }}}
 

@@ -54,7 +54,6 @@ set showmode			" Show current mode at the bottom.
 set ruler			" Always show cursor position.
 "set completeopt+=noinsert	" If you use the noinsert flag in completeopt in combination with menu, the first item will be selected (but not inserted into the buffer).
 set statusline=%!MyStatusLine()
-set undofile
 set nofoldenable
 
 " make the highlighting of tabs and other non-text less annoying
