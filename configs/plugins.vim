@@ -152,6 +152,17 @@ let g:prettier#config#bracket_spacing = 'false'
 
 " }}}
 
+" VIM-COMMENTARY {{{
+
+nnoremap <space>/ :Commentary<CR>
+vnoremap <space>/ :Commentary<CR>
+
+" ------------------------------------ If my favorite file type isn't supported
+" autocmd FileType apache setlocal commentstring=#\ %s
+autocmd FileType json setlocal commentstring=//\ %s
+
+" }}}
+
 " VIM-ILLUMINATE {{{
 
 hi link illuminatedWord Visual
