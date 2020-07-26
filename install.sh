@@ -118,6 +118,17 @@ function installAdminTools() {
     sudo apt-get install lazygit
   fi
 
+  if which lazydocker > /dev/null; then
+    echo "lazydocker is already installed."
+  else
+    echo "Installing lazydocker..."
+    wget https://github.com/jesseduffield/lazydocker/releases/download/v0.9/lazydocker_0.9_Linux_x86_64.tar.gz
+    tar xvzf lazydocker*.tar.gz
+    sudo install lazydocker /usr/local/bin
+    rm lazydocker*
+    rm -rf lazydocker
+  fi
+
   if which ack > /dev/null; then
     echo "Ack is already installed."
   else
