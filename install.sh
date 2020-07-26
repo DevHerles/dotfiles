@@ -137,10 +137,12 @@ function installAdminTools() {
     sudo apt-get install lazygit
   fi
 
-  # install lazydocker, ripgrep, fzf
+  # install lazydocker, ripgrep, fzf, universal-ctags, silversearcher-ag, fd-find
   which lazydocker > /dev/null && echo "lazydocker is already installed." || asktoinstalllazydocker
   which ripgrep > /dev/null && echo "ripgrep is already installed." || sudo apt install ripgrep -y
-  which fzf > /dev/null && echo "fzf is already installed." || sudo apt install fzf -y
+  which universal-ctags > /dev/null && echo "universal-ctags is already installed." || sudo apt install universal-ctags -y
+  which silversearcher-ag > /dev/null && echo "silversearcher-ag is already installed." || sudo apt install silversearcher-ag -y
+  which fd-find > /dev/null && echo "fd-find is already installed." || sudo apt install fd-find -y
 
   if which ack > /dev/null; then
     echo "Ack is already installed."

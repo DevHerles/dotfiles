@@ -58,14 +58,16 @@ Plug 'tpope/vim-fugitive' " -------- Just use to show git status in Vim-Airline
 
 " FINDER {{{
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}
 Plug 'junegunn/fzf.vim' " ------------------------------------------ fzf in vim
+Plug 'airblade/vim-rooter'
 
 " }}}
 
 " RANGER {{{
 
-Plug 'francoiscabrol/ranger.vim' " --------Ranger integration in vim and neovim
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'} " ---------- Ranger integration
 
 " }}}
 

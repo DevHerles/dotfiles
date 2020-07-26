@@ -20,6 +20,7 @@ runtime configs/autoformat.vim " --------------------------- CODEFoRMAT configs
 runtime configs/aranda.vim " ----------------------------------- Custom configs
 runtime configs/indent.vim " ----------------------------------- Indent configs
 runtime configs/floaterm.vim " ------------------------------- Floaterm configs
+runtime configs/fzf.vim " ----------------------------------------- FZF configs
 
 " }}}
 
