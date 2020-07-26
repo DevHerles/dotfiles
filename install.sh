@@ -27,6 +27,22 @@ function installPostgresql() {
   fi
 }
 
+installlazydocker() {
+  echo "Installing lazydocker..."
+  wget https://github.com/jesseduffield/lazydocker/releases/download/v0.9/lazydocker_0.9_Linux_x86_64.tar.gz
+  tar xvzf lazydocker*.tar.gz
+  sudo install lazydocker /usr/local/bin
+  rm lazydocker*
+  rm -rf lazydocker
+}
+
+asktoinstalllazydocker() {
+  echo "lazydocker not found"
+  echo -n "Would you like to install lazydocker now (y/n)? "
+  read answer
+  [ "$answer" != "${answer#[Yy]}" ] && installlazydocker
+}
+
 function installAdminTools() {
   echo "Installing admin tools"
 
@@ -58,6 +74,8 @@ function installAdminTools() {
     sudo pip3 install -U jedi
     sudo pip3 install black
     sudo pip3 install isort
+    sudo pip3 install ueberzug
+    sudo pip3 install neovim-remote
   fi
 
   if which xclip > /dev/null; then
@@ -79,6 +97,7 @@ function installAdminTools() {
   else
     echo "Installing ranger..."
     sudo apt-get install ranger
+    sudo apt install libjpeg8-dev zlib1g-dev python-dev python3-dev libxtst-dev
   fi
 
   if which netstat > /dev/null; then
@@ -118,16 +137,10 @@ function installAdminTools() {
     sudo apt-get install lazygit
   fi
 
-  if which lazydocker > /dev/null; then
-    echo "lazydocker is already installed."
-  else
-    echo "Installing lazydocker..."
-    wget https://github.com/jesseduffield/lazydocker/releases/download/v0.9/lazydocker_0.9_Linux_x86_64.tar.gz
-    tar xvzf lazydocker*.tar.gz
-    sudo install lazydocker /usr/local/bin
-    rm lazydocker*
-    rm -rf lazydocker
-  fi
+  # install lazydocker, ripgrep, fzf
+  which lazydocker > /dev/null && echo "lazydocker is already installed." || asktoinstalllazydocker
+  which ripgrep > /dev/null && echo "ripgrep is already installed." || sudo apt install ripgrep -y
+  which fzf > /dev/null && echo "fzf is already installed." || sudo apt install fzf -y
 
   if which ack > /dev/null; then
     echo "Ack is already installed."
@@ -157,14 +170,6 @@ function installAdminTools() {
   else
     echo "Installing vtop..."
     sudo npm i -g vtop
-  fi
-
-  if which bat > /dev/null; then
-    echo "bat is already installed."
-  else
-    echo "Installing bat..."
-    wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb
-    sudo dpkg -i bat_0.11.0_amd64.deb && rm bat_0.11.0_amd64.deb
   fi
 
   if which tree > /dev/null; then
@@ -306,6 +311,9 @@ function setupVim() {
     done
 
     echo "Vim and neovim setup complete"
+
+    echo "Installing neovim plugins..."
+    nvim --headless +PlugInstall +qall > /dev/null 2>&1
   }
 
 function setupTmux() {
