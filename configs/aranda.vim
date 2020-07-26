@@ -14,19 +14,10 @@ nnoremap N Nzz
 " --------------------------------------------Switch between the last two files
 nnoremap <tab><tab> <c-^>
 nnoremap <silent><Leader>r :e!<CR>
-"map <F7> mzgg=G`z " --------re-indent file and jump back to where the cursor was
-
-
-"nnoremap <silent> <F9> :windo diffthis<CR>
-
-"nnoremap <Leader>rn :!mv <C-R>=expand("%")<CR> " ------------rename current file
-"nnoremap <Leader><Leader> zz " --------------------------------Center the screen
 
 " -------------------------------------------------------------Act like D and C
 nnoremap Y y$
 
-"noremap <leader><leader>c "*y " ------------------------------------Copy from register
-"map <leader>vv "*p " ----------------------------------------Paste from register
 "nnoremap <silent> <Leader>= gg=G
 
 " ----------------------------------------------------Delete the current buffer
@@ -44,6 +35,7 @@ noremap <C-h> <C-w>h
 noremap <silent> <Leader>w :wa<CR>
 nnoremap <silent> L :call MyNext()<CR>
 nnoremap <silent> H :call MyPrev()<CR>
+
 " ------When I forgot to start vim using sudo
 "cnoremap <C-s>w execute 'silent! write !SUDO_ASKPASS=`which ssh-askpass` sudo tee % >/dev/null' <bar> edit!
 
@@ -145,12 +137,6 @@ cnoreabbrev Ack Ack!
 cnoreabbrev ack Ack!
 nnoremap <Leader>a :Ack!<Space><C-R><C-W>
 
-" -----------------------------------------------------------In all Python files
-nnoremap <Leader>ap :Ack!<Space><C-R><C-W> --py<CR>
-
-" --------------------------------------------------------------In all XML files
-nnoremap <Leader>ax :Ack!<Space><C-R><C-W> --xml<CR>
-
 " }}}
 
 " RIPGREP {{{
@@ -180,13 +166,6 @@ if executable('rg')
     " --color: Search color options
     command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 endif
-
-" }}}
-
-" LAZYGIT {{{
-
-noremap <silent> <Leader>g :FloatermNew --height=0.8 --width=0.9 --name=Lazygit --autoclose=2 lazygit <CR>
-noremap <silent> <Leader>z :FloatermNew --height=0.7 --width=0.9 --name=Zhell --autoclose=2 <CR>
 
 " }}}
 

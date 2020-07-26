@@ -65,29 +65,8 @@ endif
 
 " MAPPINGS {{{
 
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <silent> gl :CocList <CR>
-nmap <silent> go :CocList outline<CR>
-nmap <silent> gL :CocListResume <CR>
-
-nmap <silent><leader>xa <Plug>(coc-codelens-action)
-vmap <silent><leader>a  <Plug>(coc-codeaction-selected)
-nmap <silent><leader><leader>.  <Plug>(coc-codeaction)
-nmap <silent><leader><leader>e :CocCommand flutter.emulators<CR>
-nmap <silent><leader><leader>r :CocCommand flutter.run<CR>
-
-nmap <silent> gR <Plug>(coc-rename)
-nmap <silent> gI <Plug>(coc-implementation)
-nmap <silent> ge <Plug>(coc-refactor)
-" the <CR> should not be necessary but i get some unwanted output
-nmap <silent> ga <Plug>(coc-codeaction-selected)<CR>
+" --------------------------------------------------------GoTo code navigation.
 vmap <silent> ga <Plug>(coc-codeaction-selected)<CR>
-nmap <silent> gA :CocAction <CR>
-nmap <silent> gf <Plug>(coc-fix-current)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -102,7 +81,7 @@ endfunction
 
 " }}}
 
-" Highlight the symbol and its references when holding the cursor.
+" -------------Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
@@ -191,10 +170,6 @@ let g:coc_explorer_global_presets = {
 \     'file.child.template': '[selection | clip | 1] [indent][icon | 1] [filename omitCenter 1]'
 \   }
 \ }
-"nmap <silent> <space>e :CocCommand explorer<CR>
-nnoremap <silent> <leader>e :CocCommand explorer<CR>
-nmap <space>l :CocCommand explorer --preset floatingRightside<CR>
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
 " Snippets
 " Use <C-l> for trigger snippet expand.
@@ -210,7 +185,7 @@ autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | end
 "let g:coc_snippet_prev = '<c-k>'
 
 " Use <C-j> for both expand and jump (make expand higher priority.)
-imap <S-o> <Plug>(coc-snippets-expand-jump)
+" imap <S-o> <Plug>(coc-snippets-expand-jump)
 
 " HIGHLIGHT {{{
 
@@ -219,7 +194,7 @@ hi CocWarningSign  ctermfg=Brown guifg=#e8b586
 hi CocInfoSign  ctermfg=Yellow guifg=#61afef
 hi CocHintSign  ctermfg=Blue guifg=#56b6c2
 
-" }}}
+" }}}za
 
 " EXTENSIONS SETTINGS {{{
 

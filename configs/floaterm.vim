@@ -6,29 +6,9 @@
 "          \/     \/            \/       \/                \/     \/
 " | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
 
-" GENERAL {{{
+" FLOATERM {{{
 
-let mapleader = "\<Space>"
-let maplocalleader = "\\"
-
-" Use black hole for delete. Don't want to store in register with dd.
-" For cut, use visual and x instead
-nnoremap d "_d
-vnoremap d "_d
-
-" DISABLED {{{
-
-" Disable Ctrl-Z
-nnoremap <c-z> <NOP>
-
-" Disable arrow keys (Vim don't need this)
-nnoremap <Up> <NOP>
-nnoremap <Down> <NOP>
-nnoremap <Left> <NOP>
-nnoremap <Right> <NOP>
-
-" Disable ex mode
-nnoremap Q <Nop>
+noremap <silent> <Leader>g :FloatermNew --height=0.8 --width=0.9 --name=Lazygit --autoclose=2 lazygit <CR>
+noremap <silent> <Leader>z :FloatermNew --height=0.7 --width=0.9 --name=Zhell --autoclose=2 <CR>
 
 " }}}
-
