@@ -1,94 +1,117 @@
 {
-    // coc settings
+  // coc settings
 
-    "coc.preferences.snippets.enable": true,
-    "coc.preferences.snippetStatusText": "🌈",
-    "coc.preferences.formatOnType": false,
-    "coc.preferences.formatOnSaveFiletypes": ["xml", "dart"],
-    "codeLens.enable": true,
-    "suggest.echodocSupport": true,
-    "diagnostic.virtualText": true,
+  // TODO add more labels and give them cool glyphs
+  "suggest.completionItemKindLabels": {
+    "text": "t",
+    "method": "m",
+    "function": ""
+  },
 
-    // diagnostic
-    "diagnostic.infoSign": "i",
-    "diagnostic.hintSign": "*",
-    "diagnostic.warningSign": "!",
-    "diagnostic.errorSign": "x",
-    "diagnostic.enable": true,
-    "diagnostic.signOffset": 9999999,
-    "diagnostic.highlightOffset": 9999999,
-    "diagnostic.refreshOnInsertMode": true,
+  "coc.preferences.snippets.enable": true,
+  "coc.preferences.snippetStatusText": "🌈",
+  "coc.preferences.formatOnType": false,
 
-    // suggest
-    "suggest.detailField": "abbr",
-    "suggest.detailMaxLength": 30,
-    "suggest.maxCompleteItemCount": 50,
-    "suggest.maxPreviewWidth": 80,
-    "suggest.triggerAfterInsertEnter": false,
+  // Autoformat
+  "coc.preferences.formatOnSaveFiletypes": [
+    "xml",
+    "dart",
+    "css",
+    "markdown",
+    "javascript",
+    "graphql",
+    "html",
+    "yaml",
+    "json",
+    "python"
+  ],
 
-    // priority
-    "suggest.languageSourcePriority": 9999,
-    "coc.source.syntax.priority": 10,
-    "coc.source.file.priority": 4,
-    "coc.source.around.priority": 3,
-    "coc.source.tag.priority": 2,
-    "coc.source.emoji.priority": 2,
-    "coc.source.dictionary.priority": 1,
-    "coc.source.buffer.priority": 1,
+  "coc.preferences.hoverTarget": "float",
 
-    // snippets
-    "snippets.extends": {
-        "scss": ["css"],
-        "sass": ["css"],
-        "less": ["css"],
-        "xml": ["xml"],
-        "vim": ["vim"],
-        "snippets": ["snippets"],
-        "typescript": ["javascript", "angulartypescript"],
-        "html": ["angularhtml", "angularmaterial", "angularflexlayout"]
-    },
+  "codeLens.enable": true,
+  "suggest.echodocSupport": true,
+  "diagnostic.virtualText": true,
 
-    // html
-    "html.suggest.ionic": true,
+  // diagnostic
+  "diagnostic.errorSign": " ",
+  "diagnostic.warningSign": " ",
+  "diagnostic.infoSign": "",
+  "diagnostic.hintSign": " ",
+  "diagnostic.enable": true,
+  "diagnostic.signOffset": 9999999,
+  "diagnostic.highlightOffset": 9999999,
+  "diagnostic.refreshOnInsertMode": true,
 
-    // emoji
-    "coc.source.emoji.filetypes": [
-        "markdown",
-        "gitcommit"
-    ],
+  // suggest
+  "suggest.detailField": "abbr",
+  "suggest.detailMaxLength": 30,
+  "suggest.maxCompleteItemCount": 50,
+  "suggest.maxPreviewWidth": 80,
+  "suggest.triggerAfterInsertEnter": false,
 
-    // eslint
-    "eslint.enable": true,
-    "eslint.filetypes": [
-        "javascript",
-        "javascript.jsx",
-        "javascriptreact"
-    ],
-    "eslint.autoFix": true,
-    "eslint.autoFixOnSave": true,
+  // priority
+  "suggest.languageSourcePriority": 9999,
+  "coc.source.syntax.priority": 10,
+  "coc.source.file.priority": 4,
+  "coc.source.around.priority": 3,
+  "coc.source.tag.priority": 2,
+  "coc.source.emoji.priority": 2,
+  "coc.source.dictionary.priority": 1,
+  "coc.source.buffer.priority": 1,
 
-    // tslint
-    "tslint.enable": true,
-    "tslint.autoFixOnSave": false,
+  // snippets
+  "snippets.extends": {
+    "scss": ["css"],
+    "sass": ["css"],
+    "less": ["css"],
+    "xml": ["xml"],
+    "vim": ["vim"],
+    "snippets": ["snippets"],
+    "typescript": ["javascript", "angulartypescript"],
+    "html": ["angularhtml", "angularmaterial", "angularflexlayout"]
+  },
 
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.flake8Enabled": true,
-    "python.formatting.provider": "black",
-    "python.formatting.blackPath": "/usr/local/bin/black",
-    "python.sortImports.path": "~/.local/bin/isort",
-    "snippets.ultisnips.directories": ["~/.dotfiles/my_snippets"],
+  // html
+  "html.suggest.ionic": true,
 
-    // java
-    "xml.java.home": "/usr/local/java/jdk-14.0.2",
+  // emoji
+  "coc.source.emoji.filetypes": ["markdown", "gitcommit"],
 
-    // explorer
-    "explorer.width": 40,
-    "explorer.icon.enableNerdfont": true,
-    "explorer.previewAction.onHover": false,
-    "explorer.icon.enableVimDevicons": false,
-    "explorer.keyMappings": {
-        "<cr>": ["expandable?", "expand", "open"],
-        "v": "open:vsplit"
-    }
+  // eslint
+  "eslint.enable": true,
+  "eslint.filetypes": ["javascript", "javascript.jsx", "javascriptreact"],
+  "eslint.autoFix": true,
+  "eslint.autoFixOnSave": true,
+
+  // tslint
+  "tslint.enable": true,
+  "tslint.autoFixOnSave": false,
+
+  // python config
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/usr/local/bin/black",
+  "python.sortImports.path": "~/.local/bin/isort",
+  "snippets.ultisnips.directories": ["~/.dotfiles/my_snippets"],
+
+  // java
+  "xml.java.home": "/usr/local/java/jdk-14.0.2",
+
+  // explorer
+  "explorer.width": 40,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.previewAction.onHover": false,
+  "explorer.icon.enableVimDevicons": false,
+  "explorer.keyMappings": {
+    "<cr>": ["expandable?", "expand", "open"],
+    "v": "open:vsplit"
+  },
+
+  // emmet
+  "emmet.includeLanguages": {
+    "vue-html": "html",
+    "javascript": "javascriptreact"
+  }
 }

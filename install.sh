@@ -143,8 +143,8 @@ function installAdminTools() {
   which universal-ctags > /dev/null && echo "universal-ctags is already installed." || sudo apt install universal-ctags -y
   which silversearcher-ag > /dev/null && echo "silversearcher-ag is already installed." || sudo apt install silversearcher-ag -y
   which fd-find > /dev/null && echo "fd-find is already installed." || sudo apt install fd-find -y
-  wich neofetch > /dev/null && echo "neofetch is already installed." || sudo apt install neofetch -y
-  wich clang-format > /dev/null && echo "clang-format is already installed." || sudo apt-get install clang-format -y
+  which neofetch > /dev/null && echo "neofetch is already installed." || sudo apt install neofetch -y
+  which clang-format > /dev/null && echo "clang-format is already installed." || sudo apt-get install clang-format -y
   if which ack > /dev/null; then
     echo "Ack is already installed."
   else
@@ -275,6 +275,31 @@ function linkingDotFiles() {
   ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
 }
 
+moveoldnvim() { \
+  echo "Moving your config to nvim.old"
+  [ -d "$HOME/.confg/nvim.old" ] && rm -rf $HOME/.config/nvim.old 
+  mv $HOME/.config/nvim $HOME/.config/nvim.old
+}
+
+installplugins() { \
+  # mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/init.vim.tmp
+  # mv $HOME/.config/nvim/utils/init.vim $HOME/.config/nvim/init.vim
+  # cp $PWD/utils/init.vim $HOME/.config/nvim/init.vim
+  echo "Installing plugins...XXX"
+  nvim --headless +PlugInstall +qall > /dev/null 2>&1
+  # mv $HOME/.config/nvim/init.vim $HOME/.config/nvim/utils/init.vim
+  # mv $HOME/.config/nvim/init.vim.tmp $HOME/.config/nvim/init.vim
+}
+
+installcocextensions() { \
+  # Install extensions
+  mkdir -p ~/.config/coc/extensions
+  cd ~/.config/coc/extensions
+  [ ! -f package.json ] && echo '{"dependencies":{}}'> package.json
+  # Change extension names to the extensions you need
+  sudo npm install coc-explorer coc-snippets coc-json coc-actions --global-style --ignore-scripts --no-bin-links --no-package-lock --only=prod
+}
+
 function setupVim() {
   echo "Setting up vim and neovim..."
   cd ~/
@@ -286,39 +311,24 @@ function setupVim() {
     sudo apt-get install software-properties-common
     sudo add-apt-repository ppa:neovim-ppa/stable
     sudo apt-get update
-    sudo apt-get install neovim
-    sudo apt-get install python-dev python-pip python3-dev python3-pip
-    sudo apt-get install python-neovim
-    sudo apt-get install python3-neovim
+    sudo apt-get install neovim -y
+    sudo apt-get install python-dev python-pip python3-dev python3-pip -y
+    sudo apt-get install python-neovim -y
+    sudo apt-get install python3-neovim -y
     sudo gem install neovim
   fi
 
-    # Set up colors folder
-    mkdir -p ~/.vim/colors
-    mkdir -p ~/.config/nvim/colors
+  # move old nvim directory if it exists
+  [ -d "$HOME/.confg/nvim" ] && moveoldnvim 
 
-    # Install vim-plug
-    if [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
-      echo "Vim-plug is already installed"
-    else
-      echo "Installing vim-plug..."
-      curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      echo "Once this process is complete open vim and run :PlugInstall"
-    fi
+  echo "Cloning Nvim DevHerles configuration..."
+  git clone https://github.com/DevHerles/nvim.git ~/.config/nvim
 
-    local colors=($(ls ~/.dotfiles/vim_colors))
-    for colorFile in $colors
-    do
-      ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.vim/colors/$colorFile
-      ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.config/nvim/colors/$colorFile
-    done
+  # install plugins
+  which nvim > /dev/null && installplugins
 
-    echo "Vim and neovim setup complete"
-
-    echo "Installing neovim plugins..."
-    nvim --headless +PlugInstall +qall > /dev/null 2>&1
-  }
+  echo "Neovim setup is complete..."
+}
 
 function setupTmux() {
   if which tmux > /dev/null; then
@@ -373,6 +383,7 @@ function install() {
   installFlutter
   installOhMyZSH
   setupVim
+  installcocextensions
   setupTmux
   linkingDotFiles
   installDocker

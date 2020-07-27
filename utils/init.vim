@@ -6,10 +6,4 @@
 "          \/     \/            \/       \/                \/     \/
 " | Author: HerlesINC | Github: DevHerles | Email: herles.incalla@gmail.com |
 
-" EXPLoRER {{{
-
-nmap <space>e :CocCommand explorer<CR>
-nmap <space>f :CocCommand explorer --preset floating<CR>
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
-
-" }}}
+source ../vim-plug/plugins.vim " ------------- Just pull in plugins for install

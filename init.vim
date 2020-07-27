@@ -8,20 +8,27 @@
 
 " CONFIG'S SOURCES {{{
 
-runtime configs/init.vim " -------------------------------------- Pluggins list
-runtime configs/general.vim " --------------------------------- General configs
+runtime vim-plug/plugins.vim " ---------------------------------- Pluggins list
+runtime general/settings.vim " ------------------------------- General settings
+runtime general/functions.vim " ----------------------------- General functions
+runtime keys/mappings.vim " ---------------------------------- WhichKey configs
+runtime keys/which_key.vim " --------------------------------- WhichKey configs
+
+runtime themes/airline.vim " --------------------------- Airline theme settings
 runtime configs/keys.vim " --------------------------------------- Key bindings
 runtime configs/plugins.vim " -------------------------------- Pluggins configs
 runtime configs/coc.vim " ----------------------------------------- Coc configs
-runtime configs/coc/coc-snippets.vim " ---------------------------- Coc configs
-runtime configs/coc/coc-explorer.vim " ---------------------------- Coc configs
-runtime configs/which_key.vim " ------------------------------ WhichKey configs
 runtime configs/autoformat.vim " --------------------------- CODEFoRMAT configs
-runtime configs/aranda.vim " ----------------------------------- Custom configs
+" runtime configs/aranda.vim " --------------------------------- Custom configs
 runtime configs/indent.vim " ----------------------------------- Indent configs
 runtime configs/floaterm.vim " ------------------------------- Floaterm configs
 runtime configs/fzf.vim " ----------------------------------------- FZF configs
+runtime configs/sneak.vim " ------------------------------------- Sneak configs
+runtime configs/gitgutter.vim " ----------------------------- GitGutter configs
+runtime configs/rnvimr.vim " -------------------------- Rnvimr (Ranger) configs
+runtime configs/vim-commentary.vim " ------------------- vim-commentary configs
 runtime configs/colorscheme.vim " -------------------------- Random Colorscheme
+luafile lua/plug-colorizer.lua
 
 " }}}
 
