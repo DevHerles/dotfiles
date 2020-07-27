@@ -45,6 +45,10 @@ Plug 'terryma/vim-expand-region'
 " COLORS, THEMES {{{
 
 Plug 'DevHerles/aranda', { 'rtp': 'vim' }
+Plug 'ghifarit53/tokyonight-vim'
+Plug 'sheerun/vim-polyglot'
+Plug 'joshdick/onedark.vim'
+Plug 'arcticicestudio/nord-vim'
 
 " }}}
 

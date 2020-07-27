@@ -21,6 +21,7 @@ runtime configs/aranda.vim " ----------------------------------- Custom configs
 runtime configs/indent.vim " ----------------------------------- Indent configs
 runtime configs/floaterm.vim " ------------------------------- Floaterm configs
 runtime configs/fzf.vim " ----------------------------------------- FZF configs
+runtime configs/colorscheme.vim " -------------------------- Random Colorscheme
 
 " }}}
 

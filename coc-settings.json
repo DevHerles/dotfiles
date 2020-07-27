@@ -64,8 +64,8 @@
         "javascript.jsx",
         "javascriptreact"
     ],
-    "eslint.autoFix": false,
-    "eslint.autoFixOnSave": false,
+    "eslint.autoFix": true,
+    "eslint.autoFixOnSave": true,
 
     // tslint
     "tslint.enable": true,

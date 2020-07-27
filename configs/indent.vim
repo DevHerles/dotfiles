@@ -14,7 +14,7 @@ let g:indentLine_char = '▏'
 
 augroup languages_indent
     autocmd!
-    autocmd FileType vim    setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
+    autocmd FileType vim    setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4
     autocmd FileType xml    setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
     autocmd FileType json   setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4

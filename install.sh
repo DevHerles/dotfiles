@@ -143,7 +143,8 @@ function installAdminTools() {
   which universal-ctags > /dev/null && echo "universal-ctags is already installed." || sudo apt install universal-ctags -y
   which silversearcher-ag > /dev/null && echo "silversearcher-ag is already installed." || sudo apt install silversearcher-ag -y
   which fd-find > /dev/null && echo "fd-find is already installed." || sudo apt install fd-find -y
-
+  wich neofetch > /dev/null && echo "neofetch is already installed." || sudo apt install neofetch -y
+  wich clang-format > /dev/null && echo "clang-format is already installed." || sudo apt-get install clang-format -y
   if which ack > /dev/null; then
     echo "Ack is already installed."
   else
@@ -158,6 +159,7 @@ function installAdminTools() {
     sudo apt install npm
     sudo npm install -g neovim
     sudo npm install -g js-beautify
+    sudo npm install --save-dev eslint prettier eslint-config-prettier eslint-plugin-prettier
   fi
 
   if which node > /dev/null; then
