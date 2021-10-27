@@ -16,13 +16,20 @@ export TERMINAL="sterminal"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Path to your flutter installation.
-export PATH=$HOME/flutter/bin:$PATH
-export PATH=$HOME/flutter/bin/cache/dart-sdk:$PATH
+export PATH=$HOME/.flutter/bin:$PATH
+export PATH=$HOME/.flutter/bin/cache/dart-sdk:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
+export PATH=/usr/lib/dart/bin:$PATH
+export PATH=/usr/lib/dart/bin/dartfmt:$PATH
 export PATH=/usr/bin/gem:$PATH
 export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.config/composer/vendor/bin:$PATH
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH=/home/herles/.config/composer/vendor/bin/laravel:$PATH
+# export JAVA_HOME=/usr/local/java/jdk-14.0.2
+export JAVA_HOME=/home/herles/.jdks/openjdk-15
 
-
+export BAT_THEME="Enki-Aster"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -99,19 +106,27 @@ plugins=(
   history
   colored-man-pages
   jump
+  aws
+  fzf
 )
 autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 
 typeset -ga sources
-sources+="$HOME/.dotfiles/aliases.zsh"
-
+sources+="$HOME/.config/nvim/oh-my-zsh/aliases.zsh"
+sources+="$HOME/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh"
+sources+="$HOME/.cargo/env"
 # try to include all sources
 foreach file (`echo $sources`)
   if [[ -a $file  ]]; then
     source $file
   fi
 end
+
+# only aws command completion
+zstyle ':completion:*:*:aws' fzf-search-display true
+# or for everything
+zstyle ':completion:*' fzf-search-display true
 
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -142,7 +157,10 @@ echo -e "\e]12;yellow\a"
 
 bindkey '^ ' autosuggest-accept
 
+eval "$(starship init zsh)"
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
