@@ -113,7 +113,7 @@ autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 
 typeset -ga sources
-sources+="$HOME/.config/nvim/oh-my-zsh/aliases.zsh"
+sources+="$HOME/.dotfiles/oh-my-zsh/aliases.zsh"
 sources+="$HOME/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh"
 sources+="$HOME/.cargo/env"
 # try to include all sources

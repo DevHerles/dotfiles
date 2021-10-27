@@ -1,32 +1,5 @@
 #!/usr/bin/env bash
 
-function installFlutter() {
-  if which flutter > /dev/null; then
-    echo "flutter is already installed."
-  else
-    echo "Installing flutter..."
-    git clone https://github.com/flutter/flutter.git -b stable --depth 1 $HOME
-  fi
-
-  if which adb > /dev/null; then
-    echo "adb are already installed."
-  else
-    echo "Installing adb..."
-    sudo apt-get install adb
-    sudo usermod -aG plugdev $LOGNAME
-  fi
-}
-
-function installPostgresql() {
-  if which psql > /dev/null; then
-    echo "postgresql is already installed."
-  else
-    sudo apt update
-    echo "Installing postgresql..."
-    sudo apt install postgresql postgresql-contrib
-  fi
-}
-
 function installAdminTools() {
   echo "Installing admin tools"
 
@@ -238,64 +211,6 @@ function installOhMyZSH() {
   fi
 }
 
-function linkingDotFiles() {
-  cd ~/
-
-  echo "Linking asf.zsh-theme..."
-  ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
-
-  echo "Linking .gitconfig..."
-  ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
-
-  echo "Linking init.vim..."
-  ln -sf ~/.dotfiles/init.vim ~/.config/nvim/init.vim
-
-  echo "Linking configs folder..."
-  ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
-}
-
-function setupVim() {
-  echo "Setting up vim and neovim..."
-  cd ~/
-
-  if which nvim > /dev/null; then
-    echo "Neovim is already installed"
-  else
-    echo "Installing Neovim..."
-    sudo apt-get install software-properties-common
-    sudo add-apt-repository ppa:neovim-ppa/stable
-    sudo apt-get update
-    sudo apt-get install neovim
-    sudo apt-get install python-dev python-pip python3-dev python3-pip
-    sudo apt-get install python-neovim
-    sudo apt-get install python3-neovim
-    sudo gem install neovim
-  fi
-
-    # Set up colors folder
-    mkdir -p ~/.vim/colors
-    mkdir -p ~/.config/nvim/colors
-
-    # Install vim-plug
-    if [ -f ~/.local/share/nvim/site/autoload/plug.vim ]; then
-      echo "Vim-plug is already installed"
-    else
-      echo "Installing vim-plug..."
-      curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      echo "Once this process is complete open vim and run :PlugInstall"
-    fi
-
-    local colors=($(ls ~/.dotfiles/vim_colors))
-    for colorFile in $colors
-    do
-      ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.vim/colors/$colorFile
-      ln -sf ~/.dotfiles/vim_colors/$colorFile ~/.config/nvim/colors/$colorFile
-    done
-
-    echo "Vim and neovim setup complete"
-  }
-
 function setupTmux() {
   if which tmux > /dev/null; then
     echo "tmux is already installed."
@@ -321,34 +236,24 @@ function setupDirColors() {
   eval $( dircolors -b ~/.dotfiles/dir_colors )
 }
 
-function installDocker() {
-  if which docker > /dev/null; then
-    echo "Docker is already installed."
-  else
-    echo "Installing docker..."
-    sudo apt install docker.io
-    sudo systemctl start docker
-    sudo systemctl enable docker
+function linkingDotFiles() {
+  cd ~/
 
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
-    newgrp docker
-  fi
-  if which docker-compose > /dev/null; then
-    echo "docker-compose is already installed."
-  else
-    echo "Installing docker-compose..."
-    sudo apt install docker-compose
-  fi
+  echo "Linking asf.zsh-theme..."
+  ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
+
+  echo "Linking .gitconfig..."
+  ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
+
+  echo "Linking configs folder..."
+  ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
 }
+
 
 function install() {
   echo "Beginning installation..."
   installAdminTools
-  installPostgresql
-  installFlutter
   installOhMyZSH
-  setupVim
   setupTmux
   linkingDotFiles
   installDocker
