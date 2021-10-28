@@ -245,8 +245,8 @@ function linkingDotFiles() {
   echo "Linking .gitconfig..."
   ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
 
-  echo "Linking configs folder..."
-  ln -sf ~/.dotfiles/configs ~/.config/nvim/configs
+  echo "Linking alacritty..."
+  ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
 }
 
 
