@@ -154,6 +154,11 @@ function installAdminTools() {
   export LS_COLORS="$(vivid generate snazzy)"
 }
 
+function installStarship() {
+  sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+}
+
+
 function installOhMyZSH() {
   echo "Installing ZSH y git-core..."
 
@@ -254,9 +259,9 @@ function install() {
   echo "Beginning installation..."
   installAdminTools
   installOhMyZSH
+  installStarship
   setupTmux
   linkingDotFiles
-  installDocker
   setupDirColors
   echo "End installation..."
 }
