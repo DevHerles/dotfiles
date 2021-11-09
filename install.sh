@@ -206,7 +206,7 @@ function installOhMyZSH() {
     rm ~/.zshrc
   fi
 
-  ln -sf ~/.dotfiles/.zshrc ~/.zshrc
+  ln -sf ~/.dotfiles/zshrc ~/.zshrc
 
   if [ $SHELL == "/usr/bin/zsh" ]; then
     echo "Skipping, your current console is already zsh..."
@@ -233,7 +233,7 @@ function setupTmux() {
 
   cd ~/
   echo "Linking .tmux.conf..."
-  ln -sf ~/.dotfiles/.tmux.conf ~/.tmux.conf
+  ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 }
 
 function setupDirColors() {
@@ -248,7 +248,7 @@ function linkingDotFiles() {
   ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
 
   echo "Linking .gitconfig..."
-  ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig
+  ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 
   echo "Linking alacritty..."
   ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
