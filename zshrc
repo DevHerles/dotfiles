@@ -17,7 +17,9 @@ export ZSH="$HOME/.oh-my-zsh"
 
 # Path to your flutter installation.
 export PATH=$HOME/.flutter/bin:$PATH
+export PATH=/opt/flutter/bin:$PATH
 export PATH=$HOME/.flutter/bin/cache/dart-sdk:$PATH
+export PATH=/opt/flutter/bin/cache/dart-sdk:$PATH
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=/usr/lib/dart/bin:$PATH
 export PATH=/usr/lib/dart/bin/dartfmt:$PATH
@@ -26,8 +28,12 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.config/composer/vendor/bin:$PATH
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 export PATH=/home/herles/.config/composer/vendor/bin/laravel:$PATH
+export PATH=/opt/thunderbird:$PATH
+export PATH=/opt/android-studio/bin:$PATH
+export PATH=/opt/robo3t/bin:$PATH
 # export JAVA_HOME=/usr/local/java/jdk-14.0.2
-export JAVA_HOME=/home/herles/.jdks/openjdk-15
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
 
 export BAT_THEME="Enki-Aster"
 # Set name of the theme to load --- if set to "random", it will
@@ -100,7 +106,7 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-completions
-  copydir
+  copypath
   copyfile
   tmux
   history
@@ -164,3 +170,5 @@ eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+: undercover && export PS1='C:${PWD//\//\\}> '
+: undercover && new_line_before_prompt=no
