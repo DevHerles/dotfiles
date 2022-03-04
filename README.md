@@ -75,3 +75,9 @@ sudo pip3 install -U jedi
 ## Installation Notes
 
 Your computer password is needed to change shells which is a sudo operation
+
+## Switching remote URLs from HTTPS to SSH
+
+```bash
+git remote set-url origin git@github.com:DevHerles/dotfiles.git
+```
