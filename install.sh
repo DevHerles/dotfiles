@@ -251,7 +251,7 @@ function linkingDotFiles() {
   ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 
   echo "Linking alacritty..."
-  ln -sf ~/.dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
+  ln -sf ~/.dotfiles/alacritty.yml ~/.alacritty.yml
 }
 
 

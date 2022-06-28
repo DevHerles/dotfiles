@@ -31,6 +31,7 @@ export PATH=/home/herles/.config/composer/vendor/bin/laravel:$PATH
 export PATH=/opt/thunderbird:$PATH
 export PATH=/opt/android-studio/bin:$PATH
 export PATH=/opt/robo3t/bin:$PATH
+export PATH=$HOME/.pub-cache/bin:$PATH
 # export JAVA_HOME=/usr/local/java/jdk-14.0.2
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
@@ -170,5 +171,3 @@ eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-: undercover && export PS1='C:${PWD//\//\\}> '
-: undercover && new_line_before_prompt=no
