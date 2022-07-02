@@ -186,3 +186,5 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+. ~/.config/z/z.sh
+

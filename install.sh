@@ -198,6 +198,18 @@ function installOhMyZSH() {
     git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
   fi
 
+  if [ -d ~/.config ]; then
+    echo "~/.config folder already exists..."
+  else
+    mkdir ~/.config
+  fi
+
+  if [ -d ~/.config/z ]; then
+    cd ~/.config/z && git pull;
+  else
+    git clone git@github.com:rupa/z.git ~/.config/z
+  fi
+
   if [ -d ~/.dotfiles/gruvbox ]; then
     cd ~/.dotfiles/gruvbox && git pull;
   fi

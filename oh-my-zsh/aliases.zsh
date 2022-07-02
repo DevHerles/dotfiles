@@ -40,4 +40,4 @@ alias fzf="fzf --height 70% --layout reverse --info inline --border \
     --preview 'bat --style=numbers --color=always --line-range :500 {}' --bind 'alt-j:down,alt-k:up,alt-8:preview-down,alt-9:preview-up' --preview-window right:60%:noborder \
     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
-alias rasa-symptoms="cd ~/asfdev/devherles/rasa-projects/rasa-symptoms && source ~/asfdev/devherles/rasa-projects/rasa-env/bin/activate"
+alias rs="cd ~/asfdev/devherles/rasa-projects/rasa-symptoms && source ~/asfdev/devherles/rasa-projects/rasa-env/bin/activate"
