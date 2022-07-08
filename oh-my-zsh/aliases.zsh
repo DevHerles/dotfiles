@@ -1,10 +1,11 @@
 export EDITOR="nvim"
 
+alias r="ranger"
+
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
-alias vif='nvim $(fzf)'
-alias ivf='nvim $(fzf)'
+alias o='nvim $(fzf -m)'
 
 alias cd=' cd'
 alias ..=' cd ..; ls'

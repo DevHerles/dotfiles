@@ -36,7 +36,7 @@ export PATH=$HOME/.pub-cache/bin:$PATH
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
 
-export BAT_THEME="Enki-Aster"
+export BAT_THEME="TwoDark"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME

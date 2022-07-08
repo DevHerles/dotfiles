@@ -2,6 +2,7 @@
 
 function installAdminTools() {
   echo "Installing admin tools"
+  sudo apt install libxext-dev
 
   if which curl > /dev/null; then
     echo "curl is already installed."
@@ -31,6 +32,7 @@ function installAdminTools() {
     sudo pip3 install -U jedi
     sudo pip3 install black
     sudo pip3 install isort
+    sudo pip3 install ueberzug
   fi
 
   if which xclip > /dev/null; then
@@ -124,8 +126,8 @@ function installAdminTools() {
     echo "bat is already installed."
   else
     echo "Installing bat..."
-    wget https://github.com/sharkdp/bat/releases/download/v0.11.0/bat_0.11.0_amd64.deb
-    sudo dpkg -i bat_0.11.0_amd64.deb && rm bat_0.11.0_amd64.deb
+    wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat-musl_0.21.0_amd64.deb
+    sudo dpkg -i bat-musl_0.21.0_amd64.deb && rm bat-musl_0.21.0_amd64.deb
   fi
 
   if which tree > /dev/null; then
@@ -210,6 +212,19 @@ function installOhMyZSH() {
     git clone git@github.com:rupa/z.git ~/.config/z
   fi
 
+  if [ -d ~/.config/ranger ]; then
+    echo "~/.config/ranger folder already exists..."
+  else
+    mkdir -p ~/.config/ranger/plugins
+  fi
+
+  if [ -d ~/.config/ranger/plugins/ranger_devicons ]; then
+    echo "ranger_devicons already installed..."
+    cd ~/.config/ranger/plugins/ranger_devicons && git pull
+  else
+    git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
+  fi
+
   if [ -d ~/.dotfiles/gruvbox ]; then
     cd ~/.dotfiles/gruvbox && git pull;
   fi
@@ -264,6 +279,10 @@ function linkingDotFiles() {
 
   echo "Linking alacritty..."
   ln -sf ~/.dotfiles/alacritty.yml ~/.alacritty.yml
+
+  echo "Linking ranger..."
+  ln -sf ~/.dotfiles/config/ranger/rc.conf ~/.config/ranger/rc.conf
+  ln -sf ~/.dotfiles/config/ranger/colorschemes ~/.config/ranger/colorschemes
 }
 
 
