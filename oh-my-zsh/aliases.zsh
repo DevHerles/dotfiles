@@ -1,5 +1,8 @@
 export EDITOR="nvim"
 
+alias lg="lazygit"
+alias ld="lazydocker"
+
 alias r="ranger"
 
 alias v="nvim"
