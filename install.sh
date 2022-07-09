@@ -121,6 +121,13 @@ function installAdminTools() {
     echo "Installing NodeJs..."
     sudo apt install nodejs
   fi
+  
+  if which openboard > /dev/null; then
+    echo "openboard is already installed."
+  else
+    echo "Installing openboard..."
+    sudo apt install openboard
+  fi
 
   if which vtop > /dev/null; then
     echo "vtop is already installed."
@@ -280,7 +287,7 @@ function setupTmux() {
   fi
 
   cd ~/
-  echo "Linking .tmux.conf..."
+  echo "Linking tmux.conf..."
   ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
 }
 
@@ -295,7 +302,7 @@ function linkingDotFiles() {
   echo "Linking asf.zsh-theme..."
   ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
 
-  echo "Linking .gitconfig..."
+  echo "Linking gitconfig..."
   ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 
   echo "Linking alacritty..."
