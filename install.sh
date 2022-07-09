@@ -2,7 +2,7 @@
 
 function installAdminTools() {
   echo "Installing admin tools"
-  sudo apt install libxext-dev
+  sudo apt install libxext-dev build-essential
 
   if which curl > /dev/null; then
     echo "curl is already installed."
@@ -84,13 +84,20 @@ function installAdminTools() {
     sudo apt-get install ruby-full
   fi
 
+  if which brew > /dev/null; then
+    echo "brew is already installed."
+  else
+    echo "Installing brew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.bash_profile
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  fi
+
   if which lazygit > /dev/null; then
     echo "lazygit is already installed."
   else
     echo "Installing lazygit..."
-    sudo add-apt-repository ppa:lazygit-team/release
-    sudo apt-get update
-    sudo apt-get install lazygit
+    brew install lazygit
   fi
 
   if which ack > /dev/null; then
@@ -144,6 +151,15 @@ function installAdminTools() {
     sudo apt-get install dfc
   fi
 
+  if which mdp > /dev/null; then
+    echo "mdp is already installed"
+  else
+    echo "Installing mpd..."
+    git clone https://github.com/visit1985/mdp.git /tmp/mdp
+    cd /tmp/mdp && make && sudo make install
+    rm -rf /tmp/mdp
+  fi
+
   if [ -f /usr/bin/vivid ]; then
     echo "vivid is already installed"
   else
@@ -157,7 +173,12 @@ function installAdminTools() {
 }
 
 function installStarship() {
-  sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+  if which starship > /dev/null; then
+    echo "starship is already installed"
+  else
+    echo "Installing starship..."
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+  fi
 }
 
 
