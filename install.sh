@@ -100,6 +100,13 @@ function installAdminTools() {
     brew install lazygit
   fi
 
+  if which stylua > /dev/null; then
+    echo "stylua is already installed."
+  else
+    echo "Installing stylua..."
+    brew install stylua
+  fi
+
   if which ack > /dev/null; then
     echo "Ack is already installed."
   else
