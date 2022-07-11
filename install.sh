@@ -13,6 +13,20 @@ function installAdminTools() {
     sudo apt install curl
   fi
 
+  if which imagemagick > /dev/null; then
+    echo "imagemagick is already installed."
+  else
+    echo "Installing imagemagick..."
+    sudo apt-get install imagemagick
+  fi
+
+  if which neofetch > /dev/null; then
+    echo "neofetch is already installed."
+  else
+    echo "Installing neofetch..."
+    sudo apt-get install neofetch
+  fi
+
   if which pip > /dev/null; then
     echo "pip is already installed."
   else
@@ -33,6 +47,7 @@ function installAdminTools() {
     sudo pip3 install black
     sudo pip3 install isort
     sudo pip3 install ueberzug
+    sudo pip3 install pywal
   fi
 
   if which xclip > /dev/null; then
