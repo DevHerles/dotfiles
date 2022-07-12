@@ -188,3 +188,4 @@ unset __conda_setup
 
 . ~/.config/z/z.sh
 
+# export WALLPAPER=sed -n -e '/size/ p' "$(gsettings get org.gnome.desktop.background picture-uri-dark | cut -d/ -f3- | cut -d\' -f1)" | awk -F\> '{ print $2 }' | awk -F\< '{ print $1 }'
