@@ -144,10 +144,10 @@ function installAdminTools() {
     sudo apt install nodejs
   fi
   
-  if which openboard > /dev/null; then
-    echo "openboard is already installed."
+  if which OpenBoard > /dev/null; then
+    echo "OpenBoard is already installed."
   else
-    echo "Installing openboard..."
+    echo "Installing OpenBoard..."
     sudo apt install openboard
   fi
 
