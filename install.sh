@@ -335,6 +335,9 @@ function linkingDotFiles() {
   ln -sf ~/.dotfiles/config/ranger/colorschemes ~/.config/ranger/colorschemes
 }
 
+function enableAppArmor() {
+    sudo systemctl start apparmor.service
+}
 
 function install() {
   echo "Beginning installation..."
@@ -344,6 +347,7 @@ function install() {
   setupTmux
   linkingDotFiles
   setupDirColors
+  enableAppArmor
   echo "End installation..."
 }
 
