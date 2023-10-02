@@ -162,8 +162,9 @@ function installAdminTools() {
     echo "bat is already installed."
   else
     echo "Installing bat..."
-    wget https://github.com/sharkdp/bat/releases/download/v0.21.0/bat-musl_0.21.0_amd64.deb
-    sudo dpkg -i bat-musl_0.21.0_amd64.deb && rm bat-musl_0.21.0_amd64.deb
+    sudo apt-get install bat -y
+    mkdir -p ~/.local/bin
+    ln -s /usr/bin/batcat ~/.local/bin/bat
   fi
 
   if which tree > /dev/null; then
