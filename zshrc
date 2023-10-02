@@ -113,7 +113,7 @@ plugins=(
   history
   colored-man-pages
   jump
-  aws
+  kubectl
   fzf
 )
 autoload -U compinit && compinit
@@ -187,5 +187,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 . ~/.config/z/z.sh
+
+alias kubectl="minikube kubectl --"
 
 # export WALLPAPER=sed -n -e '/size/ p' "$(gsettings get org.gnome.desktop.background picture-uri-dark | cut -d/ -f3- | cut -d\' -f1)" | awk -F\> '{ print $2 }' | awk -F\< '{ print $1 }'
