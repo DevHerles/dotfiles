@@ -1,7 +1,6 @@
 export EDITOR="nvim"
 
 alias cat="bat"
-alias kubectl="minikube kubectl --"
 
 alias lg="lazygit"
 alias ld="lazydocker"
