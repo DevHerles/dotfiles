@@ -138,7 +138,7 @@ zstyle ':completion:*' fzf-search-display true
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
 
-export LS_COLORS="$(vivid generate snazzy)"
+export LS_COLORS="$(vivid generate molokai)"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -187,5 +187,8 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 . ~/.config/z/z.sh
+
+export FZF_BASE=/usr/bin/fzf
+alias kubectl="minikube kubectl --"
 
 # export WALLPAPER=sed -n -e '/size/ p' "$(gsettings get org.gnome.desktop.background picture-uri-dark | cut -d/ -f3- | cut -d\' -f1)" | awk -F\> '{ print $2 }' | awk -F\< '{ print $1 }'
