@@ -5,7 +5,7 @@ window:
   decorations: none
   opacity: 0.5
   dynamic_title: false
-  startup_mode: Fullscreen
+  startup_mode: Maximized # Fullscreen
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
