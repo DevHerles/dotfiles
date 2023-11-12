@@ -325,6 +325,7 @@ function installNerdFont ()
 {
   echo "Installing JetBrainsMono font"
   wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip 
+  mkdir -p ~/.local/share/fonts
   unzip JetBrainsMono.zip -d ~/.local/share/fonts
   fc-cache ~/.local/share/fonts
   echo "Done"
