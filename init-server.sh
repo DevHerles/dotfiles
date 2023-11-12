@@ -4,29 +4,43 @@
 
 export TERM=xterm-256color
 
-adduser admin
-usermod -aG sudo admin
+# Check if the current user is root
+if [ "$(id -u)" -eq 0 ]; then
+    echo "Root user detected. Installing Zsh..."
+    apt-get update -y
+    apt install git iputils-ping wget curl sudo zsh build-essential -y
 
-apt install git iputils-ping wget curl -y
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    adduser admin
+    usermod -aG sudo admin
 
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-cd ~/.fzf/
-./install
+    ssh-keygen -t ed25519 -C "admin@server"
+    cat ~/.ssh/id_ed25519.pub
 
-cd $HOME
+    mkdir -p /home/admin/.ssh
+    mv ~/.ssh/id_ed25519 /home/admin/.ssh
+    mv ~/.ssh/id_ed25519.pub /home/admin/.ssh
 
-brew install neovim
+    chown -R admin:admin /home/admin/.ssh
+    cp init-server.sh /home/admin/init-server.sh
+    chmod +x /home/admin/init-server.sh
 
-alias vi='nvim'
-alias vim='nvim'
+    chown admin:admin /home/admin/init-server.sh
+else
+    echo "Non-root user detected. Installing admin tools..."
+    cd $HOME
+    echo "Zsh installed and set as the default shell."
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    chsh -s $(which zsh)
 
-ssh-keygen -t ed25519 -C "admin@server"
-cat ~/.ssh/id_ed25519.pub
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/admin/.zshrc
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    brew install gcc
+    brew install neovim
 
-mkdir -p /home/admin/.ssh
-mv ~/.ssh/id_ed25519 /home/admin/.ssh
-mv ~/.ssh/id_ed25519.pub /home/admin/.ssh
+    git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+    cd ~/.fzf/
+    ./install
 
-chown -R admin:admin /home/admin/.ssh
-chmod -R 777 /home/linuxbrew
+fi
+

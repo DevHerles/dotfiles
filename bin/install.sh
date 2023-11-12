@@ -2,40 +2,12 @@
 
 function installAdminTools() {
   echo "Installing admin tools"
-  sudo apt install libxext-dev build-essential iputils-ping wget -y
-
-  if which curl > /dev/null; then
-    echo "curl is already installed."
-  else
-    echo "Installing curl..."
-    sudo apt update
-    sudo apt upgrade
-    sudo apt install curl -y
-  fi
-
-  if which imagemagick > /dev/null; then
-    echo "imagemagick is already installed."
-  else
-    echo "Installing imagemagick..."
-    sudo apt-get install imagemagick -y
-  fi
 
   if which neofetch > /dev/null; then
     echo "neofetch is already installed."
   else
     echo "Installing neofetch..."
     sudo apt-get install neofetch -y
-  fi
-  if which pip3 > /dev/null; then
-    echo "pip3 is already installed."
-  else
-    echo "Installing pip3..."
-    sudo apt-get install python3-pip -y
-    sudo pip3 install -U jedi
-    sudo pip3 install black
-    sudo pip3 install isort
-    sudo pip3 install ueberzug
-    sudo pip3 install pywal
   fi
 
   if which xclip > /dev/null; then
@@ -80,22 +52,6 @@ function installAdminTools() {
     sudo apt-get install xsel -y
   fi
 
-  if which ruby > /dev/null; then
-    echo "ruby is already installed."
-  else
-    echo "Installing ruby..."
-    sudo apt-get install ruby-full -y
-  fi
-
-  if which brew > /dev/null; then
-    echo "brew is already installed."
-  else
-    echo "Installing brew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.bash_profile
-    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-  fi
-
   if which lazygit > /dev/null; then
     echo "lazygit is already installed."
   else
@@ -115,35 +71,6 @@ function installAdminTools() {
   else
     echo "Installing ack-grep..."
     sudo apt-get install ack-grep -y
-  fi
-
-  if which npm > /dev/null; then
-    echo "npm is already installed."
-  else
-    echo "Installing npm..."
-    sudo apt install npm -y
-    sudo npm install -g neovim
-  fi
-
-  if which node > /dev/null; then
-    echo "nodejs is already installed."
-  else
-    echo "Installing NodeJs..."
-    sudo apt install nodejs -y
-  fi
-  
-  if which OpenBoard > /dev/null; then
-    echo "OpenBoard is already installed."
-  else
-    echo "Installing OpenBoard..."
-    sudo apt install openboard -y
-  fi
-
-  if which vtop > /dev/null; then
-    echo "vtop is already installed."
-  else
-    echo "Installing vtop..."
-    sudo npm i -g vtop
   fi
 
   if which bat > /dev/null; then
@@ -326,6 +253,72 @@ function installFzf () {
   echo "Done"
 }
 
+function guiTools() {
+  if type Xorg >/dev/null 2>&1; then
+    echo "Xorg exists on this system."
+
+    if which pip3 > /dev/null; then
+      echo "pip3 is already installed."
+    else
+      echo "Installing pip3..."
+      sudo apt-get install python3-pip -y
+      sudo pip3 install -U jedi
+      sudo pip3 install black
+      sudo pip3 install isort
+      sudo pip3 install ueberzug
+      sudo pip3 install pywal
+    fi
+
+    if which imagemagick > /dev/null; then
+      echo "imagemagick is already installed."
+    else
+      echo "Installing imagemagick..."
+      sudo apt-get install imagemagick -y
+    fi
+
+    if which ruby > /dev/null; then
+      echo "ruby is already installed."
+    else
+      echo "Installing ruby..."
+      sudo apt-get install ruby-full -y
+    fi
+
+    if which brew > /dev/null; then
+      echo "brew is already installed."
+    else
+      echo "Installing brew..."
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.bash_profile
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
+
+    if which npm > /dev/null; then
+      echo "npm is already installed."
+    else
+      echo "Installing npm..."
+      sudo apt install npm -y
+      sudo npm install -g neovim
+    fi
+
+    if which node > /dev/null; then
+      echo "nodejs is already installed."
+    else
+      echo "Installing NodeJs..."
+      sudo apt install nodejs -y
+    fi
+    
+    if which vtop > /dev/null; then
+      echo "vtop is already installed."
+    else
+      echo "Installing vtop..."
+      sudo npm i -g vtop
+    fi
+
+  else
+    echo "Xorg does not exist on this system."
+  fi
+}
+
 function install() {
   echo "Beginning installation..."
   installAdminTools
@@ -337,6 +330,7 @@ function install() {
   enableAppArmor
   installNerdFont
   installFzf
+  guiTools
   echo "End installation..."
 }
 
