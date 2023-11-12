@@ -208,7 +208,7 @@ function installOhMyZSH() {
     echo "zsh is already installed."
   else
     echo "Installing zsh"
-    sudo apt-get install zsh -y
+    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
   fi
 
   if [ -d ~/.oh-my-zsh ]; then
