@@ -351,5 +351,5 @@ function install() {
 }
 
 install
+zsh
 
-source ~/.zshrc
