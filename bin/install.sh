@@ -17,27 +17,15 @@ function installAdminTools() {
     echo "imagemagick is already installed."
   else
     echo "Installing imagemagick..."
-    sudo apt-get install imagemagick
+    sudo apt-get install imagemagick -y
   fi
 
   if which neofetch > /dev/null; then
     echo "neofetch is already installed."
   else
     echo "Installing neofetch..."
-    sudo apt-get install neofetch
+    sudo apt-get install neofetch -y
   fi
-
-  if which pip > /dev/null; then
-    echo "pip is already installed."
-  else
-    echo "Installing pip..."
-    curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-    sudo python2 get-pip.py
-    rm get-pip.py
-    pip install --user jedi
-    pip install --user pep8
-  fi
-
   if which pip3 > /dev/null; then
     echo "pip3 is already installed."
   else
@@ -54,49 +42,49 @@ function installAdminTools() {
     echo "xclip is already installed."
   else
     echo "Installing xclip..."
-    sudo apt-get install xclip
+    sudo apt-get install xclip -y
   fi
 
   if which htop > /dev/null; then
     echo "htop is already installed."
   else
     echo "Installing htop..."
-    sudo apt-get install htop
+    sudo apt-get install htop -y
   fi
 
   if which ranger > /dev/null; then
     echo "ranger is already installed."
   else
     echo "Installing ranger..."
-    sudo apt-get install ranger
+    sudo apt-get install ranger -y
   fi
 
   if which netstat > /dev/null; then
     echo "net-tools are already installed."
   else
     echo "Installing net-tools..."
-    sudo apt-get install net-tools
+    sudo apt-get install net-tools -y
   fi
 
   if which ctags > /dev/null; then
     echo "ctags is already installed."
   else
     echo "Installing ctags..."
-    sudo apt-get install ctags
+    sudo apt-get install ctags -y
   fi
 
   if which xsel > /dev/null; then
     echo "xsel is already installed."
   else
     echo "Installing xsel..."
-    sudo apt-get install xsel
+    sudo apt-get install xsel -y
   fi
 
   if which ruby > /dev/null; then
     echo "ruby is already installed."
   else
     echo "Installing ruby..."
-    sudo apt-get install ruby-full
+    sudo apt-get install ruby-full -y
   fi
 
   if which brew > /dev/null; then
@@ -126,14 +114,14 @@ function installAdminTools() {
     echo "Ack is already installed."
   else
     echo "Installing ack-grep..."
-    sudo apt-get install ack-grep
+    sudo apt-get install ack-grep -y
   fi
 
   if which npm > /dev/null; then
     echo "npm is already installed."
   else
     echo "Installing npm..."
-    sudo apt install npm
+    sudo apt install npm -y
     sudo npm install -g neovim
   fi
 
@@ -141,14 +129,14 @@ function installAdminTools() {
     echo "nodejs is already installed."
   else
     echo "Installing NodeJs..."
-    sudo apt install nodejs
+    sudo apt install nodejs -y
   fi
   
   if which OpenBoard > /dev/null; then
     echo "OpenBoard is already installed."
   else
     echo "Installing OpenBoard..."
-    sudo apt install openboard
+    sudo apt install openboard -y
   fi
 
   if which vtop > /dev/null; then
@@ -171,14 +159,14 @@ function installAdminTools() {
     echo "tree is already installed."
   else
     echo "Installing tree..."
-    sudo apt install tree
+    sudo apt install tree -y
   fi
 
   if [ -f /usr/bin/dfc ]; then
     echo "dfc is already installed"
   else
     echo "Installing dfc..."
-    sudo apt-get install dfc
+    sudo apt-get install dfc -f
   fi
 
   if which mdp > /dev/null; then
@@ -220,14 +208,7 @@ function installOhMyZSH() {
     echo "zsh is already installed."
   else
     echo "Installing zsh"
-    sudo apt-get install zsh
-  fi
-
-  if which git > /dev/null; then
-    echo "Git is already installed."
-  else
-    echo "Installing git..."
-    sudo apt-get install git-core
+    sudo apt-get install zsh -y
   fi
 
   if [ -d ~/.oh-my-zsh ]; then
@@ -299,7 +280,7 @@ function setupTmux() {
     echo "tmux is already installed."
   else
     echo "Installing tmux..."
-    sudo apt install tmux
+    sudo apt install tmux -y
   fi
 
   echo "Installing tmux plugin manager..."
@@ -340,6 +321,15 @@ function enableAppArmor() {
     sudo systemctl start apparmor.service
 }
 
+function installNerdFont ()
+{
+  echo "Installing JetBrainsMono font"
+  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip 
+  unzip JetBrainsMono.zip -d ~/.local/share/fonts
+  fc-cache ~/.local/share/fonts
+  echo "Done"
+}
+
 function install() {
   echo "Beginning installation..."
   installAdminTools
@@ -349,6 +339,7 @@ function install() {
   linkingDotFiles
   setupDirColors
   enableAppArmor
+  installNerdFont
   echo "End installation..."
 }
 

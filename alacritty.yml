@@ -16,17 +16,17 @@ scrolling:
 
 font:
   normal:
-    family: Fira Code
+    family: JetBrainsMono Nerd Font
     style: Light
   bold:
-    family: Fira Code
+    family: JetBrainsMono Nerd Font
     style: Bold
 
   italic:
-    family: Fira Code
+    family: JetBrainsMono Nerd Font
     style: Italic
   bold_italic:
-    family: Fira Code
+    family: JetBrainsMono Nerd Font
     style: Bold Italic
   size: 12.0
   offset:
