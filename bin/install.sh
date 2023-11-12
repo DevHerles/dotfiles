@@ -2,7 +2,7 @@
 
 function installAdminTools() {
   echo "Installing admin tools"
-  sudo apt install libxext-dev build-essential
+  sudo apt install libxext-dev build-essential iputils-ping wget -y
 
   if which curl > /dev/null; then
     echo "curl is already installed."
@@ -10,7 +10,7 @@ function installAdminTools() {
     echo "Installing curl..."
     sudo apt update
     sudo apt upgrade
-    sudo apt install curl
+    sudo apt install curl -y
   fi
 
   if which imagemagick > /dev/null; then
@@ -30,7 +30,7 @@ function installAdminTools() {
     echo "pip3 is already installed."
   else
     echo "Installing pip3..."
-    sudo apt-get install python3-pip
+    sudo apt-get install python3-pip -y
     sudo pip3 install -U jedi
     sudo pip3 install black
     sudo pip3 install isort
