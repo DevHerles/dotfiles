@@ -181,10 +181,8 @@ function installAdminTools() {
   if [ -f /usr/bin/vivid ]; then
     echo "vivid is already installed"
   else
-    echo "Downloading vivid0.4.0..."
-    wget "https://github.com/sharkdp/vivid/releases/download/v0.4.0/vivid_0.4.0_amd64.deb"
-    echo "Installing vivid0.4.0..."
-    sudo dpkg -i vivid_0.4.0_amd64.deb
+    echo "Installing vivid..."
+    brew install vivid
   fi
 
   export LS_COLORS="$(vivid generate snazzy)"
