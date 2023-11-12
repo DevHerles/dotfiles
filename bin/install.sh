@@ -351,3 +351,5 @@ function install() {
 }
 
 install
+
+source ~/.zshrc
