@@ -168,17 +168,7 @@ function installAdminTools() {
     echo "Installing dfc..."
     sudo apt-get install dfc -f
   fi
-
-  if which mdp > /dev/null; then
-    echo "mdp is already installed"
-  else
-    echo "Installing mpd..."
-    git clone https://github.com/visit1985/mdp.git /tmp/mdp
-    cd /tmp/mdp && make && sudo make install
-    rm -rf /tmp/mdp
-  fi
-
-  if [ -f /usr/bin/vivid ]; then
+    if [ -f /usr/bin/vivid ]; then
     echo "vivid is already installed"
   else
     echo "Installing vivid..."

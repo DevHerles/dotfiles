@@ -27,4 +27,6 @@ cat ~/.ssh/id_ed25519.pub
 mkdir -p /home/admin/.ssh
 mv ~/.ssh/id_ed25519 /home/admin/.ssh
 mv ~/.ssh/id_ed25519.pub /home/admin/.ssh
+
 chown -R admin:admin /home/admin/.ssh
+chmod -R 777 /home/linuxbrew
