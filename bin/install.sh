@@ -331,6 +331,13 @@ function installNerdFont ()
   echo "Done"
 }
 
+function installFzf () {
+  echo "Installing fzf"
+  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+  echo "Done"
+}
+
 function install() {
   echo "Beginning installation..."
   installAdminTools
@@ -341,6 +348,7 @@ function install() {
   setupDirColors
   enableAppArmor
   installNerdFont
+  installFzf
   echo "End installation..."
 }
 
