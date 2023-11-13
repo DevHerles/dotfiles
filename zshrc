@@ -7,13 +7,6 @@
 
 export TERMINAL="sterminal"
 
-if which vivid > /dev/null; then
-  echo "vivid is already installed."
-else
-  echo "Installing vivid..."
-  sudo brew install vivid
-fi
-
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 if which brew > /dev/null; then
@@ -31,6 +24,13 @@ if [ -e "$HOME/.notgui" ]; then
   echo "Last login: $(date)"
 else
   if [ "$TMUX" = "" ]; then tmux; fi
+  
+  if which vivid > /dev/null; then
+    echo "vivid is already installed."
+  else
+    echo "Installing vivid..."
+    sudo brew install vivid
+  fi
   export LS_COLORS="$(vivid generate molokai)"
 fi
 
