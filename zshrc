@@ -7,13 +7,15 @@
 
 export TERMINAL="sterminal"
 
-if type Xorg >/dev/null 2>&1; then
-  # echo "Xorg exists on this system."
+if [ -e "$HOME/.notgui" ]; then
+  export TERM="xterm-256color"
+
+  echo "Welcome to My Linux Server, $(whoami)!"
+  echo "This server is running $(lsb_release -d -s)"
+  echo "Last login: $(date)"
+else
   if [ "$TMUX" = "" ]; then tmux; fi
   export LS_COLORS="$(vivid generate molokai)"
-else
-  # echo "Xorg does not exist on this system."
-  export TERM="xterm-256color"
 fi
 
 # If you come from bash you might have to change your $PATH.

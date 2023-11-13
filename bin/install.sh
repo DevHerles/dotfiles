@@ -339,6 +339,22 @@ function install() {
   echo "End installation..."
 }
 
-install
-zsh
+# Prompt user for server-side installation
+read -p "Is this a server-side installation? (yes/y or no/n): " response
+
+# Check user's response
+if [[ $response == "yes" || $response == "y" ]]; then
+    # Create a hidden file named ".notgui"
+    echo "Hidden file '~/.notgui' created."
+    install
+    zsh
+    
+    if [ -e "$HOME/.notgui" ]; then
+      echo "The '.notgui' file already exists in the home directory."
+    else
+      touch "$HOME/.notgui"
+    fi
+else
+    echo "No action taken. This is not a server-side installation."
+fi
 
