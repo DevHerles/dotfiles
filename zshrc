@@ -7,6 +7,13 @@
 
 export TERMINAL="sterminal"
 
+if which vivid > /dev/null; then
+  echo "vivid is already installed."
+else
+  echo "Installing vivid..."
+  sudo brew install vivid
+fi
+
 if [ -e "$HOME/.notgui" ]; then
   export TERM="xterm-256color"
 
