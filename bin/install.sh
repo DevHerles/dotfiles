@@ -347,7 +347,6 @@ if [[ $response == "yes" || $response == "y" ]]; then
     # Create a hidden file named ".notgui"
     echo "Hidden file '~/.notgui' created."
     install
-    zsh
     
     if [ -e "$HOME/.notgui" ]; then
       echo "The '.notgui' file already exists in the home directory."
