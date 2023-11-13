@@ -5,14 +5,16 @@
   #source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
 
+export TERMINAL="sterminal"
+
 if type Xorg >/dev/null 2>&1; then
   echo "Xorg exists on this system."
   if [ "$TMUX" = "" ]; then tmux; fi
+  export LS_COLORS="$(vivid generate molokai)"
 else
   echo "Xorg does not exist on this system."
+  export TERM="xterm-256color"
 fi
-
-export TERMINAL="sterminal"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -121,6 +123,24 @@ plugins=(
   jump
   fzf
 )
+
+if type Xorg >/dev/null 2>&1; then
+  echo "Xorg exists on this system."
+else
+  echo "Xorg does not exist on this system."
+  plugins=(
+    git
+    zsh-autosuggestions
+    zsh-completions
+    copypath
+    copyfile
+    history
+    colored-man-pages
+    jump
+    fzf
+  )
+fi
+
 autoload -U compinit && compinit
 source $ZSH/oh-my-zsh.sh
 
@@ -143,7 +163,6 @@ zstyle ':completion:*' fzf-search-display true
 # User configuration
 # export MANPATH="/usr/local/man:$MANPATH"
 
-export LS_COLORS="$(vivid generate molokai)"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
