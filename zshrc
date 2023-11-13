@@ -14,6 +14,15 @@ else
   sudo brew install vivid
 fi
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+if which brew > /dev/null; then
+  echo "brew is already installed."
+else
+  echo "Installing brew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 if [ -e "$HOME/.notgui" ]; then
   export TERM="xterm-256color"
 
