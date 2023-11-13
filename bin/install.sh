@@ -191,23 +191,28 @@ function installOhMyZSH() {
 }
 
 function setupTmux() {
-  if which tmux > /dev/null; then
-    echo "tmux is already installed."
-  else
-    echo "Installing tmux..."
-    sudo apt install tmux -y
-  fi
+  if type Xorg >/dev/null 2>&1; then
+    echo "Xorg exists on this system."
+    if which tmux > /dev/null; then
+      echo "tmux is already installed."
+    else
+      echo "Installing tmux..."
+      sudo apt install tmux -y
+    fi
 
-  echo "Installing tmux plugin manager..."
-  if [ -d ~/.tmux/plugins/tpm ]; then
-    cd ~/.tmux/plugins/tpm && git pull
-  else
-    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-  fi
+    echo "Installing tmux plugin manager..."
+    if [ -d ~/.tmux/plugins/tpm ]; then
+      cd ~/.tmux/plugins/tpm && git pull
+    else
+      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+    fi
 
-  cd ~/
-  echo "Linking tmux.conf..."
-  ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+    cd ~/
+    echo "Linking tmux.conf..."
+    ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+  else
+    echo "Xorg does not exist on this system."
+  fi
 }
 
 function setupDirColors() {

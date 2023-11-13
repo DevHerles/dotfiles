@@ -5,7 +5,12 @@
   #source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
 
-if [ "$TMUX" = "" ]; then tmux; fi
+if type Xorg >/dev/null 2>&1; then
+  echo "Xorg exists on this system."
+  if [ "$TMUX" = "" ]; then tmux; fi
+else
+  echo "Xorg does not exist on this system."
+fi
 
 export TERMINAL="sterminal"
 
