@@ -8,11 +8,11 @@
 export TERMINAL="sterminal"
 
 if type Xorg >/dev/null 2>&1; then
-  echo "Xorg exists on this system."
+  # echo "Xorg exists on this system."
   if [ "$TMUX" = "" ]; then tmux; fi
   export LS_COLORS="$(vivid generate molokai)"
 else
-  echo "Xorg does not exist on this system."
+  # echo "Xorg does not exist on this system."
   export TERM="xterm-256color"
 fi
 
@@ -127,7 +127,7 @@ plugins=(
 if type Xorg >/dev/null 2>&1; then
   echo "Xorg exists on this system."
 else
-  echo "Xorg does not exist on this system."
+  # echo "Xorg does not exist on this system."
   plugins=(
     git
     zsh-autosuggestions
