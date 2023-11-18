@@ -5,7 +5,7 @@
   #source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 #fi
 
-export TERMINAL="sterminal"
+# export TERMINAL="sterminal"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
