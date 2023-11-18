@@ -235,6 +235,9 @@ function linkingDotFiles() {
   echo "Linking ranger..."
   ln -sf ~/.dotfiles/config/ranger/rc.conf ~/.config/ranger/rc.conf
   ln -sf ~/.dotfiles/config/ranger/colorschemes ~/.config/ranger/colorschemes
+
+  echo "ssh config..."
+  ln -sf ~/.dotfiles/ssh-config ~/.ssh/config
 }
 
 function enableAppArmor() {
