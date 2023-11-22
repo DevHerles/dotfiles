@@ -51,6 +51,7 @@ export PATH=/usr/lib/dart/bin/dartfmt:$PATH
 export PATH=/usr/bin/gem:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export PATH=$HOME/.dotfiles/bin:$PATH
+export PATH=$HOME/.asf:$PATH
 export PATH=$HOME/.config/composer/vendor/bin:$PATH
 export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
 export PATH=/home/herles/.config/composer/vendor/bin/laravel:$PATH
@@ -59,7 +60,7 @@ export PATH=/opt/android-studio/bin:$PATH
 export PATH=/opt/robo3t/bin:$PATH
 export PATH=$HOME/.pub-cache/bin:$PATH
 # export JAVA_HOME=/usr/local/java/jdk-14.0.2
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
 
 export BAT_THEME="TwoDark"
