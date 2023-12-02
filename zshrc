@@ -22,9 +22,7 @@ if [ -e "$HOME/.notgui" ]; then
   echo "Welcome to My Linux Server, $(whoami)!"
   echo "This server is running $(lsb_release -d -s)"
   echo "Last login: $(date)"
-else
-  if [ "$TMUX" = "" ]; then tmux; fi
-  
+else  
   if which vivid > /dev/null; then
     echo "vivid is already installed."
   else
@@ -33,6 +31,8 @@ else
   fi
   export LS_COLORS="$(vivid generate molokai)"
 fi
+
+if [ "$TMUX" = "" ]; then tmux; fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
