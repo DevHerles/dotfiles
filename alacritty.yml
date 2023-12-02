@@ -5,7 +5,7 @@ window:
   decorations: none
   opacity: 1
   dynamic_title: false
-  startup_mode: Maximized # Fullscreen
+  startup_mode: Fullscreen
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -28,7 +28,7 @@ font:
   bold_italic:
     family: JetBrainsMono Nerd Font
     style: Bold Italic
-  size: 12.0
+  size: 14.0
   offset:
     x: 0
     y: 0
