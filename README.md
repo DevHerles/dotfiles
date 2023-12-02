@@ -1,5 +1,12 @@
 # Dotfiles
 
+# For install alacritty
+```bash
+sudo apt install cargo cmake pkg-config libfontconfig1-dev scdoc
+cargo install alacritty
+```
+
+
 ## About
 
 This repo is a collection of all my dotfiles for vim, tmux and zsh. This repo contains my `.vimrc`, `.tmux.conf` and my `.zshrc`. I also use `oh-my-zsh`
