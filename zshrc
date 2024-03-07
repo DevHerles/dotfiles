@@ -59,9 +59,12 @@ export PATH=/opt/thunderbird:$PATH
 export PATH=/opt/android-studio/bin:$PATH
 export PATH=/opt/robo3t/bin:$PATH
 export PATH=$HOME/.pub-cache/bin:$PATH
+export PATH=$HOME/Downloads/apache-maven-3.9.6-bin/apache-maven-3.9.6/bin:$PATH
 # export JAVA_HOME=/usr/local/java/jdk-14.0.2
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$PATH:/snap/k9s/current/bin:$PATH
+export PATH=$PATH:/usr/local/netbeans-12.0/netbeans/bin:$PATH
 
 export BAT_THEME="TwoDark"
 # Set name of the theme to load --- if set to "random", it will
