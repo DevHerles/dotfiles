@@ -48,3 +48,9 @@ alias fzf="fzf --height 70% --layout reverse --info inline --border \
     --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
 
 alias rs="cd ~/asfdev/devherles/rasa-projects/rasa-symptoms && source ~/asfdev/devherles/rasa-projects/rasa-env/bin/activate"
+
+recentfiles() {
+    ls -ltr --color | grep "$(date '+%b %e')"
+}
+
+
