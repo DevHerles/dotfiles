@@ -147,6 +147,12 @@ function installOhMyZSH() {
     git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
   fi
 
+  if [ -d ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+    cd ~/.oh-my-zsh && git pull;
+  else
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  fi
+
   if [ -d ~/.config ]; then
     echo "~/.config folder already exists..."
   else
@@ -230,7 +236,7 @@ function linkingDotFiles() {
   ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
 
   echo "Linking alacritty..."
-  ln -sf ~/.dotfiles/alacritty.yml ~/.alacritty.yml
+  ln -sf ~/.dotfiles/alacritty.toml ~/.alacritty.toml
 
   echo "Linking ranger..."
   ln -sf ~/.dotfiles/config/ranger/rc.conf ~/.config/ranger/rc.conf
