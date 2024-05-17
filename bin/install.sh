@@ -1,364 +1,232 @@
-#!/usr/bin/env bash
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  #source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+#fi
 
-function installAdminTools() {
-  echo "Installing admin tools"
+# export TERMINAL="sterminal"
 
-  if which neofetch > /dev/null; then
-    echo "neofetch is already installed."
-  else
-    echo "Installing neofetch..."
-    sudo apt-get install neofetch -y
-  fi
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-  if which xclip > /dev/null; then
-    echo "xclip is already installed."
-  else
-    echo "Installing xclip..."
-    sudo apt-get install xclip -y
-  fi
+if which brew > /dev/null; then
+  echo "brew is already installed."
+else
+  echo "Installing brew..."
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  brew install eza
+fi
 
-  if which htop > /dev/null; then
-    echo "htop is already installed."
-  else
-    echo "Installing htop..."
-    sudo apt-get install htop -y
-  fi
+if [ -e "$HOME/.notgui" ]; then
+  export TERM="xterm-256color"
 
-  if which ranger > /dev/null; then
-    echo "ranger is already installed."
-  else
-    echo "Installing ranger..."
-    sudo apt-get install ranger -y
-  fi
-
-  if which netstat > /dev/null; then
-    echo "net-tools are already installed."
-  else
-    echo "Installing net-tools..."
-    sudo apt-get install net-tools -y
-  fi
-
-  if which ctags > /dev/null; then
-    echo "ctags is already installed."
-  else
-    echo "Installing ctags..."
-    sudo apt-get install ctags -y
-  fi
-
-  if which xsel > /dev/null; then
-    echo "xsel is already installed."
-  else
-    echo "Installing xsel..."
-    sudo apt-get install xsel -y
-  fi
-
-  if which lazygit > /dev/null; then
-    echo "lazygit is already installed."
-  else
-    echo "Installing lazygit..."
-    brew install lazygit
-  fi
-
-  if which stylua > /dev/null; then
-    echo "stylua is already installed."
-  else
-    echo "Installing stylua..."
-    brew install stylua
-  fi
-
-  if which ack > /dev/null; then
-    echo "Ack is already installed."
-  else
-    echo "Installing ack-grep..."
-    sudo apt-get install ack-grep -y
-  fi
-
-  if which bat > /dev/null; then
-    echo "bat is already installed."
-  else
-    echo "Installing bat..."
-    sudo apt-get install bat -y
-    mkdir -p ~/.local/bin
-    ln -s /usr/bin/batcat ~/.local/bin/bat
-  fi
-
-  if which tree > /dev/null; then
-    echo "tree is already installed."
-  else
-    echo "Installing tree..."
-    sudo apt install tree -y
-  fi
-
-  if [ -f /usr/bin/dfc ]; then
-    echo "dfc is already installed"
-  else
-    echo "Installing dfc..."
-    sudo apt-get install dfc -f
-  fi
-    if [ -f /usr/bin/vivid ]; then
-    echo "vivid is already installed"
+  echo "Welcome to My Linux Server, $(whoami)!"
+  echo "This server is running $(lsb_release -d -s)"
+  echo "Last login: $(date)"
+else  
+  if which vivid > /dev/null; then
+    echo "vivid is already installed."
   else
     echo "Installing vivid..."
-    brew install vivid
+    sudo brew install vivid
   fi
+  export LS_COLORS="$(vivid generate molokai)"
+fi
 
-  export LS_COLORS="$(vivid generate snazzy)"
-}
+if [ "$TMUX" = "" ]; then tmux; fi
 
-function installStarship() {
-  if which starship > /dev/null; then
-    echo "starship is already installed"
-  else
-    echo "Installing starship..."
-    sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path to your oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+
+# Path to your flutter installation.
+export PATH=$HOME/.flutter/bin:$PATH
+export PATH=/opt/flutter/bin:$PATH
+export PATH=$HOME/.flutter/bin/cache/dart-sdk:$PATH
+export PATH=/opt/flutter/bin/cache/dart-sdk:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=/usr/lib/dart/bin:$PATH
+export PATH=/usr/lib/dart/bin/dartfmt:$PATH
+export PATH=/usr/bin/gem:$PATH
+export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.dotfiles/bin:$PATH
+export PATH=$HOME/.asf:$PATH
+export PATH=$HOME/.config/composer/vendor/bin:$PATH
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+export PATH=/home/herles/.config/composer/vendor/bin/laravel:$PATH
+export PATH=/opt/thunderbird:$PATH
+export PATH=/opt/android-studio/bin:$PATH
+export PATH=/opt/robo3t/bin:$PATH
+export PATH=$HOME/.pub-cache/bin:$PATH
+export PATH=$HOME/Downloads/apache-maven-3.9.6-bin/apache-maven-3.9.6/bin:$PATH
+# export JAVA_HOME=/usr/local/java/jdk-14.0.2
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$PATH:/snap/k9s/current/bin:$PATH
+export PATH=$PATH:/usr/local/netbeans-12.0/netbeans/bin:$PATH
+
+export BAT_THEME="TwoDark"
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="asf"
+#ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "mortalscumbag" "kolo" )
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion.
+# Case-sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to automatically update without prompting.
+# DISABLE_UPDATE_PROMPT="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line if pasting URLs and other text is messed up.
+# DISABLE_MAGIC_FUNCTIONS=true
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# You can set one of the optional three formats:
+# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# or set a custom format using the strftime function format specifications,
+# see 'man strftime' for details.
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load?
+# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+
+plugins=(
+  git
+  zsh-autosuggestions
+  zsh-completions
+  zsh-syntax-highlighting
+  copypath
+  copyfile
+  tmux
+  history
+  colored-man-pages
+  jump
+  fzf
+)
+
+if type Xorg >/dev/null 2>&1; then
+  echo "Xorg exists on this system."
+else
+  # echo "Xorg does not exist on this system."
+  plugins=(
+    git
+    zsh-autosuggestions
+    zsh-completions
+    zsh-syntax-highlighting
+    copypath
+    copyfile
+    history
+    colored-man-pages
+    jump
+    fzf
+  )
+fi
+
+autoload -U compinit && compinit
+source $ZSH/oh-my-zsh.sh
+
+typeset -ga sources
+sources+="$HOME/.dotfiles/oh-my-zsh/aliases.zsh"
+sources+="$HOME/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh"
+sources+="$HOME/.cargo/env"
+# try to include all sources
+foreach file (`echo $sources`)
+  if [[ -a $file  ]]; then
+    source $file
   fi
-}
+end
 
+# only aws command completion
+zstyle ':completion:*:*:aws' fzf-search-display true
+# or for everything
+zstyle ':completion:*' fzf-search-display true
 
-function installOhMyZSH() {
-  echo "Installing ZSH y git-core..."
+# User configuration
+# export MANPATH="/usr/local/man:$MANPATH"
 
-  cd ~/
-  if which zsh > /dev/null; then
-    echo "zsh is already installed."
-  else
-    echo "Installing zsh"
-    sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-  fi
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-  if [ -d ~/.oh-my-zsh ]; then
-    if [ -f ~/.oh-my-zsh/themes/asf.zsh-theme ]; then
-      rm ~/.oh-my-zsh/themes/asf.zsh-theme
-    fi
-    cd ~/.oh-my-zsh && git pull;
-  else
-    wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
-  fi
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='nvim'
+ else
+   export EDITOR='nvim'
+ fi
 
-  if [ -d ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions ]; then
-    cd ~/.oh-my-zsh && git pull;
-  else
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-  fi
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-  if [ -d ~/.oh-my-zsh/custom/plugins/zsh-completions ]; then
-    cd ~/.oh-my-zsh && git pull;
-  else
-    git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
-  fi
-
-  if [ -d ~/.config ]; then
-    echo "~/.config folder already exists..."
-  else
-    mkdir ~/.config
-  fi
-
-  if [ -d ~/.config/z ]; then
-    cd ~/.config/z && git pull;
-  else
-    git clone git@github.com:rupa/z.git ~/.config/z
-  fi
-
-  if [ -d ~/.config/ranger ]; then
-    echo "~/.config/ranger folder already exists..."
-  else
-    mkdir -p ~/.config/ranger/plugins
-  fi
-
-  if [ -d ~/.config/ranger/plugins/ranger_devicons ]; then
-    echo "ranger_devicons already installed..."
-    cd ~/.config/ranger/plugins/ranger_devicons && git pull
-  else
-    git clone https://github.com/alexanderjeurissen/ranger_devicons ~/.config/ranger/plugins/ranger_devicons
-  fi
-
-  if [ -d ~/.dotfiles/gruvbox ]; then
-    cd ~/.dotfiles/gruvbox && git pull;
-  fi
-
-  if [ -f ~/.zshrc ]; then
-    rm ~/.zshrc
-  fi
-
-  ln -sf ~/.dotfiles/zshrc ~/.zshrc
-
-  if [ $SHELL == "/usr/bin/zsh" ]; then
-    echo "Skipping, your current console is already zsh..."
-  else
-    echo "Changing console to zsh..."
-    chsh -s `which zsh`
-  fi
-}
-
-function setupTmux() {
-  if type Xorg >/dev/null 2>&1; then
-    echo "Xorg exists on this system."
-    if which tmux > /dev/null; then
-      echo "tmux is already installed."
-    else
-      echo "Installing tmux..."
-      sudo apt install tmux -y
-    fi
-
-    echo "Installing tmux plugin manager..."
-    if [ -d ~/.tmux/plugins/tpm ]; then
-      cd ~/.tmux/plugins/tpm && git pull
-    else
-      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-    fi
-
-    cd ~/
-    echo "Linking tmux.conf..."
-    ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
-  else
-    echo "Xorg does not exist on this system."
-  fi
-}
-
-function setupDirColors() {
-  echo "Setup dircolors..."
-  eval $( dircolors -b ~/.dotfiles/dir_colors )
-}
-
-function linkingDotFiles() {
-  cd ~/
-
-  echo "Linking asf.zsh-theme..."
-  ln -sf ~/.dotfiles/asf.zsh-theme ~/.oh-my-zsh/themes/asf.zsh-theme
-
-  echo "Linking gitconfig..."
-  ln -sf ~/.dotfiles/gitconfig ~/.gitconfig
-
-  echo "Linking alacritty..."
-  ln -sf ~/.dotfiles/alacritty.yml ~/.alacritty.yml
-
-  echo "Linking ranger..."
-  ln -sf ~/.dotfiles/config/ranger/rc.conf ~/.config/ranger/rc.conf
-  ln -sf ~/.dotfiles/config/ranger/colorschemes ~/.config/ranger/colorschemes
-
-  echo "ssh config..."
-  ln -sf ~/.dotfiles/ssh-config ~/.ssh/config
-}
-
-function enableAppArmor() {
-    sudo systemctl start apparmor.service
-}
-
-function installNerdFont ()
-{
-  echo "Installing JetBrainsMono font"
-  wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip 
-  mkdir -p ~/.local/share/fonts
-  unzip JetBrainsMono.zip -d ~/.local/share/fonts
-  fc-cache ~/.local/share/fonts
-  echo "Done"
-}
-
-function installFzf () {
-  echo "Installing fzf"
-  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-  ~/.fzf/install
-  echo "Done"
-}
-
-function guiTools() {
-  if type Xorg >/dev/null 2>&1; then
-    echo "Xorg exists on this system."
-
-    if which pip3 > /dev/null; then
-      echo "pip3 is already installed."
-    else
-      echo "Installing pip3..."
-      sudo apt-get install python3-pip -y
-      sudo pip3 install -U jedi
-      sudo pip3 install black
-      sudo pip3 install isort
-      sudo pip3 install ueberzug
-      sudo pip3 install pywal
-    fi
-
-    if which imagemagick > /dev/null; then
-      echo "imagemagick is already installed."
-    else
-      echo "Installing imagemagick..."
-      sudo apt-get install imagemagick -y
-    fi
-
-    if which ruby > /dev/null; then
-      echo "ruby is already installed."
-    else
-      echo "Installing ruby..."
-      sudo apt-get install ruby-full -y
-    fi
-
-    if which brew > /dev/null; then
-      echo "brew is already installed."
-    else
-      echo "Installing brew..."
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> $HOME/.bash_profile
-      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-    fi
-
-    if which npm > /dev/null; then
-      echo "npm is already installed."
-    else
-      echo "Installing npm..."
-      sudo apt install npm -y
-      sudo npm install -g neovim
-    fi
-
-    if which node > /dev/null; then
-      echo "nodejs is already installed."
-    else
-      echo "Installing NodeJs..."
-      sudo apt install nodejs -y
-    fi
-    
-    if which vtop > /dev/null; then
-      echo "vtop is already installed."
-    else
-      echo "Installing vtop..."
-      sudo npm i -g vtop
-    fi
-
-  else
-    echo "Xorg does not exist on this system."
-  fi
-}
-
-function install() {
-  echo "Beginning installation..."
-  installAdminTools
-  installOhMyZSH
-  installStarship
-  setupTmux
-  linkingDotFiles
-  setupDirColors
-  enableAppArmor
-  installNerdFont
-  installFzf
-  guiTools
-  echo "End installation..."
-}
-
-install
-
-## Prompt user for server-side installation
-#read -p "Is this a server-side installation? (yes/y or no/n): " response
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
 #
-## Check user's response
-#if [[ $response == "yes" || $response == "y" ]]; then
-#    # Create a hidden file named ".notgui"
-#    echo "Hidden file '~/.notgui' created."
-#    install
-#    
-#    if [ -e "$HOME/.notgui" ]; then
-#      echo "The '.notgui' file already exists in the home directory."
-#    else
-#      touch "$HOME/.notgui"
-#    fi
-#else
-#    echo "No action taken. This is not a server-side installation."
-#fi
-#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+echo -e "\e]12;yellow\a"
+
+bindkey '^ ' autosuggest-accept
+
+eval "$(starship init zsh)"
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+. ~/.config/z/z.sh
+
+export FZF_BASE=/usr/bin/fzf
+
+alias k=kubectl
+alias r=ranger
+# export WALLPAPER=sed -n -e '/size/ p' "$(gsettings get org.gnome.desktop.background picture-uri-dark | cut -d/ -f3- | cut -d\' -f1)" | awk -F\> '{ print $2 }' | awk -F\< '{ print $1 }'
+# source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+alias ls="eza --icons=always"
