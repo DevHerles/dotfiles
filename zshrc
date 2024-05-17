@@ -14,6 +14,7 @@ if which brew > /dev/null; then
 else
   echo "Installing brew..."
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  brew install eza
 fi
 
 if [ -e "$HOME/.notgui" ]; then
@@ -137,6 +138,7 @@ plugins=(
   git
   zsh-autosuggestions
   zsh-completions
+  zsh-syntax-highlighting
   copypath
   copyfile
   tmux
@@ -154,6 +156,7 @@ else
     git
     zsh-autosuggestions
     zsh-completions
+    zsh-syntax-highlighting
     copypath
     copyfile
     history
@@ -217,21 +220,6 @@ eval "$(starship init zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/herles/Downloads/ls/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/herles/Downloads/ls/etc/profile.d/conda.sh" ]; then
-        . "/home/herles/Downloads/ls/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/herles/Downloads/ls/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 . ~/.config/z/z.sh
 
 export FZF_BASE=/usr/bin/fzf
@@ -239,3 +227,6 @@ export FZF_BASE=/usr/bin/fzf
 alias k=kubectl
 alias r=ranger
 # export WALLPAPER=sed -n -e '/size/ p' "$(gsettings get org.gnome.desktop.background picture-uri-dark | cut -d/ -f3- | cut -d\' -f1)" | awk -F\> '{ print $2 }' | awk -F\< '{ print $1 }'
+# source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+alias ls="eza --icons=always"
