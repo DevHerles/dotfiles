@@ -162,6 +162,10 @@ bindkey '^ ' autosuggest-accept
 # export FZF_BASE=/usr/bin/fzf
 
 alias ls="eza --icons=always"
+alias l.='ls -d .* --color=auto'
+alias trash='mv --force -t ~/.local/share/Trash '
+alias count='find . -type f | wc -l'
+alias c='clear'
 
 # History
 HISTSIZE=10000
