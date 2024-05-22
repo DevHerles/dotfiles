@@ -1,3 +1,35 @@
 Host *
   ForwardX11 yes
   ForwardAgent yes
+
+Host bastion-21
+  HostName 10.4.0.21
+  User admin
+
+Host bastion-25
+  HostName 10.4.0.25
+  User admin
+
+Host bastion-antaip-dev
+  HostName 10.9.9.23
+  User root
+
+Host master-antaip-dev
+  HostName 10.9.9.23
+  User root
+
+Host node1-antaip-dev
+  HostName 10.9.9.24
+  User root
+
+Host node2-antaip-dev
+  HostName 10.9.9.25
+  User root
+
+Host node3-antaip-dev
+  HostName 10.9.9.26
+  User root
+
+Host prometheus
+  HostName 10.1.31.45
+  user root
