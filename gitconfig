@@ -18,3 +18,10 @@
 [color "branch"]
   remote = yellow
 
+[safe]
+	directory = /home/herles/bastion/cnsd-apps
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

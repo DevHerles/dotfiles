@@ -1,232 +1,382 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  #source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
+#!/usr/bin/env bash
+set -euo pipefail
 
-# export TERMINAL="sterminal"
+# =============================================
+# Helpers
+# =============================================
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+log()  { printf "\n\033[1;34m== %s ==\033[0m\n" "$*"; }
+ok()   { printf "\033[0;32m  ✓ %s\033[0m\n" "$*"; }
+info() { printf "\033[0;33m  ➜ %s\033[0m\n" "$*"; }
 
-if which brew > /dev/null; then
-  echo "brew is already installed."
-else
-  echo "Installing brew..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  brew install eza
-fi
+is_installed() { command -v "$1" >/dev/null 2>&1; }
 
-if [ -e "$HOME/.notgui" ]; then
-  export TERM="xterm-256color"
-
-  echo "Welcome to My Linux Server, $(whoami)!"
-  echo "This server is running $(lsb_release -d -s)"
-  echo "Last login: $(date)"
-else  
-  if which vivid > /dev/null; then
-    echo "vivid is already installed."
+# ensure <cmd> <install_command...>
+ensure() {
+  local bin="$1"; shift
+  if is_installed "$bin"; then
+    ok "$bin"
   else
-    echo "Installing vivid..."
-    sudo brew install vivid
+    info "Instalando $bin..."
+    "$@"
   fi
-  export LS_COLORS="$(vivid generate molokai)"
-fi
+}
 
-if [ "$TMUX" = "" ]; then tmux; fi
+# ensure_git <dir> <subcommand_when_exists> <repo>
+ensure_git() {
+  local dir="$1"; shift
+  if [[ -d "$dir" ]]; then
+    ok "$dir"
+    if [[ -n "${1:-}" ]]; then
+      (cd "$dir" && "${@}")
+    fi
+  else
+    info "Clonando $1..."
+    git clone --depth 1 "$2" "$dir"
+  fi
+}
 
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+is_server() { [[ -f "$HOME/.notgui" ]]; }
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+# =============================================
+# Admin tools
+# =============================================
 
-# Path to your flutter installation.
-export PATH=$HOME/.flutter/bin:$PATH
-export PATH=/opt/flutter/bin:$PATH
-export PATH=$HOME/.flutter/bin/cache/dart-sdk:$PATH
-export PATH=/opt/flutter/bin/cache/dart-sdk:$PATH
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=/usr/lib/dart/bin:$PATH
-export PATH=/usr/lib/dart/bin/dartfmt:$PATH
-export PATH=/usr/bin/gem:$PATH
-export PATH=$HOME/.local/bin:$PATH
-export PATH=$HOME/.dotfiles/bin:$PATH
-export PATH=$HOME/.asf:$PATH
-export PATH=$HOME/.config/composer/vendor/bin:$PATH
-export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
-export PATH=/home/herles/.config/composer/vendor/bin/laravel:$PATH
-export PATH=/opt/thunderbird:$PATH
-export PATH=/opt/android-studio/bin:$PATH
-export PATH=/opt/robo3t/bin:$PATH
-export PATH=$HOME/.pub-cache/bin:$PATH
-export PATH=$HOME/Downloads/apache-maven-3.9.6-bin/apache-maven-3.9.6/bin:$PATH
-# export JAVA_HOME=/usr/local/java/jdk-14.0.2
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-export PATH=$JAVA_HOME/bin:$PATH
-export PATH=$PATH:/snap/k9s/current/bin:$PATH
-export PATH=$PATH:/usr/local/netbeans-12.0/netbeans/bin:$PATH
+function installAdminTools() {
+  log "Instalando herramientas administrativas"
 
-export BAT_THEME="TwoDark"
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="asf"
-#ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "mortalscumbag" "kolo" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-
-plugins=(
-  git
-  zsh-autosuggestions
-  zsh-completions
-  zsh-syntax-highlighting
-  copypath
-  copyfile
-  tmux
-  history
-  colored-man-pages
-  jump
-  fzf
-)
-
-if type Xorg >/dev/null 2>&1; then
-  echo "Xorg exists on this system."
-else
-  # echo "Xorg does not exist on this system."
-  plugins=(
-    git
-    zsh-autosuggestions
-    zsh-completions
-    zsh-syntax-highlighting
-    copypath
-    copyfile
-    history
-    colored-man-pages
-    jump
-    fzf
+  local apt_pkgs=(
+    "neofetch:neofetch"
+    "xclip:xclip"
+    "htop:htop"
+    "ranger:ranger"
+    "tree:tree"
+    "xsel:xsel"
+    "ack:ack-grep"
+    "bat:bat"
   )
-fi
 
-autoload -U compinit && compinit
-source $ZSH/oh-my-zsh.sh
+  for entry in "${apt_pkgs[@]}"; do
+    local bin="${entry%%:*}"
+    local pkg="${entry##*:}"
+    if ! is_installed "$bin"; then
+      info "Instalando $pkg..."
+      sudo apt-get install -y "$pkg"
+      if [[ "$bin" == "bat" ]]; then
+        mkdir -p "$HOME/.local/bin"
+        ln -sf /usr/bin/batcat "$HOME/.local/bin/bat"
+      fi
+    else
+      ok "$pkg"
+    fi
+  done
 
-typeset -ga sources
-sources+="$HOME/.dotfiles/oh-my-zsh/aliases.zsh"
-sources+="$HOME/.oh-my-zsh/custom/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh"
-sources+="$HOME/.cargo/env"
-# try to include all sources
-foreach file (`echo $sources`)
-  if [[ -a $file  ]]; then
-    source $file
+  # net-tools (netstat lives in /bin/netstat)
+  if ! is_installed netstat; then
+    info "Instalando net-tools..."
+    sudo apt-get install -y net-tools
+  else
+    ok "net-tools"
   fi
-end
 
-# only aws command completion
-zstyle ':completion:*:*:aws' fzf-search-display true
-# or for everything
-zstyle ':completion:*' fzf-search-display true
+  if ! is_installed ctags; then
+    info "Instalando ctags..."
+    sudo apt-get install -y universal-ctags || sudo apt-get install -y ctags
+  else
+    ok "ctags"
+  fi
 
-# User configuration
-# export MANPATH="/usr/local/man:$MANPATH"
+  if ! is_installed dfc; then
+    info "Instalando dfc..."
+    sudo apt-get install -y dfc || true
+  else
+    ok "dfc"
+  fi
 
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+  # brew tools
+  if is_installed brew; then
+    local brew_pkgs=(
+      "lazygit:lazygit"
+      "stylua:stylua"
+      "vivid:vivid"
+    )
+    for entry in "${brew_pkgs[@]}"; do
+      local bin="${entry%%:*}"
+      local pkg="${entry##*:}"
+      if ! is_installed "$bin"; then
+        info "Instalando $pkg (brew)..."
+        brew install "$pkg"
+      else
+        ok "$pkg"
+      fi
+    done
+  else
+    info "brew no disponible, saltando lazygit, stylua y vivid"
+  fi
 
-# Preferred editor for local and remote sessions
- if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='nvim'
- else
-   export EDITOR='nvim'
- fi
+  if is_installed vivid; then
+    local colors
+    colors="$(vivid generate snazzy)"
+    export LS_COLORS="$colors"
+  fi
+}
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+# =============================================
+# Starship
+# =============================================
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-echo -e "\e]12;yellow\a"
+function installStarship() {
+  log "Instalando Starship"
+  if is_installed starship; then
+    ok "starship"
+  else
+    info "Instalando starship..."
+    sh -c "$(curl -fsSL https://starship.rs/install.sh)"
+  fi
+}
 
-bindkey '^ ' autosuggest-accept
+# =============================================
+# Oh My ZSH
+# =============================================
 
-eval "$(starship init zsh)"
+function installOhMyZSH() {
+  log "Instalando Oh My ZSH"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+  if ! is_installed zsh; then
+    info "Instalando zsh..."
+    sudo apt-get install -y zsh git-core
+  else
+    ok "zsh"
+  fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+  ensure_git ~/.oh-my-zsh "git pull" https://github.com/ohmyzsh/ohmyzsh.git
 
-. ~/.config/z/z.sh
+  rm -f ~/.oh-my-zsh/themes/asf.zsh-theme
 
-export FZF_BASE=/usr/bin/fzf
+  ensure_git ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions \
+    "git pull" https://github.com/zsh-users/zsh-autosuggestions.git
+  ensure_git ~/.oh-my-zsh/custom/plugins/zsh-completions \
+    "git pull" https://github.com/zsh-users/zsh-completions.git
 
-alias k=kubectl
-alias r=ranger
-# export WALLPAPER=sed -n -e '/size/ p' "$(gsettings get org.gnome.desktop.background picture-uri-dark | cut -d/ -f3- | cut -d\' -f1)" | awk -F\> '{ print $2 }' | awk -F\< '{ print $1 }'
-# source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  mkdir -p ~/.config
+  ensure_git ~/.config/z "git pull" git@github.com:rupa/z.git
 
-alias ls="eza --icons=always"
+  mkdir -p ~/.config/ranger/plugins
+  ensure_git ~/.config/ranger/plugins/ranger_devicons \
+    "git pull" https://github.com/alexanderjeurissen/ranger_devicons.git
+
+  if [[ -d ~/.dotfiles/gruvbox ]]; then
+    (cd ~/.dotfiles/gruvbox && git pull)
+  fi
+
+  ln -sf ~/.dotfiles/zshrc ~/.zshrc
+
+  if [[ "$SHELL" != */zsh ]]; then
+    info "Cambiando shell por defecto a zsh..."
+    chsh -s "$(command -v zsh)"
+  else
+    ok "zsh es la shell actual"
+  fi
+}
+
+# =============================================
+# Tmux
+# =============================================
+
+function setupTmux() {
+  if ! is_installed Xorg; then
+    info "Xorg no detectado, saltando tmux"
+    return
+  fi
+
+  log "Configurando tmux"
+
+  if ! is_installed tmux; then
+    info "Instalando tmux..."
+    sudo apt-get install -y tmux
+  else
+    ok "tmux"
+  fi
+
+  ensure_git ~/.tmux/plugins/tpm "git pull" https://github.com/tmux-plugins/tpm
+
+  ln -sf ~/.dotfiles/tmux.conf ~/.tmux.conf
+}
+
+# =============================================
+# Dircolors
+# =============================================
+
+function setupDirColors() {
+  log "Configurando dircolors"
+  eval "$(dircolors -b ~/.dotfiles/dir_colors)"
+}
+
+# =============================================
+# Dotfiles symlinks
+# =============================================
+
+function linkingDotFiles() {
+  log "Creando enlaces simbólicos"
+
+  local links=(
+    "$HOME/.dotfiles/asf.zsh-theme:$HOME/.oh-my-zsh/themes/asf.zsh-theme"
+    "$HOME/.dotfiles/gitconfig:$HOME/.gitconfig"
+    "$HOME/.dotfiles/alacritty.yml:$HOME/.alacritty.yml"
+    "$HOME/.dotfiles/config/ranger/rc.conf:$HOME/.config/ranger/rc.conf"
+    "$HOME/.dotfiles/config/ranger/colorschemes:$HOME/.config/ranger/colorschemes"
+    "$HOME/.dotfiles/ssh-config:$HOME/.ssh/config"
+  )
+
+  mkdir -p "$HOME/.oh-my-zsh/themes" "$HOME/.config/ranger" "$HOME/.ssh"
+
+  for entry in "${links[@]}"; do
+    local src="${entry%%:*}"
+    local dst="${entry##*:}"
+    ln -sf "$src" "$dst"
+    ok "$(basename "$src") → $dst"
+  done
+}
+
+# =============================================
+# AppArmor
+# =============================================
+
+function enableAppArmor() {
+  log "Habilitando AppArmor"
+  sudo systemctl start apparmor.service
+}
+
+# =============================================
+# Fonts
+# =============================================
+
+function installNerdFont() {
+  log "Instalando fuente JetBrainsMono"
+  mkdir -p "$HOME/.local/share/fonts"
+  wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
+  unzip -o -q JetBrainsMono.zip -d "$HOME/.local/share/fonts"
+  rm -f JetBrainsMono.zip
+  fc-cache -f "$HOME/.local/share/fonts"
+  ok "Fuente instalada"
+}
+
+# =============================================
+# FZF
+# =============================================
+
+function installFzf() {
+  log "Instalando fzf"
+  ensure_git ~/.fzf "" https://github.com/junegunn/fzf.git
+  ~/.fzf/install --all --no-update-rc
+}
+
+# =============================================
+# GUI tools
+# =============================================
+
+function guiTools() {
+  if ! is_installed Xorg; then
+    info "Xorg no detectado, saltando tools GUI"
+    return
+  fi
+
+  log "Instalando tools GUI"
+
+  # Ruby via apt
+  if ! is_installed ruby; then
+    info "Instalando ruby..."
+    sudo apt-get install -y ruby-full
+  else
+    ok "ruby"
+  fi
+
+  # Node via apt
+  if ! is_installed node; then
+    info "Instalando nodejs..."
+    sudo apt-get install -y nodejs
+  else
+    ok "nodejs"
+  fi
+
+  # NPM
+  if ! is_installed npm; then
+    info "Instalando npm..."
+    sudo apt-get install -y npm
+  else
+    ok "npm"
+  fi
+
+  # Python tools
+  if ! is_installed pip3; then
+    info "Instalando pip3..."
+    sudo apt-get install -y python3-pip
+  else
+    ok "pip3"
+  fi
+
+  local pip_pkgs=(jedi black isort ueberzug pywal)
+  for pkg in "${pip_pkgs[@]}"; do
+    info "Instalando $pkg (pip)..."
+    sudo pip3 install -U "$pkg"
+  done
+
+  # Brew
+  if ! is_installed brew; then
+    info "Instalando brew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> "$HOME/.bash_profile"
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+  else
+    ok "brew"
+  fi
+
+  # Imagemagick
+  if ! is_installed imagemagick; then
+    info "Instalando imagemagick..."
+    sudo apt-get install -y imagemagick
+  else
+    ok "imagemagick"
+  fi
+
+  # vtop (needs npm)
+  if ! is_installed vtop && is_installed npm; then
+    info "Instalando vtop..."
+    sudo npm i -g vtop
+  else
+    ok "vtop"
+  fi
+}
+
+# =============================================
+# Bin scripts
+# =============================================
+
+function installBinScripts() {
+  log "Instalando scripts a /usr/local/bin"
+  sudo cp ~/.dotfiles/bin/*.sh /usr/local/bin/
+  sudo chmod +x /usr/local/bin/*.sh
+  ok "Scripts instalados: $(find /usr/local/bin -maxdepth 1 -name '*.sh' -printf '%f ')"
+}
+
+# =============================================
+# Main
+# =============================================
+
+function install() {
+  log "Comenzando instalación"
+  installAdminTools
+  installOhMyZSH
+  installStarship
+  setupTmux
+  linkingDotFiles
+  setupDirColors
+  enableAppArmor
+  installNerdFont
+  installFzf
+  guiTools
+  installBinScripts
+  log "Instalación completada"
+}
+
+install

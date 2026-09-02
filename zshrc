@@ -42,6 +42,7 @@ if [ "$TMUX" = "" ]; then tmux; fi
 export ZSH="$HOME/.oh-my-zsh"
 
 # Path to your flutter installation.
+export PATH=$HOME/development/flutter/bin:$PATH
 export PATH=$HOME/.flutter/bin:$PATH
 export PATH=/opt/flutter/bin:$PATH
 export PATH=$HOME/.flutter/bin/cache/dart-sdk:$PATH
@@ -62,7 +63,11 @@ export PATH=/opt/robo3t/bin:$PATH
 export PATH=$HOME/.pub-cache/bin:$PATH
 export PATH=$HOME/Downloads/apache-maven-3.9.6-bin/apache-maven-3.9.6/bin:$PATH
 # export JAVA_HOME=/usr/local/java/jdk-14.0.2
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+# export JAVA_HOME=/home/herles/Downloads/wso2-resources/openlogic-openjdk-11.0.11+9-linux-x64
+# export JAVA_HOME=/home/herles/Downloads/openjdk-17.0.2_linux-x64_bin/jdk-17.0.2
+# export JAVA_HOME=/home/herles/Downloads/jdk-11.0.23_linux-x64_bin/jdk-11.0.23
+export JAVA_HOME=/home/herles/Downloads/jdk-17.0.11+9
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$PATH:/snap/k9s/current/bin:$PATH
 export PATH=$PATH:/usr/local/netbeans-12.0/netbeans/bin:$PATH
@@ -230,3 +235,13 @@ alias r=ranger
 # source /home/linuxbrew/.linuxbrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 alias ls="eza --icons=always"
+alias vscode=windsurf
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/herles/.local/bin:$PATH"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# opencode
+export PATH=/home/herles/.opencode/bin:$PATH
